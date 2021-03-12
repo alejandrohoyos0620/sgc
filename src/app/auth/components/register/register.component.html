@@ -31,6 +31,7 @@
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
+            <mat-error *ngIf="seeIfEmail()">En este campo debe haber un correo</mat-error>
             <input class="input-litle-form" placeholder="Correo electrónico" formControlName="email" matInput
               type="email">
           </div>
@@ -43,6 +44,7 @@
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum ">
+            <mat-error *ngIf="seeIfMatch()">Las contraseñas no coinciden</mat-error>
             <input class="input-litle-form" placeholder="Confirmar contraseña" formControlName="confirmPassword"
               matInput type="password">
           </div>

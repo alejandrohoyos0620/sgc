@@ -22,7 +22,7 @@
       //"@admin/*": ["src/app/admin/*"],
       "@auth/*": ["src/app/auth/*"],
       "@shared/*": ["src/app/shared/*"],
-      //"@utils/*": ["src/app/utils/*"],
+      "@utils/*": ["src/app/utils/*"],
       "@environments/*": ["src/environments/*"],
       "@assets/*": ["src/assets/*"]
     }

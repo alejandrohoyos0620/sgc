@@ -3,6 +3,7 @@ import {TokenService} from './token.service';
 import {tap} from 'rxjs/operators';
 
 import {HttpClient} from '@angular/common/http';
+import { environment } from '@environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,12 @@ export class AuthService {
 
   createUser(firstName: string, lastName: string, phone: string, city: string, address: string, email: string, password: string): any
   {
-    return this.http.post('http://localhost:3000/api/customers/register', {
+    return this.http.post(`${environment.url_api}/customers/register`, {
+      firstName,
+      lastName,
+      phone,
+      city,
+      address,
       email,
       password,
     });
@@ -36,8 +42,8 @@ export class AuthService {
 
   loginRestApi(email: string, password: string) {
     return this.http.post('http://localhost:3000/api/customers/login', {
-      email,
-      password,
+      email: "email",
+      password : "password",
     })
     .pipe(
       // tslint:disable-next-line: deprecation
