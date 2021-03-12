@@ -17,7 +17,7 @@
       "dom"
     ],
     "paths":{
-      //"@core/*": ["src/app/core/*"],
+      "@core/*": ["src/app/core/*"],
       "@material/*": ["src/app/material/*"],
       //"@admin/*": ["src/app/admin/*"],
       "@auth/*": ["src/app/auth/*"],

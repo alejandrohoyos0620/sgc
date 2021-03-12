@@ -1,59 +1,59 @@
 <div class="div-container">
-  <form [formGroup]="form" (ngSubmit)="register($event)">
-    <img class="img-fondo" src="./../../../../assets/images/registro-complemento.jpeg">
+  <form [formGroup]="form" class="form-register" (ngSubmit)="register($event) ">
     <mat-card class="container card-register">
       <mat-card-content class="mat">
-        <div class="row input-div">
+        <div class="row input-div-row">
           <img class="img-logo" src="./../../../../assets/images/registro-logo.jpeg">
         </div>
-        <div class="row  title">
+        <div class="row ">
           <mat-card-title class="title ">Registrarse</mat-card-title>
         </div>
-        <div class="row input-div">
-          <div class="col-xs">
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Nombre" formControlName="firstName" matInput type="text">
           </div>
-          <div class="col-xs ">
+          <div class="col-xs input-div-colum ">
             <input class="input-litle-form" placeholder="Apellido" formControlName="lastName" matInput type="text">
           </div>
         </div>
-        <div class="row input-div">
-          <div class="col-xs">
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Telefono" formControlName="phone" matInput type="text">
           </div>
         </div>
-        <div class="row input-div">
-          <div class="col-xs">
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Ciudad" formControlName="city" matInput type="text">
           </div>
-          <div class="col-xs">
+          <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Direccion" formControlName="address" matInput type="text">
           </div>
         </div>
-        <div class="row input-div">
-          <div class="col-xs">
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Correo electrónico" formControlName="email" matInput
               type="email">
           </div>
         </div>
-        <div class="row input-div">
-          <div class="col-xs">
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Contraseña" formControlName="password" matInput
               type="password">
           </div>
         </div>
-        <div class="row input-div">
-          <div class="col-xs ">
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum ">
             <input class="input-litle-form" placeholder="Confirmar contraseña" formControlName="confirmPassword"
               matInput type="password">
           </div>
         </div>
-        <p class = "p-resgistro">Al hacer click en Restrarse, aceptas las <a href="">Condiciones</a>, la <a href="">Politica de datos</a> y la <a href="">Politica de cookies.</a> Es posible
-        que te enviemos notificaciones por SMS que podrás desactivar cuando quieras.</p>
+        <p class="p-resgistro">Al hacer click en Restrarse, aceptas las <a href="">Condiciones</a>, la <a
+            href="">Politica de datos</a> y la <a href="">Politica de cookies.</a> Es posible
+          que te enviemos notificaciones por SMS que podrás desactivar cuando quieras.</p>
+        <div class="mat-button">
+          <button [disabled]="form.invalid" class="button-register " mat-raised-button type="submit">Registarse</button>
+        </div>
       </mat-card-content>
-      <mat-card-actions class="mat-button">
-        <button [disabled]="form.invalid" class="button-register" mat-raised-button type="submit">Registarse</button>
-      </mat-card-actions>
     </mat-card>
   </form>
 </div>

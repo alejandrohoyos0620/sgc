@@ -1,0 +1,50 @@
+import { Injectable } from '@angular/core';
+import {TokenService} from './token.service';
+import {tap} from 'rxjs/operators';
+
+import {HttpClient} from '@angular/common/http';
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  constructor(
+    private http: HttpClient,
+    private token: TokenService
+  ) { }
+
+  createUser(firstName: string, lastName: string, phone: string, city: string, address: string, email: string, password: string): any
+  {
+    return this.http.post('http://localhost:3000/api/customers/register', {
+      email,
+      password,
+    });
+  //return this.af.createUserWithEmailAndPassword(email, password);
+  }
+
+  login(email: string, password: string): any{
+  //return this.af.signInWithEmailAndPassword(email, password);
+  }
+
+  logout(): any{
+  //return this.af.signOut();
+  }
+
+  hasUser(): any{
+  //return this.af.authState;
+  }
+
+  loginRestApi(email: string, password: string) {
+    return this.http.post('http://localhost:3000/api/customers/login', {
+      email,
+      password,
+    })
+    .pipe(
+      // tslint:disable-next-line: deprecation
+      tap((data: {token: string}) => {
+        const token = data.token;
+        this.token.saveToken(token)
+      })
+    );
+  }
+}
