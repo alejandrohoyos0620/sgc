@@ -1,0 +1,15 @@
+nav > a {
+    padding:5px;
+    text-decoration: none;
+}
+nav > a.active {
+   background-color: rgb(59, 182, 216);
+}
+.header-row{
+    width: 100%;
+}
+.adminButton{
+    width: 17%;
+    display: flex;
+    justify-content: space-between;
+}

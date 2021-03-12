@@ -1,0 +1,81 @@
+
+.container,  .card-register{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* justify-content: center; */
+    width:  33%;
+    min-height: 72%;
+    z-index: 2;
+    position: absolute;
+    line-height: 40px;
+    margin-left: 32%;
+    margin-top: 5%;
+}
+.mat{
+    width: auto;
+    height: auto;
+    margin: 0px 6% 0px 5%;
+    align-content: center;
+}
+.mat-button{
+    width: auto;
+    height: auto;
+    align-content: center;
+    text-align: center;
+    margin-top: 2%;
+    .button-register   {
+        background-color: rgb(61, 181, 69) !important;
+        color: white;
+        min-width: 60%;
+        border-radius: 8px !important;
+    }
+}
+.title{
+    margin-left: 20%;
+    margin-top: 0px;
+    font-size: 23px;
+}
+.div-container{
+   background:rgb(68, 114, 196) ;
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   z-index: 1;
+
+}
+.img-fondo{
+    width: 70%;
+    height: 81%;
+    z-index: -1;
+    margin-left: 14.4%;
+    position: absolute;
+    margin-top: 5%;
+}
+.img-logo{
+    margin-left: 39%;
+    width: 25%;
+    height: 85%;
+    margin-top: 0px;
+}
+.input-litle-form{
+    padding: 0 !important;
+    border-radius: 8px !important;
+    border: 2px solid rgb(199, 197, 197) !important;
+    min-width: 100% !important;
+    height: 90%;
+}
+
+.input-div{
+    margin-top: 14px;
+}
+.p-resgistro{
+    width: 62%;
+    margin-left: 20%;
+    margin-top: 4%;
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 12px;
+    color:rgb(135, 135, 135);
+}
