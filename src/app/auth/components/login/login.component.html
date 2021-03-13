@@ -1,28 +1,38 @@
-<form [formGroup]="form" (ngSubmit)="login($event)">
-    <mat-card class ="container card">
-      <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="row">
-          <div class="col-xs">
-            <mat-form-field>
-              <input placeholder="email" formControlName="email" matInput type="email">
-            </mat-form-field>
+<div class="div-container">
+  <form [formGroup]="form" class="form-login" (ngSubmit)="login($event) ">
+    <mat-card class="container card-login">
+      <mat-card-content class="mat">
+        <div class="row input-div-row">
+          <img class="img-logo" src="./../../../../assets/images/registro-logo.jpeg">
+        </div>
+        <div>
+          <h1 style="align-content: center;">Iniciar Sesión</h1>
+          <!-- <mat-card-title class="title ">Iniciar Sesión</mat-card-title> -->
+        </div>
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum">
+           <!-- <mat-error *ngIf="seeIfEmail()">En este campo debe haber un correo</mat-error> -->
+            <input class="input-litle-form" placeholder="Correo electrónico" formControlName="email" matInput
+              type="email">
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs">
-            <mat-form-field>
-              <input placeholder="password" formControlName="password" matInput type="password">
-            </mat-form-field>
+        <div class="row input-div-row">
+          <div class="col-xs input-div-colum">
+            <input class="input-litle-form" placeholder="Contraseña" formControlName="password" matInput
+              type="password">
           </div>
+        </div>
+        <div class="empty"></div>
+        <div class="mat-button">
+          <button  [ngClass]="{'button-enable' : !form.invalid, 'button-disable': form.invalid}" [disabled]="form.invalid" mat-raised-button   type="submit" >Iniciar sesión</button>
+        </div>
+        <div class="empty"></div>
+        <a>¿Olvidaste tu contraseña?</a>
+        <hr>
+        <div class="mat-button">
+          <button  class="button-login " mat-raised-button  (click)="register()">Registrarse</button>
         </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button [disabled]="form.invalid" mat-raised-button type="submit">Ingresar</button>
-        <!--<button [disabled]="form.invalid" mat-raised-button type = "button" (click) = "loginApi()">Ingresar API</button>-->
-      </mat-card-actions>
     </mat-card>
-    
   </form>
+</div>

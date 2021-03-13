@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
 
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -28,8 +29,8 @@ export class RegisterComponent implements OnInit {
     event.preventDefault();
     if (this.form.valid) {
       const value = this.form.value;
-      this.authService.createUser(value.firstName,
-        value.lastName,
+      const fullName = `${value.firstName} ${value.lastName}`
+      this.authService.createUser(fullName,
         value.phone,
         value.city,
         value.address,

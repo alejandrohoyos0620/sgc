@@ -5,9 +5,9 @@
         <div class="row input-div-row">
           <img class="img-logo" src="./../../../../assets/images/registro-logo.jpeg">
         </div>
-        <div class="row ">
-          <mat-card-title class="title ">Registrarse</mat-card-title>
-        </div>
+        <div >
+         <h1 style="align-content: center;"> Registrarse  </h1>
+             </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Nombre" formControlName="firstName" matInput type="text">
@@ -53,7 +53,8 @@
             href="">Politica de datos</a> y la <a href="">Politica de cookies.</a> Es posible
           que te enviemos notificaciones por SMS que podrás desactivar cuando quieras.</p>
         <div class="mat-button">
-          <button [disabled]="form.invalid" class="button-register " mat-raised-button type="submit">Registarse</button>
+          <!-- <button [disabled]="form.invalid" class="button-register " mat-raised-button type="submit">Registarse</button> -->
+           <button  [ngClass]="{'button-enable' : !form.invalid, 'button-disable': form.invalid}" [disabled]="form.invalid" mat-raised-button   type="submit" >Registarse</button>
         </div>
       </mat-card-content>
     </mat-card>

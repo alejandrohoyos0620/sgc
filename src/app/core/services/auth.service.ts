@@ -11,14 +11,14 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private token: TokenService
+    private token: TokenService,
+   
   ) { }
 
-  createUser(firstName: string, lastName: string, phone: string, city: string, address: string, email: string, password: string): any
+  createUser(fullName: string, phone: string, city: string, address: string, email: string, password: string): any
   {
     return this.http.post(`${environment.url_api}/customers/register`, {
-      firstName,
-      lastName,
+      fullName,
       phone,
       city,
       address,
@@ -29,6 +29,18 @@ export class AuthService {
   }
 
   login(email: string, password: string): any{
+    return this.http.post(`${environment.url_api}/customers/login`, {
+      email,
+      password,
+    })
+    .pipe(
+      // tslint:disable-next-line: deprecation
+      tap((data: {token: string}) => {
+        const token = data.token;
+        this.token.saveToken(token);
+        
+      })
+    );
   //return this.af.signInWithEmailAndPassword(email, password);
   }
 

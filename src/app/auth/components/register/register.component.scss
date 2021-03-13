@@ -5,25 +5,13 @@
     flex-direction: column;
     width:  50%;
     height: 96.3%;
+    text-align: center;
 }
 .mat{
-    width: 100%;
+    width: 90%;
     height: 100%;
-    margin: 0px 5% 0px 0%;
+    margin: 0px 5% 0px 5%;
     align-content: center;
-}
-.mat-button{
-    width: 100%;
-    height: auto;
-    align-content: center;
-    text-align: center;
-    margin-top: 2%;
-    .button-register   {
-        background-color: rgb(61, 181, 69) !important;
-        color: white;
-        width: 75%;
-        border-radius: 8px !important;
-    }
 }
 .title{
     margin-left: 44%;
@@ -83,6 +71,25 @@
     margin-left: 15%;
     background-size: 100% 100%;
     background-image: url("./../../../../assets/images/registro-complemento.jpeg");
+}
+
+.button-enable{
+    background-color: rgb(61, 181, 69) !important;
+    width: 75%;
+    border-radius: 8px !important;
+    color: white;
+}
+.button-disable{
+    width: 75%;
+    border-radius: 8px !important;
+}
+.mat-button{
+    width: 100%;
+    height: auto;
+    align-content: center;
+    text-align: center;
+    margin-top: 2%;
+    
 }
 
 /* <img class="img-fondo" src="./../../../../assets/images/registro-complemento.jpeg"> */
