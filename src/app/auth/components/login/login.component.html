@@ -31,6 +31,7 @@
         <hr>
         <div class="mat-button">
           <button  class="button-login " mat-raised-button  (click)="register()">Registrarse</button>
+          <button [disabled]="form.invalid" mat-raised-button type = "button" (click) = "loginApi()">Ingresar API</button>
         </div>
       </mat-card-content>
     </mat-card>

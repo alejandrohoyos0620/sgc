@@ -49,9 +49,11 @@
               matInput type="password">
           </div>
         </div>
-        <p class="p-resgistro">Al hacer click en Restrarse, aceptas las <a href="">Condiciones</a>, la <a
+        <div class="row input-div-row">
+        <p >Al hacer click en Restrarse, aceptas las <a href="">Condiciones</a>, la <a
             href="">Politica de datos</a> y la <a href="">Politica de cookies.</a> Es posible
           que te enviemos notificaciones por SMS que podrás desactivar cuando quieras.</p>
+        </div>
         <div class="mat-button">
           <!-- <button [disabled]="form.invalid" class="button-register " mat-raised-button type="submit">Registarse</button> -->
            <button  [ngClass]="{'button-enable' : !form.invalid, 'button-disable': form.invalid}" [disabled]="form.invalid" mat-raised-button   type="submit" >Registarse</button>

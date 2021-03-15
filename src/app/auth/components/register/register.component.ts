@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MyValidators, validateIfMatch} from '@utils/validators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '@core/services/auth.service';
 @Component({
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {
     this.buildForm();
   }
@@ -38,6 +40,7 @@ export class RegisterComponent implements OnInit {
         value.password)
         .subscribe((data) => {
           console.log(data);
+          this.toastr.success("Tu registro se ha almacenado satisfactoriamente");
           this.router.navigate(['/auth/login']);
         });
     }
@@ -52,8 +55,8 @@ export class RegisterComponent implements OnInit {
       city: ['', [Validators.required]],
       address: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     },
       {
         validators: validateIfMatch
@@ -64,11 +67,15 @@ export class RegisterComponent implements OnInit {
     return this.form.hasError('noSonIguales') &&
       this.form.get('password').dirty &&
       this.form.get('confirmPassword').dirty;
+     
   }
 
   seeIfEmail(): boolean{
     return this.form.get('email').invalid && this.form.get('email').dirty  ;
   }
  
+  showToaster(){
+    this.toastr.success("Hello, I'm the toastr message.")
+  }
 
 }

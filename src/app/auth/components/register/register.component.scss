@@ -1,11 +1,19 @@
-
+.form-register{
+    width: 70%;
+    height: 86%;
+    margin-top: 4%;
+    margin-left: 15%;
+    background-size: 100% 100%;
+    background-image: url("./../../../../assets/images/registro-complemento.jpeg");
+}
 .container,  .card-register{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     width:  50%;
-    height: 96.3%;
+    height: 100%;
     text-align: center;
+    padding: 0px;
 }
 .mat{
     width: 90%;
@@ -64,14 +72,6 @@
     line-height: 100%;
     color:rgb(135, 135, 135);
 }
-.form-register{
-    width: 70%;
-    height: 86%;
-    margin-top: 4%;
-    margin-left: 15%;
-    background-size: 100% 100%;
-    background-image: url("./../../../../assets/images/registro-complemento.jpeg");
-}
 
 .button-enable{
     background-color: rgb(61, 181, 69) !important;
@@ -91,5 +91,45 @@
     margin-top: 2%;
     
 }
+@media (max-height: 800px){
+    .input-div-row{
+        margin-top: 1%;
+    }
+ .container,  .card-register{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width:  50%;
+    height: 100% !important;
+    text-align: center;
+    padding: 0px;
+    }
+
+    .input-litle-form{
+        padding: 0 !important;
+        border-radius: 8px !important;
+        border: 2px solid rgb(199, 197, 197) !important;
+        width: 100% !important;
+        height: 80%;
+    }
+    .p-resgistro{
+        width: 80%;
+        margin-top: 1%;
+        margin-bottom: 0px;
+        text-align: center;
+        font-size: 100%;
+        line-height: 100%;
+        color:rgb(135, 135, 135);
+    }
+    .img-logo{
+        margin-left: auto;
+        margin-right: auto;
+        width: 15%;
+        height: 60%;
+        margin-top: 0px;
+    }
+
+}
+
 
 /* <img class="img-fondo" src="./../../../../assets/images/registro-complemento.jpeg"> */

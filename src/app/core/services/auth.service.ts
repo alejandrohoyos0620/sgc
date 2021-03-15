@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {TokenService} from './token.service';
 import {tap} from 'rxjs/operators';
-
+//import { JwtHelperService } from '@auth0/angular-jwt';
 import {HttpClient} from '@angular/common/http';
 import { environment } from '@environments/environment';
 @Injectable({
@@ -12,6 +12,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private token: TokenService,
+   // public jwtHelper: JwtHelperService
    
   ) { }
 
@@ -49,13 +50,17 @@ export class AuthService {
   }
 
   hasUser(): any{
-  //return this.af.authState;
+    const token = this.token.getToken();
+    // Check whether the token is expired and return
+    // true or false
+    //return !this.jwtHelper.isTokenExpired(token);
+    return token === '' ? false : true;
   }
 
   loginRestApi(email: string, password: string) {
-    return this.http.post('http://localhost:3000/api/customers/login', {
-      email: "email",
-      password : "password",
+    return this.http.post('https://platzi-store.herokuapp.com/auth', {
+      email,
+      password
     })
     .pipe(
       // tslint:disable-next-line: deprecation

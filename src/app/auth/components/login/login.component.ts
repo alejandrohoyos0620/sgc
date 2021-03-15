@@ -43,6 +43,12 @@ export class LoginComponent implements OnInit {
   register() {
     this.router.navigate(['/auth/register']);
   }
+  loginApi(){
+    this.authService.loginRestApi('alejandro@alejo.com', '123456')
+    .subscribe(data => {
+      console.log(data);
+    });
+  }
 
   seeIfEmail(): boolean{
     return this.form.get('email').invalid && this.form.get('email').dirty  ;
