@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MyValidators, validateIfMatch} from '@utils/validators';
+import {errorMessages, validateIfMatch} from '@utils/validators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ import { AuthService } from '@core/services/auth.service';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-
+  errors = errorMessages;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,15 +44,14 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/auth/login']);
         });
     }
-    console.log("Registró");
   }
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      city: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.pattern(/^([a-zA-Z ]|ñ|Ñ)*$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^([a-zA-Z ]|ñ|Ñ)*$/)]],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      city: ['', [Validators.required,  Validators.pattern(/^([a-zA-Z ]|ñ|Ñ)*$/)]],
       address: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -67,13 +66,26 @@ export class RegisterComponent implements OnInit {
     return this.form.hasError('noSonIguales') &&
       this.form.get('password').dirty &&
       this.form.get('confirmPassword').dirty;
-     
   }
 
   seeIfEmail(): boolean{
     return this.form.get('email').invalid && this.form.get('email').dirty  ;
   }
- 
+  validFormFName(): boolean{
+    return this.form.get('firstName').invalid && this.form.get('firstName').dirty  ;
+  }
+  validFormLName(): boolean{
+    return this.form.get('lastName').invalid && this.form.get('lastName').dirty  ;
+  }
+  validPassword(): boolean{
+    return this.form.get('password').invalid && this.form.get('password').dirty  ;
+  }
+  validFormPhone(): boolean{
+    return this.form.get('phone').invalid && this.form.get('phone').dirty  ;
+  }
+  validFormCity(): boolean{
+    return this.form.get('city').invalid && this.form.get('city').dirty  ;
+  }
   showToaster(){
     this.toastr.success("Hello, I'm the toastr message.")
   }

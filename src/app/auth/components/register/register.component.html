@@ -5,58 +5,86 @@
         <div class="row input-div-row">
           <img class="img-logo" src="./../../../../assets/images/registro-logo.jpeg">
         </div>
-        <div >
-         <h1 style="align-content: center;"> Registrarse  </h1>
-             </div>
+        <div>
+          <h1 style="align-content: center;"> Registrarse </h1>
+        </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Nombre" formControlName="firstName" matInput type="text">
+            <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('pattern')">
+              {{errors.fullName}}</mat-error>
+            <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('required')">
+              {{errors.required}}</mat-error>
           </div>
           <div class="col-xs input-div-colum ">
             <input class="input-litle-form" placeholder="Apellido" formControlName="lastName" matInput type="text">
+            <mat-error *ngIf="form.get('lastName').dirty && form.get('lastName').hasError('pattern')">
+              {{errors.fullName}}</mat-error>
+            <mat-error *ngIf="form.get('lastName').dirty && form.get('lastName').hasError('required')">
+              {{errors.required}}</mat-error>
           </div>
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Telefono" formControlName="phone" matInput type="text">
+            <mat-error *ngIf="form.get('phone').dirty && form.get('phone').hasError('pattern')">{{errors.phone}}
+            </mat-error>
+            <mat-error *ngIf="form.get('phone').dirty && form.get('phone').hasError('required')">{{errors.required}}
+            </mat-error>
           </div>
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Ciudad" formControlName="city" matInput type="text">
+            <mat-error *ngIf="form.get('city').dirty && form.get('city').hasError('pattern')">{{errors.city}}
+            </mat-error>
+            <mat-error *ngIf="form.get('city').dirty && form.get('city').hasError('required')">{{errors.required}}
+            </mat-error>
           </div>
           <div class="col-xs input-div-colum">
-            <input class="input-litle-form" placeholder="Direccion" formControlName="address" matInput type="text">
+            <input class="input-litle-form" placeholder="Direccion ej. Calle/Carrera #__-__, piso #, edificio..."
+              formControlName="address" matInput type="text">
           </div>
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
-            <mat-error *ngIf="seeIfEmail()">En este campo debe haber un correo</mat-error>
             <input class="input-litle-form" placeholder="Correo electrónico" formControlName="email" matInput
               type="email">
+            <mat-error *ngIf="form.get('email').dirty && form.get('email').hasError('email')">{{errors.email}}
+            </mat-error>
+            <mat-error *ngIf="form.get('email').dirty && form.get('email').hasError('required')">{{errors.required}}
+            </mat-error>
           </div>
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Contraseña" formControlName="password" matInput
               type="password">
+            <mat-error *ngIf="form.get('password').dirty && form.get('password').hasError('minlength')">
+              {{errors.password}}</mat-error>
+            <mat-error *ngIf="form.get('password').dirty && form.get('password').hasError('required')">
+              {{errors.required}}</mat-error>
           </div>
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum ">
-            <mat-error *ngIf="seeIfMatch()">Las contraseñas no coinciden</mat-error>
             <input class="input-litle-form" placeholder="Confirmar contraseña" formControlName="confirmPassword"
               matInput type="password">
+            <mat-error *ngIf="form.get('confirmPassword').dirty && form.hasError('noSonIguales') && form.get('password').dirty">
+              {{errors.confirmPassword}}</mat-error>
+            <mat-error *ngIf="form.get('confirmPassword').dirty && form.get('confirmPassword').hasError('required')">
+              {{errors.required}}</mat-error>
           </div>
         </div>
         <div class="row input-div-row">
-        <p >Al hacer click en Restrarse, aceptas las <a href="">Condiciones</a>, la <a
-            href="">Politica de datos</a> y la <a href="">Politica de cookies.</a> Es posible
-          que te enviemos notificaciones por SMS que podrás desactivar cuando quieras.</p>
+          <p>Al hacer click en Restrarse, aceptas las <a href="">Condiciones</a>, la <a href="">Politica de datos</a> y
+            la <a href="">Politica de cookies.</a> Es posible
+            que te enviemos notificaciones por SMS que podrás desactivar cuando quieras.</p>
         </div>
         <div class="mat-button">
           <!-- <button [disabled]="form.invalid" class="button-register " mat-raised-button type="submit">Registarse</button> -->
-           <button  [ngClass]="{'button-enable' : !form.invalid, 'button-disable': form.invalid}" [disabled]="form.invalid" mat-raised-button   type="submit" >Registarse</button>
+          <button [ngClass]="{'button-enable' : !form.invalid, 'button-disable': form.invalid}"
+            [disabled]="form.invalid" mat-raised-button type="submit">Registrarse</button>
         </div>
       </mat-card-content>
     </mat-card>

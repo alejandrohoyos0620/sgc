@@ -20,3 +20,14 @@ export const validateIfMatch: ValidatorFn = (control: FormGroup): ValidationErro
 
   return password.value === confirmarPassword.value ? null : { 'noSonIguales': true };
 };
+
+export const errorMessages: { [key: string]: string } = {
+    fullName: 'El campo no puede tener números',
+    email: 'En este campo debe haber un correo(usuario@dominio)',
+    confirmEmail: 'Email addresses must match',
+    password: 'La contraseña debe ser entre 7 y 15 caracteres, y contener mayúsculas y minúsculas',
+    phone: 'El campo sólo admite números',
+    confirmPassword: 'Las contraseñas no coinciden',
+    required: "El campo es requerido",
+    city: 'El campo no puede tener números',
+};

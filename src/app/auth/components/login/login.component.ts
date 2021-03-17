@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {errorMessages} from '@utils/validators';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import {throwError} from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,10 +13,12 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   buttonValid : boolean;
+  errors = errorMessages;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
     ) {
     this.buildForm();
     this.buttonValid = false;
@@ -29,8 +34,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(value.email, value.password)
       .subscribe((data) => {
         console.log(data);
+        this.toastr.success("Correcto inicio de sesión");
         this.router.navigate(['']);
-      });
+      }, error=>{
+        debugger;
+        this.toastr.error(error.error.message);
+      })
      }
   }
   private buildForm(): void {
@@ -43,12 +52,12 @@ export class LoginComponent implements OnInit {
   register() {
     this.router.navigate(['/auth/register']);
   }
-  loginApi(){
-    this.authService.loginRestApi('alejandro@alejo.com', '123456')
-    .subscribe(data => {
-      console.log(data);
-    });
-  }
+  // loginApi(){
+  //   this.authService.loginRestApi('alejandro@alejo.com', '123456')
+  //   .subscribe(data => {
+  //     console.log(data);
+  //   });
+  // }
 
   seeIfEmail(): boolean{
     return this.form.get('email').invalid && this.form.get('email').dirty  ;

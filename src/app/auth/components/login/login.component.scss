@@ -19,6 +19,7 @@
     width: 90%;
     height: 100%;
     margin: 0px 5%;
+    align-content: center;
 }
 .mat-button{
     width: 100%;
@@ -69,7 +70,7 @@
 }
 
 .input-div-row{
-    margin-top: 20%;
+    margin-top: 25%;
 }
 .input-div-colum{
     height: 40px;
@@ -100,7 +101,7 @@
 }
 @media (max-height: 800px){
     .input-div-row{
-        margin-top: 1%;
+        margin-top: 10%;
     }
  .container,  .card-login{
     display: flex;
@@ -137,4 +138,24 @@
     }
 
 }
+  @media (max-height: 400px){
+    .input-div-row{
+        margin-top: 1%;
+    }
+
+  }
+  @media (max-width: 680px){
+    
+    .mat-button{
+        .button-login   {
+           font-size: 50%;
+        }
+           
+    }
+    .button-enable, .button-disable{
+        font-size: 50%;
+    }
+  }
+
+  
 /* <img class="img-fondo" src="./../../../../assets/images/registro-complemento.jpeg"> */

@@ -131,5 +131,17 @@
 
 }
 
+@media (max-width: 680px){
+    .mat-button{
+        .button-login   {
+           font-size: 50%;
+        }
+           
+    }
+    .button-enable, .button-disable{
+        font-size: 50%;
+    }
+  }
+
 
 /* <img class="img-fondo" src="./../../../../assets/images/registro-complemento.jpeg"> */
