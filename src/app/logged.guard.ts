@@ -16,7 +16,7 @@ export class LoggedGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!this.authService.hasUserAdmin(route.data.expectedRole)){
+      if(!this.authService.hasUserRole(route.data.expectedRole)){
         this.router.navigate(['/auth/login']);
         return false;
       }

@@ -54,10 +54,10 @@ export class AuthService {
     const token = this.token.getToken();
     return token === '' ? false : true;
   }
-  hasUserAdmin(expectedRole: string): any {
+  hasUserRole(expectedRole: string): any {
     const constpectedRole = expectedRole;
     const token = this.token.getToken();
-    if (token !== '') {
+    if (token !== '' && token !== undefined && token !== null ) {
       const tokenPayload: any = decode(token);
       if (
         !this.hasUser() ||

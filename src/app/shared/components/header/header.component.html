@@ -1,17 +1,83 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <div class="row between-xs middle-xs header-row">
-            <nav>
-                <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
-                <a mat-button routerLink="/products" routerLinkActive="active">Products</a>
-                <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
-                <a *ngIf ="hasUser()"mat-raised-button color="warn" routerLink="/admin" routerLinkActive="active">Admin</a>
-            </nav>
-            <nav>
-                <a mat-button  *ngIf="!hasUser()" routerLink="/auth/login" routerLinkActive="active">Login</a>
-                <a mat-button  *ngIf="!hasUser()" routerLink="/auth/register" routerLinkActive="active">Register</a>
-                <a mat-button *ngIf="hasUser()" routerLinkActive="active" (click)="logout()">Logout</a>
-            </nav>
+            <div class="divImgNav">
+                <img class="imgAccount" src="../../../../assets/images/image1.png">
             </div>
+            <nav class="navCenter">
+                <div class="hoverDivNav">
+                    <a routerLink="/home" routerLinkActive="active">
+                        <mat-icon class="iconAccount">home </mat-icon>
+                    </a>
+                </div>
+                <div class="hoverDivNav">
+                    <a routerLink="/products" routerLinkActive="active">
+                        <mat-icon class="iconAccount">shopping_cart </mat-icon>
+                    </a>
+                </div>
+                <div class="hoverDivNav">
+                    <a routerLink="/contact" routerLinkActive="active">
+                        <mat-icon class="iconAccount">space_dashboard </mat-icon>
+                    </a>
+                </div>
+                <div class="hoverDivNav" *ngIf="hasUser()">
+                    <a color="warn" routerLink="/admin" routerLinkActive="active">
+                        <mat-icon class="iconAccount">admin_panel_settings</mat-icon>
+                    </a>
+                </div>
+            </nav>
+            <nav class="navRight">
+                <div class="hoverDivNavRight">
+                    <a mat-button *ngIf="!hasUser()" routerLink="/auth/login" routerLinkActive="active">
+                        <mat-icon class="iconAccount">login</mat-icon>
+                        <span>Iniciar Sesión</span>
+                    </a>
+                </div>
+                <div class="hoverDivNavRight">
+                    <a mat-button *ngIf="!hasUser()" routerLink="/auth/register" routerLinkActive="active">
+                        <mat-icon class="iconAccount">assignment_ind</mat-icon>
+                        <span>Registrarse</span>
+                    </a>
+                </div>
+                <button mat-icon-button *ngIf="hasUser()" [matMenuTriggerFor]="menu"
+                    aria-label="Example icon-button with a menu">
+                    <div class="divSelectUser">
+                        <mat-icon class="iconAccountArrow">expand_more</mat-icon>
+                    </div>
+                </button>
+                <div class="divIconUser" *ngIf="hasUser()">
+                    <mat-icon class="iconAccountUser">account_circle</mat-icon>
+                </div>
+                <mat-menu class="menuAuth" #menu="matMenu">
+                    <div class="divImg">
+                        <img src="../../../../assets/images/image1.png">
+                    </div>
+                    <div class="divImg">
+                        <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
+                    </div>
+                    <ul>
+                        <li><span class="spanNameMenu"><b>{{user.name}}</b></span></li>
+                        <li><span class="spanEmailMenu">{{user.email}}</span></li>
+                    </ul>
+                    <hr class="linesMenu">
+                    <ul>
+                        <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{user.phone}}</b></span></li>
+                        <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{user.city}}</b></span></li>
+                        <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{user.address}}</b></span></li>
+                        <li><button mat-fab>
+                                <mat-icon>mode_edit</mat-icon>
+                            </button></li>
+                    </ul>
+                    <hr class="linesMenu">
+                    <div class="divButtonLogout">
+                        <button class="buttonLogout" mat-raised-button *ngIf="hasUser()" (click)="logout()">
+                            <mat-icon>logout</mat-icon>
+                            <span>Cerrar sesión</span>
+                        </button>
+                    </div>
+                </mat-menu>
+
+            </nav>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>

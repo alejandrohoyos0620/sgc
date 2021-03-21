@@ -18,4 +18,7 @@ export class TokenService {
   deleteToken(){
     localStorage.setItem('token', '');
   }
+  isTokenWrite(){
+    return (localStorage.getItem('token') === undefined || localStorage.getItem('token') === null) ? true: false;
+  }
 }
