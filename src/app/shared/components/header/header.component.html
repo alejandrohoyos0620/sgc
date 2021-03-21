@@ -5,37 +5,37 @@
                 <img class="imgAccount" src="../../../../assets/images/image1.png">
             </div>
             <nav class="navCenter">
-                <div class="hoverDivNav">
-                    <a routerLink="/home" routerLinkActive="active">
+                <div class="hoverDivNav" matTooltip="Inicio" matTooltipClass="example-tooltip-red">
+                    <a routerLink="/home" routerLinkActive="active" >
                         <mat-icon class="iconAccount">home </mat-icon>
                     </a>
                 </div>
-                <div class="hoverDivNav">
-                    <a routerLink="/products" routerLinkActive="active">
+                <div class="hoverDivNav" matTooltip="Productos" matTooltipClass="example-tooltip-red">
+                    <a routerLink="/products" routerLinkActive="active" >
                         <mat-icon class="iconAccount">shopping_cart </mat-icon>
                     </a>
                 </div>
-                <div class="hoverDivNav">
-                    <a routerLink="/contact" routerLinkActive="active">
+                <div class="hoverDivNav" matTooltip="Panel" matTooltipClass="example-tooltip-red">
+                    <a routerLink="/contact" routerLinkActive="active"  >
                         <mat-icon class="iconAccount">space_dashboard </mat-icon>
                     </a>
                 </div>
                 <div class="hoverDivNav" *ngIf="hasUser()">
-                    <a color="warn" routerLink="/admin" routerLinkActive="active">
+                    <a class="adminIcon" routerLink="/admin" routerLinkActive="active" matTooltip="Administrar" matTooltipClass="example-tooltip-red" >
                         <mat-icon class="iconAccount">admin_panel_settings</mat-icon>
                     </a>
                 </div>
             </nav>
-            <nav class="navRight">
+            <nav class="navRight ">
                 <div class="hoverDivNavRight">
                     <a mat-button *ngIf="!hasUser()" routerLink="/auth/login" routerLinkActive="active">
-                        <mat-icon class="iconAccount">login</mat-icon>
+                        <mat-icon class="iconAccountAuth">login</mat-icon>
                         <span>Iniciar Sesión</span>
                     </a>
                 </div>
                 <div class="hoverDivNavRight">
                     <a mat-button *ngIf="!hasUser()" routerLink="/auth/register" routerLinkActive="active">
-                        <mat-icon class="iconAccount">assignment_ind</mat-icon>
+                        <mat-icon class="iconAccountAuth">assignment_ind</mat-icon>
                         <span>Registrarse</span>
                     </a>
                 </div>
@@ -56,14 +56,14 @@
                         <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
                     </div>
                     <ul>
-                        <li><span class="spanNameMenu"><b>{{user.name}}</b></span></li>
-                        <li><span class="spanEmailMenu">{{user.email}}</span></li>
+                        <li><span class="spanNameMenu"><b>{{customer.fullName}}</b></span></li>
+                        <li><span class="spanEmailMenu">{{customer.email}}</span></li>
                     </ul>
                     <hr class="linesMenu">
                     <ul>
-                        <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{user.phone}}</b></span></li>
-                        <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{user.city}}</b></span></li>
-                        <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{user.address}}</b></span></li>
+                        <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{customer.phone}}</b></span></li>
+                        <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{customer.city}}</b></span></li>
+                        <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{customer.address}}</b></span></li>
                         <li><button mat-fab>
                                 <mat-icon>mode_edit</mat-icon>
                             </button></li>

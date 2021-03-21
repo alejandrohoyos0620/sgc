@@ -1,6 +1,6 @@
 nav > a {
     text-decoration: none;  
-    
+    width: auto;
 }
 .hoverDivNav:hover {
     background: #2c387b;
@@ -12,7 +12,7 @@ nav > a {
     border-radius: 10px;
 }
 .hoverDivNavRight{
-    width: 25% !important;
+    width: auto !important;
     height: auto; 
     text-align: center;
     border-radius: 10px;
@@ -22,6 +22,9 @@ nav >.hoverDivNav > a.active {
 }
 nav > .hoverDivNav > a{
     color:white; 
+}
+.adminIcon{
+    color:rgb(255, 87, 87) !important; 
 }
 .divSelectUser{
     border-bottom-left-radius: 50%;
@@ -77,6 +80,10 @@ ul{
 .iconAccount{
     font-size: xxx-large !important;
 }
+.iconAccountAuth{
+    font-size: xxx-large !important;
+      
+}
 .imgAccount{   
     width: 130px;
     height: 100% !important;
@@ -110,7 +117,7 @@ nav{
 }
 
 .mat-toolbar-multiple-rows{
-    height: 5vw;
+    height: auto;
 }
 .mat-toolbar-row, .mat-toolbar-single-row{
     height: 100%;
@@ -124,11 +131,37 @@ mat-menu-item{
     width: auto;
     height: auto;
 }
+.verticalLine { border-left: thick solid #ff0000; }
 
 .linesMenu{
     color: #dadde1;
     margin: 8px 16px;
 }
+.example-tooltip-red {
+    background: #b71c1c !important;
+}
 .buttonLogout{
     background: rgb(161, 182, 194);
 }
+@media (max-width: 1350px){
+    .imgAccount{   
+        width: 90px;
+        height: 100% !important;
+    }
+    .hoverDivNavRight{
+        width: auto !important;
+        height: auto; 
+        text-align: center;
+        border-radius: 10px;
+    }
+    .navRight{
+        width: 40%;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    nav{
+        display: flex;
+        width: 40%;
+        height: 100%;
+    }
+  }

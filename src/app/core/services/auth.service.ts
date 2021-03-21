@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import decode from 'jwt-decode';
 import {throwError} from 'rxjs';
+import { Customer } from '@core/models/customer.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,15 +19,8 @@ export class AuthService {
 
   ) { }
 
-  createUser(fullName: string, phone: string, city: string, address: string, email: string, password: string): any {
-    return this.http.post(`${environment.url_api}/customers/register`, {
-      fullName,
-      phone,
-      city,
-      address,
-      email,
-      password,
-    });
+  createUser(customer: Customer): any {
+    return this.http.post(`${environment.url_api}/customers/register`, customer);
     //return this.af.createUserWithEmailAndPassword(email, password);
   }
 

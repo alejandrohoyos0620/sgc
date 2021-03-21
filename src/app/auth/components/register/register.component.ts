@@ -3,7 +3,7 @@ import {errorMessages, validateIfMatch} from '@utils/validators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import {Customer} from '@core/models/customer.model';
 import { AuthService } from '@core/services/auth.service';
 @Component({
   selector: 'app-register',
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
   errors = errorMessages;
-
+  customer: Customer;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -31,13 +31,16 @@ export class RegisterComponent implements OnInit {
     event.preventDefault();
     if (this.form.valid) {
       const value = this.form.value;
-      const fullName = `${value.firstName} ${value.lastName}`
-      this.authService.createUser(fullName,
-        value.phone,
-        value.city,
-        value.address,
-        value.email,
-        value.password)
+      const fullName = `${value.firstName} ${value.lastName}`;
+      this.customer = {
+        fullName: fullName,
+        address: value.address,
+        city: value.city,
+        phone: value.phone,
+        email: value.email,
+        password: value.password
+      };
+      this.authService.createUser(this.customer)
         .subscribe((data) => {
           console.log(data);
           this.toastr.success("Tu registro se ha almacenado satisfactoriamente");

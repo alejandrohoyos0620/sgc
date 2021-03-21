@@ -3,7 +3,7 @@ import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 import { matDrawerAnimations } from '@angular/material/sidenav';
-import {User} from '@core/models/user.model';
+import {Customer} from '@core/models/customer.model';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,12 +11,13 @@ import {User} from '@core/models/user.model';
 })
 export class HeaderComponent implements OnInit {
   showFiller = false ;
-  user:User ={
-    name:"Alejandro Hoyos Hernández",
+  customer:Customer ={
+    fullName:"Alejandro Hoyos Hernández",
     address:"Calle 65E #40-52",
     city:"Manizales, Caldas",
     phone:"3136509765",
-    email:"alejandro@alejo.com"
+    email:"alejandro@alejo.com",
+    password: "12345678"
   }
   constructor(
     private authService: AuthService,
