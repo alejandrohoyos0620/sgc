@@ -11,10 +11,10 @@
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Nombre" formControlName="firstName" matInput type="text">
-            <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('pattern')">
-              {{errors.fullName}}</mat-error>
+            <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('ERROR_BAJO')">
+              {{errors.patterFName}}</mat-error>
             <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('required')">
-              {{errors.required}}</mat-error>
+              {{errors.patternLName}}</mat-error>
           </div>
           <div class="col-xs input-div-colum ">
             <input class="input-litle-form" placeholder="Apellido" formControlName="lastName" matInput type="text">
@@ -27,8 +27,12 @@
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Telefono" formControlName="phone" matInput type="text">
-            <mat-error *ngIf="form.get('phone').dirty && form.get('phone').hasError('pattern')">{{errors.phone}}
+            <mat-error *ngIf="form.get('phone').dirty && form.get('phone').hasError('pattern')">{{errors.patternPhone}}
             </mat-error>
+            <mat-error *ngIf="form.get('phone').dirty && form.get('phone').hasError('minlength')">
+              {{errors.lengthPhone}}</mat-error>
+            <mat-error *ngIf="form.get('phone').dirty && form.get('phone').hasError('maxlength')">
+              {{errors.lengthPhone}}</mat-error>
             <mat-error *ngIf="form.get('phone').dirty && form.get('phone').hasError('required')">{{errors.required}}
             </mat-error>
           </div>
@@ -61,16 +65,21 @@
             <input class="input-litle-form" placeholder="Contraseña" formControlName="password" matInput
               type="password">
             <mat-error *ngIf="form.get('password').dirty && form.get('password').hasError('minlength')">
-              {{errors.password}}</mat-error>
+              {{errors.lengthPassword}}</mat-error>
+            <mat-error *ngIf="form.get('password').dirty && form.get('password').hasError('maxlength')">
+              {{errors.lengthPassword}}</mat-error>
             <mat-error *ngIf="form.get('password').dirty && form.get('password').hasError('required')">
               {{errors.required}}</mat-error>
+            <mat-error *ngIf="form.get('password').dirty && form.get('password').hasError('pattern')">
+              {{errors.patternPassword}}</mat-error>
           </div>
         </div>
         <div class="row input-div-row">
           <div class="col-xs input-div-colum ">
             <input class="input-litle-form" placeholder="Confirmar contraseña" formControlName="confirmPassword"
               matInput type="password">
-            <mat-error *ngIf="form.get('confirmPassword').dirty && form.hasError('noSonIguales') && form.get('password').dirty">
+            <mat-error
+              *ngIf="form.get('confirmPassword').dirty && form.hasError('noSonIguales') && form.get('password').dirty">
               {{errors.confirmPassword}}</mat-error>
             <mat-error *ngIf="form.get('confirmPassword').dirty && form.get('confirmPassword').hasError('required')">
               {{errors.required}}</mat-error>
@@ -81,11 +90,13 @@
             la <a href="">Politica de cookies.</a> Es posible
             que te enviemos notificaciones por SMS que podrás desactivar cuando quieras.</p>
         </div>
+        <div class="row input-div-row">
         <div class="mat-button">
           <!-- <button [disabled]="form.invalid" class="button-register " mat-raised-button type="submit">Registarse</button> -->
           <button [ngClass]="{'button-enable' : !form.invalid, 'button-disable': form.invalid}"
             [disabled]="form.invalid" mat-raised-button type="submit">Registrarse</button>
         </div>
+      </div>
       </mat-card-content>
     </mat-card>
   </form>

@@ -91,9 +91,14 @@
     margin-top: 2%;
     
 }
-@media (max-height: 800px){
+//@media (max-width: 1350px){
+    @media (max-height: 800px) {
     .input-div-row{
-        margin-top: 1%;
+        height: 10%;
+        margin-top: 0%;
+    }
+    .mat-h1, .mat-headline, .mat-typography h1{
+        font-size: 20px/30px;
     }
  .container,  .card-register{
     display: flex;
@@ -110,7 +115,7 @@
         border-radius: 8px !important;
         border: 2px solid rgb(199, 197, 197) !important;
         width: 100% !important;
-        height: 80%;
+        height: 100%;
     }
     .p-resgistro{
         width: 80%;
@@ -125,13 +130,24 @@
         margin-left: auto;
         margin-right: auto;
         width: 15%;
-        height: 60%;
+        height: 100%;
         margin-top: 0px;
     }
 
 }
 
-@media (max-width: 680px){
+@media (max-width: 520px){
+    .mat-button{
+        .button-login   {
+           font-size: 70%;
+        }
+           
+    }
+    .button-enable, .button-disable{
+        font-size: 70%;
+    }
+  }
+  @media (max-width: 400px){
     .mat-button{
         .button-login   {
            font-size: 50%;
@@ -142,6 +158,7 @@
         font-size: 50%;
     }
   }
+
 
 
 /* <img class="img-fondo" src="./../../../../assets/images/registro-complemento.jpeg"> */

@@ -48,16 +48,16 @@ export class RegisterComponent implements OnInit {
         });
     }
   }
-
+  
   private buildForm(): void {
-    this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.pattern(/^([a-zA-Z ]|ñ|Ñ)*$/)]],
-      lastName: ['', [Validators.required, Validators.pattern(/^([a-zA-Z ]|ñ|Ñ)*$/)]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+    this.form = this.formBuilder.group({///^([a-zA-Z ]|ñ|Ñ)*$/
+      firstName: ['', [Validators.required, Validators.pattern(/^(\w|ñ|Ñ|á|é|í|ó|ú)+(\s{1,1}(\w|ñ|Ñ|á|é|í|ó|ú)+){1,1}$/)]],  
+      lastName: ['', [Validators.required, Validators.pattern(/^(\w|ñ|Ñ|á|é|í|ó|ú)+(\s{1,1}(\w|ñ|Ñ|á|é|í|ó|ú)+){1,1}$/)]],
+      phone: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(15), Validators.pattern('([0-9]| |[+]|[-])*')]],
       city: ['', [Validators.required,  Validators.pattern(/^([a-zA-Z ]|ñ|Ñ)*$/)]],
       address: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(15),  Validators.pattern(/^(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     },
       {

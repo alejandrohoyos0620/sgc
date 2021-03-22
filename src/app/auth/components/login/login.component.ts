@@ -13,6 +13,7 @@ import {throwError} from 'rxjs';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   buttonValid : boolean;
+  typePassword ="password";
   errors = errorMessages;
   constructor(
     private formBuilder: FormBuilder,
@@ -61,5 +62,14 @@ export class LoginComponent implements OnInit {
 
   seeIfEmail(): boolean{
     return this.form.get('email').invalid && this.form.get('email').dirty  ;
+  }
+  lookPassword(){
+    if(this.typePassword === 'password'){
+      this.typePassword = 'text';
+    }
+    else{
+      this.typePassword = 'password';
+    }
+    
   }
 }

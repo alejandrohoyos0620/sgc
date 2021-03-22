@@ -22,12 +22,16 @@ export const validateIfMatch: ValidatorFn = (control: FormGroup): ValidationErro
 };
 
 export const errorMessages: { [key: string]: string } = {
+    patternFName:'El campo no puede tener números',
+    patternLName:'El campo no puede tener números',
     fullName: 'El campo no puede tener números',
     email: 'En este campo debe haber un correo(usuario@dominio)',
     confirmEmail: 'Email addresses must match',
-    password: 'La contraseña debe ser entre 7 y 15 caracteres, y contener mayúsculas y minúsculas',
-    phone: 'El campo sólo admite números',
+    lengthPassword: 'La contraseña debe ser entre 8 y 15 caracteres',
+    patternPhone: 'El campo sólo admite números y caracteres como (+,-) o espacios',
+    lengthPhone: 'El teléfono debe ser entre 7 y 15 caracteres',
     confirmPassword: 'Las contraseñas no coinciden',
     required: "El campo es requerido",
+    patternPassword: "La contraseña debe contener mínimo una letra minúscula y una mayúscula",
     city: 'El campo no puede tener números',
 };
