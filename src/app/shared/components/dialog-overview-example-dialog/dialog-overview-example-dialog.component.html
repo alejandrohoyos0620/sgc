@@ -1,0 +1,23 @@
+<h1 mat-dialog-title><b>Editar perfíl</b></h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="data.fullName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Teléfono</mat-label>
+    <input matInput [(ngModel)]="data.phone">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ciudad</mat-label>
+    <input matInput [(ngModel)]="data.city">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Dirección</mat-label>
+    <input matInput [(ngModel)]="data.address">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Descartar</button>
+  <button mat-button [mat-dialog-close]="data.city" cdkFocusInitial>Guardar</button>
+</div>

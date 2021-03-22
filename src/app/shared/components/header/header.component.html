@@ -6,22 +6,23 @@
             </div>
             <nav class="navCenter">
                 <div class="hoverDivNav" matTooltip="Inicio" matTooltipClass="example-tooltip-red">
-                    <a routerLink="/home" routerLinkActive="active" >
+                    <a routerLink="/home" routerLinkActive="active">
                         <mat-icon class="iconAccount">home </mat-icon>
                     </a>
                 </div>
                 <div class="hoverDivNav" matTooltip="Productos" matTooltipClass="example-tooltip-red">
-                    <a routerLink="/products" routerLinkActive="active" >
+                    <a routerLink="/products" routerLinkActive="active">
                         <mat-icon class="iconAccount">shopping_cart </mat-icon>
                     </a>
                 </div>
                 <div class="hoverDivNav" matTooltip="Panel" matTooltipClass="example-tooltip-red">
-                    <a routerLink="/contact" routerLinkActive="active"  >
+                    <a routerLink="/contact" routerLinkActive="active">
                         <mat-icon class="iconAccount">space_dashboard </mat-icon>
                     </a>
                 </div>
                 <div class="hoverDivNav" *ngIf="hasUser()">
-                    <a class="adminIcon" routerLink="/admin" routerLinkActive="active" matTooltip="Administrar" matTooltipClass="example-tooltip-red" >
+                    <a class="adminIcon" routerLink="/admin" routerLinkActive="active" matTooltip="Administrar"
+                        matTooltipClass="example-tooltip-red">
                         <mat-icon class="iconAccount">admin_panel_settings</mat-icon>
                     </a>
                 </div>
@@ -49,31 +50,68 @@
                     <mat-icon class="iconAccountUser">account_circle</mat-icon>
                 </div>
                 <mat-menu class="menuAuth" #menu="matMenu">
-                    <div class="divImg">
-                        <img src="../../../../assets/images/image1.png">
+                    <!--Div present when the target isEditable is true, when can edit the card-->
+                    <div *ngIf="isEditable">
+                        <form [formGroup]="form" class="form-register" (ngSubmit)="register($event) ">
+                            <div class="divImg">
+                                <img src="../../../../assets/images/image1.png">
+                            </div>
+                            <div class="divImg">
+                                <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
+                            </div>
+                            <ul>
+                                <input class="input-litle-form" placeholder="Nombre" formControlName="firstName"
+                                    matInput type="text">
+                                <li><span class="spanNameMenu"><b>{{customer.fullName}}</b></span></li>
+                                <li><span class="spanEmailMenu">{{customer.email}}</span></li>
+                            </ul>
+                            <hr class="linesMenu">
+                            <ul>
+                                <li><input class="input-litle-form" placeholder="Telefono" formControlName="phone"
+                                        matInput type="text">{{customer.phone}}</li>
+                                <li><input class="input-litle-form" placeholder="Ciudad" formControlName="city" matInput
+                                        type="text">{{customer.city}}</li>
+                                <li><input class="input-litle-form"
+                                        placeholder="Direccion ej. Calle/Carrera #__-__, piso #, edificio..."
+                                        formControlName="address" matInput type="text">{{customer.address}}
+                                </li>
+                            </ul>
+                            <hr class="linesMenu">
+                            <div class="mat-button">
+                                <button [ngClass]="{'button-enable' : !form.invalid, 'button-disable': form.invalid}"
+                                    [disabled]="form.invalid" mat-raised-button type="submit">Conformar</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="divImg">
-                        <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
-                    </div>
-                    <ul>
-                        <li><span class="spanNameMenu"><b>{{customer.fullName}}</b></span></li>
-                        <li><span class="spanEmailMenu">{{customer.email}}</span></li>
-                    </ul>
-                    <hr class="linesMenu">
-                    <ul>
-                        <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{customer.phone}}</b></span></li>
-                        <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{customer.city}}</b></span></li>
-                        <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{customer.address}}</b></span></li>
-                        <li><button mat-fab>
-                                <mat-icon>mode_edit</mat-icon>
-                            </button></li>
-                    </ul>
-                    <hr class="linesMenu">
-                    <div class="divButtonLogout">
-                        <button class="buttonLogout" mat-raised-button *ngIf="hasUser()" (click)="logout()">
-                            <mat-icon>logout</mat-icon>
-                            <span>Cerrar sesión</span>
-                        </button>
+                    <!--Div present when the target isEditable is false, when can't edit the card-->
+                    <div *ngIf="!isEditable">
+                        <div class="divImg">
+                            <img src="../../../../assets/images/image1.png">
+                        </div>
+                        <div class="divImg">
+                            <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
+                        </div>
+                        <ul>
+                            <li><span class="spanNameMenu"><b>{{customer.fullName}}</b></span></li>
+                            <li><span class="spanEmailMenu">{{customer.email}}</span></li>
+                        </ul>
+                        <hr class="linesMenu">
+                        <ul>
+                            <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{customer.phone}}</b></span></li>
+                            <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{customer.city}}</b></span></li>
+                            <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{customer.address}}</b></span>
+                            </li>
+                            <li><button mat-fab (click) ="openDialog()">
+                                    <mat-icon>mode_edit</mat-icon>
+                                </button></li>
+                        </ul>
+                        <hr class="linesMenu">
+                        <div class="divButtonLogout">
+                            <button class="buttonLogout" mat-raised-button *ngIf="hasUser()" (click)="logout()">
+                                <mat-icon>logout</mat-icon>
+                                <span>Cerrar sesión</span>
+                            </button>
+                        </div>
                     </div>
                 </mat-menu>
 
@@ -81,3 +119,18 @@
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
+  <!-- <ol>
+    <li>
+      <mat-form-field>
+        <mat-label>What's your name?</mat-label>
+        <input matInput [(ngModel)]="name">
+      </mat-form-field>
+    </li>
+    <li>
+      <button mat-raised-button (click)="openDialog()">Pick one</button>
+    </li>
+    <li *ngIf="animal">
+      You chose: <i>{{animal}}</i>
+    </li>
+  </ol> -->
+ 

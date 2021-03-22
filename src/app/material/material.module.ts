@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -43,6 +44,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatFormFieldModule,
     MatStepperModule,
     MatTooltipModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -62,7 +64,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatPaginatorModule,
     MatFormFieldModule,
     MatStepperModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

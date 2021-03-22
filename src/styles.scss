@@ -24,3 +24,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-fab:not([class*=mat-elevation-z]), .mat-mini-fab:not([class*=mat-elevation-z]){
         background-color: #00B6F1;
 }
+.mat-dialog-container{
+    background-image: linear-gradient(153deg, #3f51b5 6%, #00B6F1  100%);
+    
+}
