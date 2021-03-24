@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
         this.toastr.success("Correcto inicio de sesión");
         this.router.navigate(['']);
       }, error=>{
-        debugger;
         this.toastr.error(error.error.message);
       })
      }

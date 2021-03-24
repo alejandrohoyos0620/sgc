@@ -1,1 +1,67 @@
-<p>panel works!</p>
+<div class="containerPanel">
+    <nav class="navTableButtons">
+        <button class="buttonServiceList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor = "warn" (click) ="changeTable('service')">
+            <mat-icon>download</mat-icon>
+            <span>Listado de servicios</span>
+        </button>
+        <button class="buttonAprovedList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor = "warn" (click) ="changeTable('aproved')">
+            <mat-icon>warning</mat-icon>
+            <span>Aprobados</span>
+        </button>
+        <button class="buttonCourseList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor = "warn" (click) ="changeTable('course')">
+            <mat-icon>error_outline</mat-icon>
+            <span>En Curso</span>
+        </button>
+        <button class="buttonFinishedList" mat-raised-button matBadge="32"  matBadgePosition="above" matBadgeColor = "warn" (click) ="changeTable('finished')">
+            <mat-icon>done_all</mat-icon>
+            <span>Terminados</span>
+        </button>
+    </nav>
+    <div class ="spaceNav"></div>
+    <div *ngIf="tableEnable === 'service'" class ="divTablePanel">
+        <div class="divBannerService">
+            <p> Listado de servicios</p>
+        </div>
+        <div class ="spaceTable"></div>
+        <table class="tablePanel">
+        </table>
+    </div>
+    <div *ngIf="tableEnable === 'aproved'" class ="divTablePanel">
+        <div class="divBannerAproved">
+            <p> Listado de servicios aprobados</p>
+        </div>
+        <div class ="spaceTable"></div>
+        <table class="tablePanel">
+        </table>
+    </div>
+    <div *ngIf="tableEnable === 'course'" class ="divTablePanel">
+        <div class="divBannerCourse">
+            <p> Listado de servicios en curso</p>
+        </div>
+        <div class ="spaceTable"></div>
+        <table class="tablePanelCourse">
+             <tr>
+                <th>N° Ticket</th>
+                <th>Servicio</th>
+                <th>Técnico</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+              </tr>
+              <tr *ngFor="let hiredService of hiredServices;">
+                <td>{{ hiredService.id }}</td>
+                <td>{{ hiredService.service.name }}</td>
+                <td>{{ hiredService.repairman.fullName }}</td>
+                <td>{{ hiredService.customer.fullName }}</td>
+                <td>{{ hiredService.createdAt }}</td>
+              </tr>
+        </table>
+    </div>
+    <div *ngIf="tableEnable === 'finished'" class ="divTablePanel">
+        <div class="divBannerFinished">
+            <p>Listado de servicios terminados</p>
+        </div>
+        <div class ="spaceTable"></div>
+        <table class="tablePanel">
+        </table>
+    </div>
+</div>

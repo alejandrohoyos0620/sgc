@@ -1,0 +1,151 @@
+.containerPanel {
+    background-color: white;
+    border: rgb(204, 204, 204) solid;
+    border-radius: 10px !important;
+    box-shadow: 5px 5px 5px 0px rgba(253, 1, 1, 0.2);
+    background: white;
+    /* background-image: linear-gradient(153deg, #a9a9a9 6%, #ffffff  100%); */
+    height: 70%;
+    width: 90%;
+    margin-left: 5%;
+}
+.navTableButtons {
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    width: 98%;
+    margin: 1% 1%;
+}
+.divBannerService, .divBannerAproved, .divBannerCourse, .divBannerFinished{
+    justify-content: center;
+    width: 98%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    height: 9%;
+    display: flex;
+    align-items: center;
+    p{
+        margin: 0;
+    }
+}
+.divBannerService{
+    background: rgb(35, 42, 171);
+}
+.divBannerAproved{
+    background: rgb(255, 0, 0);
+}
+.divBannerCourse{
+    background: rgb(255, 192, 0);
+}
+.divBannerFinished{
+    background: rgb(72, 193, 53);
+    
+}
+.divTablePanel {
+    width: 100%;
+    height: 84%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tablePanelService, .tablePanelCourse, .tablePanelAproved, .tablePanelFinished{
+    height: 89%;
+    width: 98%;
+    border: rgb(204, 204, 204) solid 1px ;
+    border-radius: 10px;
+}
+.tablePanelCourse{
+   /* tr:nth-child(even) {
+        background-color: rgb(255, 218, 109);   
+    }
+    
+    tr:nth-child(odd) {
+        background-color: rgb(250, 222, 140);
+    }
+     tr:nth-child(1){
+        background-color: rgb(255, 192, 0);
+        color: white;
+    } */
+    tr:nth-child(even) {
+        background-color: rgb(77, 82, 169);   
+    }
+    
+    tr:nth-child(odd) {
+        background-color: rgb(119, 122, 171);
+    }
+     tr:nth-child(1){
+        background-color: rgb(35, 42, 171);
+        color: white;
+    }
+}
+.tablePanelService{
+    tr:nth-child(even) {
+        background-color: rgb(77, 82, 169);   
+    }
+    
+    tr:nth-child(odd) {
+        background-color: rgb(119, 122, 171);
+    }
+     tr:nth-child(1){
+        background-color: rgb(35, 42, 171);
+        color: white;
+    }
+}
+.tablePanelAproved{
+    height: 90%;
+    width: 95%;
+    border: rgb(204, 204, 204) solid 1px ;
+    border-radius: 10px;
+}
+.tablePanelFinished{
+    height: 90%;
+    width: 95%;
+    border: rgb(204, 204, 204) solid 1px ;
+    border-radius: 10px;
+}
+.spaceNav{
+height: 1%;
+}
+.spaceTable{
+    height: 1%;
+}
+.divImgPanel {
+    width: 100%;
+    height: 20%;
+}
+.imgHeaderPalen {
+    width: 100%;
+    height: 80%;
+}
+.buttonServiceList,.buttonAprovedList,.buttonCourseList,.buttonFinishedList{
+    color: white;
+    border-radius: 0px;
+    width: 15%;
+}
+.buttonServiceList {
+    background-color: rgb(35, 42, 171);
+}
+.buttonAprovedList {
+    background-color: rgb(255, 0, 0);
+
+}
+.buttonCourseList {
+    background-color: rgb(255, 192, 0);
+}
+.buttonFinishedList {
+    background-color: rgb(72, 193, 53);
+}
+.linesMenu{
+    color: #dadde1;
+    margin: 8px 16px;
+    height: 1px;
+}
+
+@media only screen and (min-width: 75em){
+    .container{
+    width: 86rem !important;
+    }
+}

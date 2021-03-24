@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
   errors = errorMessages;
-  customer: Customer;
+  customer: Partial<Customer>;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,

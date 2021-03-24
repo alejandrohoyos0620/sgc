@@ -57,15 +57,15 @@
                         <div class="divImg">
                             <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
                         </div>
-                        <ul>
-                            <li><span class="spanNameMenu"><b>{{customer.fullName}}</b></span></li>
-                            <li><span class="spanEmailMenu">{{customer.email}}</span></li>
+                        <ul *ngIf="user" >
+                            <li><span class="spanNameMenu"><b>{{user.fullName}}</b></span></li>
+                            <li><span class="spanEmailenu">{{user.email}}</span></li>
                         </ul>
                         <hr class="linesMenu">
-                        <ul>
-                            <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{customer.phone}}</b></span></li>
-                            <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{customer.city}}</b></span></li>
-                            <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{customer.address}}</b></span>
+                        <ul *ngIf="user">
+                            <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{user.phone}}</b></span></li>
+                            <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{user.city}}</b></span></li>
+                            <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{user.address}}</b></span>
                             </li>
                             <li><button mat-fab (click)="openDialog()">
                                     <mat-icon>mode_edit</mat-icon>

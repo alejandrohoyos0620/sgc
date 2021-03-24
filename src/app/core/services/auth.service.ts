@@ -5,8 +5,10 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import decode from 'jwt-decode';
-import {throwError} from 'rxjs';
+import { throwError } from 'rxjs';
 import { Customer } from '@core/models/customer.model';
+import { UsersService } from './users/users.service';
+import { Employee } from '@core/models/employee.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,12 +17,13 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private token: TokenService,
+    private userService: UsersService
     // public jwtHelper: JwtHelperService
 
   ) { }
 
-  createUser(customer: Customer): any {
-    return this.http.post(`${environment.url_api}/customers/register`, customer);
+  createUser(customer: Partial<Customer>): any {
+    return this.http.post(`${environment.url_api}/users/register`, customer);
     //return this.af.createUserWithEmailAndPassword(email, password);
   }
 
@@ -34,10 +37,9 @@ export class AuthService {
         tap((data: { token: string }) => {
           const token = data.token;
           this.token.saveToken(token);
-          console.log(data);
+          this.userService.saveUser(token);
         })
       );
-    //return this.af.signInWithEmailAndPassword(email, password);
   }
 
   logout(): any {
@@ -46,12 +48,16 @@ export class AuthService {
 
   hasUser(): any {
     const token = this.token.getToken();
-    return token === '' ? false : true;
+    if (token !== '' && token !== undefined && token !== null) {
+      return true;
+    }
+    return false;
   }
+
   hasUserRole(expectedRole: string): any {
     const constpectedRole = expectedRole;
     const token = this.token.getToken();
-    if (token !== '' && token !== undefined && token !== null ) {
+    if (token !== '' && token !== undefined && token !== null) {
       const tokenPayload: any = decode(token);
       if (
         !this.hasUser() ||
@@ -62,23 +68,22 @@ export class AuthService {
       return true;
     }
     return false;
-
     // Check whether the token is expired and return
     // true or false
     //return !this.jwtHelper.isTokenExpired(token);
     //return token === '' ? false : true;
   }
 
-  loginRestApi(email: string, password: string) {
-    return this.http.post(`${environment.url_api}/auth`, {
-      email,
-      password
-    })
-      .pipe(
-        tap((data: { token: string }) => {
-          const token = data.token;
-          this.token.saveToken(token)
-        })
-      );
+  getUser(): Partial<Customer> | Partial<Employee> {
+    let user = localStorage.getItem('user');
+    let userDecode = JSON.parse(user);
+    if (userDecode.role !== '' && userDecode.role !== undefined && userDecode.role !== null) {
+      let customer: Partial<Customer> = userDecode;
+      return customer;
+    }
+    else{
+      let employee: Partial<Employee> = userDecode;
+      return employee;
+    }
   }
 }
