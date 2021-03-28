@@ -5,10 +5,12 @@ import { PanelRoutingModule } from './panel-routing.module';
 import {MaterialModule} from './../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { DialogServiceComponent } from './components/dialog-service/dialog-service.component';
 
 @NgModule({
   declarations: [
-    PanelComponent
+    PanelComponent,
+    DialogServiceComponent
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '@core/models/customer.model';
-import { Device } from '@core/models/device.model';
-import { Employee } from '@core/models/employee.model';
-import { Establishment } from '@core/models/establishment.model';
 import { hiredService } from '@core/models/hiredService.model';
-import { Service } from '@core/models/service.model';
+import { DialogServiceComponent } from './../dialog-service/dialog-service.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-panel',
@@ -65,7 +62,7 @@ export class PanelComponent implements OnInit {
   hiredServices: hiredService[] = [
    // this.servicios
     {
-      id: '1',
+      id: 1,
       customer: {
         fullName: 'Alejandro Hoyos Quemado',
         address: 'Calle 21 A',
@@ -74,7 +71,7 @@ export class PanelComponent implements OnInit {
         phone: '+5731456765'
       },
       device: {
-        id: '1',
+        id: 1,
         brand: 'Asus x555gq',
         code: 'C5H34HSMC-DM',
         color: 'Negro',
@@ -90,10 +87,11 @@ export class PanelComponent implements OnInit {
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
-          phone: '(03)8785622'
+          phone: '(03)8785622',
+          id:1
         },
         fullName: 'Pedro el técnico',
-        id: '1',
+        id: 1,
         phone: '+57312657673',
         role: 'tecnico'
       },
@@ -105,9 +103,10 @@ export class PanelComponent implements OnInit {
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
-          phone: '(03)8785622'
+          phone: '(03)8785622',
+          id:1
         },
-        id: '2',
+        id: 2,
         isDeliverable: false,
         isEnable: true,
         name: 'Mantenimiento'
@@ -116,7 +115,7 @@ export class PanelComponent implements OnInit {
       createdAt: '07-enero-2021'
     },
     {
-      id: '2',
+      id: 2,
       customer: {
         fullName: 'Manuel Narvaez Quemado',
         address: 'Carrera 87 F',
@@ -125,7 +124,7 @@ export class PanelComponent implements OnInit {
         phone: '+57319898965'
       },
       device: {
-        id: '2',
+        id: 2,
         brand: 'Lennovo ff45643',
         code: 'KLOSBM-83927',
         color: 'Gros',
@@ -140,10 +139,11 @@ export class PanelComponent implements OnInit {
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
-          phone: '(03)8785622'
+          phone: '(03)8785622',
+          id:1
         },
         fullName: 'Pedro el técnico',
-        id: '1',
+        id: 1,
         phone: '+57312657673',
         role: 'tecnico'
       },
@@ -155,9 +155,10 @@ export class PanelComponent implements OnInit {
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
-          phone: '(03)8785622'
+          phone: '(03)8785622',
+          id:1
         },
-        id: '1',
+        id: 1,
         isDeliverable: false,
         isEnable: true,
         name: 'Cambio de pantalla'
@@ -166,7 +167,7 @@ export class PanelComponent implements OnInit {
       createdAt: '07-enero-2021'
     },
     {
-      id: '3',
+      id: 3,
       customer: {
         fullName: 'Alejandro Hoyos Quemado',
         address: 'Calle 21 A',
@@ -175,7 +176,7 @@ export class PanelComponent implements OnInit {
         phone: '+5731456765'
       },
       device: {
-        id: '1',
+        id: 1,
         brand: 'Asus x555gq',
         code: 'C5H34HSMC-DM',
         color: 'Negro',
@@ -191,10 +192,11 @@ export class PanelComponent implements OnInit {
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
-          phone: '(03)8785622'
+          phone: '(03)8785622',
+          id:1
         },
         fullName: 'Pedro el técnico',
-        id: '1',
+        id: 1,
         phone: '+57312657673',
         role: 'tecnico'
       },
@@ -206,317 +208,10 @@ export class PanelComponent implements OnInit {
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
-          phone: '(03)8785622'
+          phone: '(03)8785622',
+          id:1
         },
-        id: '1',
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla'
-      },
-      status: 'course',
-      createdAt: '07-enero-2021'
-    },
-    {
-      id: '3',
-      customer: {
-        fullName: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: '1',
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        fullName: 'Pedro el técnico',
-        id: '1',
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        id: '1',
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla'
-      },
-      status: 'course',
-      createdAt: '07-enero-2021'
-    }
-    ,
-    {
-      id: '3',
-      customer: {
-        fullName: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: '1',
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        fullName: 'Pedro el técnico',
-        id: '1',
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        id: '1',
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla'
-      },
-      status: 'course',
-      createdAt: '07-enero-2021'
-    }
-    ,
-    {
-      id: '3',
-      customer: {
-        fullName: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: '1',
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        fullName: 'Pedro el técnico',
-        id: '1',
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        id: '1',
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla'
-      },
-      status: 'course',
-      createdAt: '07-enero-2021'
-    },
-    {
-      id: '3',
-      customer: {
-        fullName: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: '1',
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        fullName: 'Pedro el técnico',
-        id: '1',
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        id: '1',
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla'
-      },
-      status: 'course',
-      createdAt: '07-enero-2021'
-    },
-    {
-      id: '3',
-      customer: {
-        fullName: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: '1',
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        fullName: 'Pedro el técnico',
-        id: '1',
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        id: '1',
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla'
-      },
-      status: 'course',
-      createdAt: '07-enero-2021'
-    },
-    {
-      id: '3',
-      customer: {
-        fullName: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: '1',
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        fullName: 'Pedro el técnico',
-        id: '1',
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622'
-        },
-        id: '1',
+        id: 1,
         isDeliverable: false,
         isEnable: true,
         name: 'Cambio de pantalla'
@@ -525,7 +220,9 @@ export class PanelComponent implements OnInit {
       createdAt: '07-enero-2021'
     }
   ];
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     console.log(this.hiredServices);
@@ -533,5 +230,21 @@ export class PanelComponent implements OnInit {
 
   changeTable(table: string) {
     this.tableEnable = table;
+  }
+
+  openDialog(index: number): void {
+    const dialogRef = this.dialog.open(DialogServiceComponent, {
+      width: '1000px',
+      height:'400px',
+      disableClose:true,
+      autoFocus:false,
+      data: this.hiredServices[index]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      //this.animal = result;
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Establishment } from "./establishment.model";
 
 export interface Employee {
-    id: string;
+    id: number;
     fullName: string;
     role: string;
     address: string;

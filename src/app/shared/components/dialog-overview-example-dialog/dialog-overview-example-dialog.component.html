@@ -1,3 +1,4 @@
+<div class ="divContainerDialog">
 <h1 mat-dialog-title><b>Editar perfíl</b></h1>
 <div mat-dialog-content>
   <mat-form-field>
@@ -19,5 +20,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Descartar</button>
-  <button mat-button [mat-dialog-close]="data.city" cdkFocusInitial>Guardar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Guardar</button>
+</div>
 </div>

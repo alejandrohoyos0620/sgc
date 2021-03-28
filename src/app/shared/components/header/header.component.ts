@@ -7,6 +7,7 @@ import { DialogOverviewExampleDialog } from './../dialog-overview-example-dialog
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { Employee } from '@core/models/employee.model';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -22,13 +23,14 @@ export class HeaderComponent implements OnInit {
   user: Partial<Customer> | Partial<Employee>;
   constructor(
     private authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) { }
 
 
   ngOnInit(): void {
   }
-  
+
   hasUser() {
     if (this.authService.hasUser()) {
       this.user = this.authService.getUser();
@@ -55,14 +57,20 @@ export class HeaderComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
+      width: '400px',
+      height: '400px',
+      disableClose: true,
       data: this.user
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  }
 
+      this.authService.updateUser(result)
+        .subscribe((data) => {
+          this.user = data;
+          console.log(data);
+          this.toastr.success("Tu registro se ha almacenado satisfactoriamente");
+        });
+    })
+  }
 }

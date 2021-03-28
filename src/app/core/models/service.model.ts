@@ -1,7 +1,7 @@
 import { Establishment } from "./establishment.model"
 
 export interface Service {
-    id: string;
+    id: number;
     name: string;
     isDeliverable: boolean;
     description: string;

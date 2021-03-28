@@ -12,6 +12,7 @@ export class UsersService {
   saveUser(token: string) {
     if (token !== '' && token !== undefined && token !== null) {
       const tokenPayload: any = decode(token);
+      console.log(tokenPayload);
       if (tokenPayload.role == undefined || tokenPayload.role == null) {
         const customer: Partial<Customer> = this.createCustomer(tokenPayload);
         localStorage.setItem('user', JSON.stringify(customer));
@@ -25,6 +26,7 @@ export class UsersService {
 
   createCustomer(tokenPayload: any): Partial<Customer> {
     return {
+      id: tokenPayload.id,
       fullName: tokenPayload.sub,
       address: tokenPayload.address,
       city: tokenPayload.city,

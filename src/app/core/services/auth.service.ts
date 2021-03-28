@@ -26,6 +26,10 @@ export class AuthService {
     return this.http.post(`${environment.url_api}/users/register`, customer);
     //return this.af.createUserWithEmailAndPassword(email, password);
   }
+  
+  updateUser(user: Partial<Customer> | Partial<Employee>): any{
+    return this.http.put(`${environment.url_api}/users/update`, user);
+  }
 
   login(email: string, password: string): any {
     return this.http.post(`${environment.url_api}/auth`, {

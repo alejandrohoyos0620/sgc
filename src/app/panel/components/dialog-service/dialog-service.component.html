@@ -1,0 +1,11 @@
+<div class="divContainerDialog">
+    <h1 mat-dialog-title>Editar perfíl</h1>
+    <div mat-dialog-content class="divContentDialog">
+        <mat-label>{{data.service.name}}</mat-label>
+        <mat-label>{{data.service.description}}</mat-label>
+    </div>
+    <div mat-dialog-actions class="divActionsDialog">
+        <button mat-button (click)="onNoClick()">Denegar</button>
+        <button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>Aprobar</button>
+    </div>
+</div>

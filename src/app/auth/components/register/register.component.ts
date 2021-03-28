@@ -44,17 +44,17 @@ export class RegisterComponent implements OnInit {
         .subscribe((data) => {
           console.log(data);
           this.toastr.success("Tu registro se ha almacenado satisfactoriamente");
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['']);
         });
     }
   }
   
   private buildForm(): void {
     this.form = this.formBuilder.group({///^([a-zA-Z ]|ñ|Ñ)*$/
-      firstName: ['', [Validators.required, Validators.pattern(/^(\w|ñ|Ñ|á|é|í|ó|ú)+(\s{1,1}(\w|ñ|Ñ|á|é|í|ó|ú)+){1,1}$/)]],  
-      lastName: ['', [Validators.required, Validators.pattern(/^(\w|ñ|Ñ|á|é|í|ó|ú)+(\s{1,1}(\w|ñ|Ñ|á|é|í|ó|ú)+){1,1}$/)]],
+      firstName: ['', [Validators.required, Validators.pattern(/^(\w|ñ|Ñ|á|é|í|ó|ú)+(\s{1,1}(\w|ñ|Ñ|á|é|í|ó|ú)+){0,1}$/)]],  
+      lastName: ['', [Validators.required, Validators.pattern(/^(\w|ñ|Ñ|á|é|í|ó|ú)+(\s{1,1}(\w|ñ|Ñ|á|é|í|ó|ú)+){0,1}$/)]],
       phone: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(15), Validators.pattern('([0-9]| |[+]|[-])*')]],
-      city: ['', [Validators.required,  Validators.pattern(/^([a-zA-Z ]|ñ|Ñ)*$/)]],
+      city: ['', [Validators.required,  Validators.pattern(/^([a-zA-Z ]|ñ|Ñ|á|é|í|ó|ú|,)*$/)]],
       address: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(15),  Validators.pattern(/^(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)]],

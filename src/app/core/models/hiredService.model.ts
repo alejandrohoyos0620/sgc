@@ -4,7 +4,7 @@ import { Employee } from "./employee.model"
 import { Service } from "./service.model"
 
 export interface hiredService {
-    id: string;
+    id: number;
     service:Partial<Service>;
     device: Device;
     customer: Partial<Customer>;

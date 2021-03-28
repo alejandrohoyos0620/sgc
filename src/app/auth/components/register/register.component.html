@@ -11,7 +11,7 @@
         <div class="row input-div-row">
           <div class="col-xs input-div-colum">
             <input class="input-litle-form" placeholder="Nombre" formControlName="firstName" matInput type="text">
-            <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('ERROR_BAJO')">
+            <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('pattern')">
               {{errors.patterFName}}</mat-error>
             <mat-error *ngIf="form.get('firstName').dirty && form.get('firstName').hasError('required')">
               {{errors.patternLName}}</mat-error>
