@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
+import { UsersService } from '@core/services/users/users.service';
 import { Customer } from '@core/models/customer.model';
 import { DialogOverviewExampleDialog } from './../dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,16 +17,17 @@ import { ToastrService } from 'ngx-toastr';
 
 export class HeaderComponent implements OnInit {
 
-  animal: string;
-  name: string;
+  user$: Observable<Partial<Customer> | Partial<Employee>>;
   showFiller = false;
   isEditable = false;
-  user: Partial<Customer> | Partial<Employee>;
   constructor(
     private authService: AuthService,
     public dialog: MatDialog,
-    private toastr: ToastrService
-  ) { }
+    private toastr: ToastrService,
+    private usersService: UsersService
+  ) { 
+    this.user$ = usersService.user$;
+  }
 
 
   ngOnInit(): void {
@@ -33,7 +35,9 @@ export class HeaderComponent implements OnInit {
 
   hasUser() {
     if (this.authService.hasUser()) {
-      this.user = this.authService.getUser();
+      if(!this.usersService.hasUser()){
+      this.usersService.getUser();
+    }
       return true;
     }
     else {
@@ -60,17 +64,18 @@ export class HeaderComponent implements OnInit {
       width: '400px',
       height: '400px',
       disableClose: true,
-      data: this.user
+      data: this.user$
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
-      this.authService.updateUser(result)
+      this.authService.updateUser(result.source)
         .subscribe((data) => {
-          this.user = data;
+          console.log("Usuario del update");
           console.log(data);
-          this.toastr.success("Tu registro se ha almacenado satisfactoriamente");
+          this.usersService.updateUser(data);
+          this.toastr.success("Tu actualziación ha sido exitosa");
         });
+        
     })
   }
 }

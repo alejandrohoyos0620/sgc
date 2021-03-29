@@ -1,21 +1,21 @@
 <div class ="divContainerDialog">
 <h1 mat-dialog-title><b>Editar perfíl</b></h1>
-<div mat-dialog-content>
+<div mat-dialog-content *ngIf="(data | async) as user">
   <mat-form-field>
     <mat-label>Nombre</mat-label>
-    <input matInput [(ngModel)]="data.fullName">
+    <input matInput [(ngModel)]="user.fullName">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Teléfono</mat-label>
-    <input matInput [(ngModel)]="data.phone">
+    <input matInput [(ngModel)]="user.phone">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Ciudad</mat-label>
-    <input matInput [(ngModel)]="data.city">
+    <input matInput [(ngModel)]="user.city">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Dirección</mat-label>
-    <input matInput [(ngModel)]="data.address">
+    <input matInput [(ngModel)]="user.address">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

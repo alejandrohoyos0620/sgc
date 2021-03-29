@@ -57,15 +57,15 @@
                         <div class="divImg">
                             <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
                         </div>
-                        <ul *ngIf="user" >
-                            <li><span class="spanNameMenu"><b>{{user.fullName}}</b></span></li>
-                            <li><span class="spanEmailenu">{{user.email}}</span></li>
+                        <ul *ngIf="(user$ | async) as userAsync" >
+                            <li><span class="spanNameMenu"><b>{{userAsync.fullName}}</b></span></li>
+                            <li><span class="spanEmailenu">{{userAsync.email}}</span></li>
                         </ul>
                         <hr class="linesMenu">
-                        <ul *ngIf="user">
-                            <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{user.phone}}</b></span></li>
-                            <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{user.city}}</b></span></li>
-                            <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{user.address}}</b></span>
+                        <ul *ngIf="(user$ | async) as userAsync">
+                            <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{userAsync.phone}}</b></span></li>
+                            <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{userAsync.city}}</b></span></li>
+                            <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{userAsync.address}}</b></span>
                             </li>
                             <li><button mat-fab (click)="openDialog()">
                                     <mat-icon>mode_edit</mat-icon>
@@ -85,17 +85,3 @@
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
-<!-- <ol>
-    <li>
-      <mat-form-field>
-        <mat-label>What's your name?</mat-label>
-        <input matInput [(ngModel)]="name">
-      </mat-form-field>
-    </li>
-    <li>
-      <button mat-raised-button (click)="openDialog()">Pick one</button>
-    </li>
-    <li *ngIf="animal">
-      You chose: <i>{{animal}}</i>
-    </li>
-  </ol> -->

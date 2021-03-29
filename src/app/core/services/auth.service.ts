@@ -5,7 +5,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import decode from 'jwt-decode';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError, } from 'rxjs';
+import { map} from 'rxjs/operators';
 import { Customer } from '@core/models/customer.model';
 import { UsersService } from './users/users.service';
 import { Employee } from '@core/models/employee.model';
@@ -27,8 +28,11 @@ export class AuthService {
     //return this.af.createUserWithEmailAndPassword(email, password);
   }
   
-  updateUser(user: Partial<Customer> | Partial<Employee>): any{
-    return this.http.put(`${environment.url_api}/users/update`, user);
+  updateUser(user$: BehaviorSubject<Partial<Employee> | Partial<Customer>>): any{
+    return this.http.put(`${environment.url_api}/users/update`, user$.getValue()).
+    pipe(
+    map((data: {updatedUser: {}}) => data.updatedUser)
+    )
   }
 
   login(email: string, password: string): any {
@@ -41,7 +45,6 @@ export class AuthService {
         tap((data: { token: string }) => {
           const token = data.token;
           this.token.saveToken(token);
-          this.userService.saveUser(token);
         })
       );
   }
@@ -78,16 +81,5 @@ export class AuthService {
     //return token === '' ? false : true;
   }
 
-  getUser(): Partial<Customer> | Partial<Employee> {
-    let user = localStorage.getItem('user');
-    let userDecode = JSON.parse(user);
-    if (userDecode.role !== '' && userDecode.role !== undefined && userDecode.role !== null) {
-      let customer: Partial<Customer> = userDecode;
-      return customer;
-    }
-    else{
-      let employee: Partial<Employee> = userDecode;
-      return employee;
-    }
-  }
+  
 }

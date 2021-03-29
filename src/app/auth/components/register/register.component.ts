@@ -42,7 +42,6 @@ export class RegisterComponent implements OnInit {
       };
       this.authService.createUser(this.customer)
         .subscribe((data) => {
-          console.log(data);
           this.toastr.success("Tu registro se ha almacenado satisfactoriamente");
           this.router.navigate(['']);
         });
