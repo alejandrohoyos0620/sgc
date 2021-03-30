@@ -1,25 +1,25 @@
-<div class ="divContainerDialog">
-<h1 mat-dialog-title><b>Editar perfíl</b></h1>
-<div mat-dialog-content *ngIf="(data | async) as user">
-  <mat-form-field>
-    <mat-label>Nombre</mat-label>
-    <input matInput [(ngModel)]="user.fullName">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Teléfono</mat-label>
-    <input matInput [(ngModel)]="user.phone">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Ciudad</mat-label>
-    <input matInput [(ngModel)]="user.city">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Dirección</mat-label>
-    <input matInput [(ngModel)]="user.address">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Descartar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Guardar</button>
-</div>
+<div class="divContainerDialog">
+  <h1 mat-dialog-title><b>Editar perfíl</b></h1>
+  <div mat-dialog-content class="divContent" *ngIf="(data | async) as user">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="user.fullName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Teléfono</mat-label>
+      <input matInput [(ngModel)]="user.phone">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ciudad</mat-label>
+      <input matInput [(ngModel)]="user.city">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Dirección</mat-label>
+      <input matInput [(ngModel)]="user.address">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="divActions">
+    <button mat-button (click)="onNoClick()">Descartar</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Guardar</button>
+  </div>
 </div>

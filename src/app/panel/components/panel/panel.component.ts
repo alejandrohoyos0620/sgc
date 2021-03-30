@@ -235,7 +235,7 @@ export class PanelComponent implements OnInit {
   openDialog(index: number): void {
     const dialogRef = this.dialog.open(DialogServiceComponent, {
       width: '1000px',
-      height:'400px',
+      height:'600px',
       disableClose:true,
       autoFocus:false,
       data: this.hiredServices[index]

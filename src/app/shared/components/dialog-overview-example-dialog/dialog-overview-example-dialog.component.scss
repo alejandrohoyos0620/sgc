@@ -1,6 +1,19 @@
 .divContainerDialog{
-    width: 88%;
-    height: 88%;
-    padding: 24px;
-
+    width: 93%;
+    height: 94%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.divActions{
+    width: 100%;
+    justify-content: center;
+}
+.divContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 98%;
 }

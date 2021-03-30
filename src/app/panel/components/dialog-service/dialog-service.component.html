@@ -1,11 +1,26 @@
 <div class="divContainerDialog">
-    <h1 mat-dialog-title>Editar perfíl</h1>
-    <div mat-dialog-content class="divContentDialog">
+    <div mat-dialog-title class="divTitle">{{data.service.name}}</div>
+    <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
+    <div mat-dialog-content class="divContentDialog" >
         <mat-label>{{data.service.name}}</mat-label>
         <mat-label>{{data.service.description}}</mat-label>
     </div>
-    <div mat-dialog-actions class="divActionsDialog">
-        <button mat-button (click)="onNoClick()">Denegar</button>
-        <button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>Aprobar</button>
+    <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
+    <div class ="spaceBetweenTitle" *ngIf="isShowRepairmans"></div>
+    <div mat-dialog-content class="divContentList" *ngIf="isShowRepairmans">
+        <div class ="divTitleRepairmans">Técnicos Disponibles</div>
+        <mat-form-field appearance="fill">
+            <mat-label>Seleccione un técnico</mat-label>
+            <mat-select [(value)]="selected" >
+              <mat-option *ngFor="let repairman of repairmans" value="{{repairman.id}}" >ID: {{repairman.id}} Nombre: {{repairman.fullName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div mat-dialog-actions *ngIf="!isShowRepairmans" class="divActionsDialog">
+        <button mat-button class ="buttonDeny" *ngIf="!isShowRepairmans" (click)="onNoClick()">Denegar</button>
+        <button mat-button class ="buttonApprove" (click)="showRepairmans()" cdkFocusInitial *ngIf="!isShowRepairmans">Aprobar</button>
+    </div>
+    <div mat-dialog-actions *ngIf="isShowRepairmans" class="divActionsConfirm">
+        <button mat-button class ="buttonApprove"[mat-dialog-close]="data.id" cdkFocusInitial *ngIf="isShowRepairmans">Confirmar</button>
     </div>
 </div>
