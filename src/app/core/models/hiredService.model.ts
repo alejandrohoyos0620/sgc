@@ -11,4 +11,5 @@ export interface hiredService {
     repairman: Partial<Employee>;
     status: string;
     createdAt: string;
+    description: string;
 }

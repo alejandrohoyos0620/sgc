@@ -17,10 +17,10 @@
           </mat-form-field>
     </div>
     <div mat-dialog-actions *ngIf="!isShowRepairmans" class="divActionsDialog">
-        <button mat-button class ="buttonDeny" *ngIf="!isShowRepairmans" (click)="onNoClick()">Denegar</button>
-        <button mat-button class ="buttonApprove" (click)="showRepairmans()" cdkFocusInitial *ngIf="!isShowRepairmans">Aprobar</button>
+        <button mat-button class ="buttonDeny" *ngIf="!isShowRepairmans" (click)="onNoClick()"><mat-icon>close</mat-icon> Denegar</button>
+        <button mat-button class ="buttonApprove" (click)="showRepairmans()" cdkFocusInitial *ngIf="!isShowRepairmans"> <mat-icon>check</mat-icon> Aprobar</button>
     </div>
     <div mat-dialog-actions *ngIf="isShowRepairmans" class="divActionsConfirm">
-        <button mat-button class ="buttonApprove"[mat-dialog-close]="data.id" cdkFocusInitial *ngIf="isShowRepairmans">Confirmar</button>
+        <button mat-button class ="buttonApprove"[mat-dialog-close]="data.id" cdkFocusInitial *ngIf="isShowRepairmans"><mat-icon>check</mat-icon> Confirmar</button>
     </div>
 </div>

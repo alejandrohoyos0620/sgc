@@ -1,0 +1,84 @@
+<!-- <div class="divContainerDialog">
+    <div mat-dialog-title class="divTitle">Servicio: {{data.service.name}} Id: {{data.id}}</div>
+    <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
+    <div mat-dialog-content class="divContentDialog" >
+        <mat-label>{{data.service.name}}</mat-label>
+        <mat-label>{{data.service.description}}</mat-label>
+    </div>
+    <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
+    <div class ="spaceBetweenTitle" *ngIf="isShowRepairmans"></div>
+    <div mat-dialog-content class="divContentList" *ngIf="isShowRepairmans">
+        <div class ="divTitleRepairmans">Técnicos Disponibles</div>
+        <mat-form-field appearance="fill">
+            <mat-label>Seleccione un técnico</mat-label>
+            <mat-select [(value)]="selected" >
+              <mat-option *ngFor="let repairman of repairmans" value="{{repairman.id}}" >ID: {{repairman.id}} Nombre: {{repairman.fullName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div mat-dialog-actions *ngIf="!isShowRepairmans" class="divActionsDialog">
+        <button mat-button class ="buttonDeny" *ngIf="!isShowRepairmans" (click)="onNoClick()">Denegar</button>
+        <button mat-button class ="buttonApprove" (click)="showRepairmans()" cdkFocusInitial *ngIf="!isShowRepairmans">Aprobar</button>
+    </div>
+    <div mat-dialog-actions *ngIf="isShowRepairmans" class="divActionsConfirm">
+        <button mat-button class ="buttonApprove"[mat-dialog-close]="data.id" cdkFocusInitial *ngIf="isShowRepairmans">Confirmar</button>
+    </div>
+</div> -->
+<div class="divContainerDialog">
+    <div mat-dialog-title class="divTitle">
+        <h1>Nombre del servicio: {{data.service.name}}</h1>
+        <h1>ID: {{data.id}}</h1>
+    </div>
+    <div class="spaceBetween" *ngIf="!isShowRepairmans"></div>
+    <div mat-dialog-content class="divContentDialog">
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Fecha de ingreso:</mat-label>
+            <mat-label class="cellContent content">{{data.createdAt}}</mat-label>
+            <mat-label class="cellContent subTitle">Precio:</mat-label>
+            <mat-label class="cellContent content">${{data.service.price}} COP</mat-label>
+        </div>
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Establecimiento:</mat-label>
+            <mat-label class="cellContent content">{{data.repairman.establishment.name}}</mat-label>
+            <mat-label class="cellContent subTitle">Ciudad:</mat-label>
+            <mat-label class="cellContent content">{{data.repairman.establishment.city}}</mat-label>
+        </div>
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Nombre del cliente:</mat-label>
+            <mat-label class="cellContent content">{{data.customer.fullName}}</mat-label>
+            <mat-label class="cellContent subTitle">Teléfono:</mat-label>
+            <mat-label class="cellContent content">{{data.customer.phone}}</mat-label>
+        </div>
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Dispositivo:</mat-label>
+            <mat-label class="cellContent content">{{data.device.name}}</mat-label>
+            <mat-label class="cellContent subTitle">Marca:</mat-label>
+            <mat-label class="cellContent content">{{data.device.brand}}</mat-label>
+        </div>
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Código:</mat-label>
+            <mat-label class="cellContent content">{{data.device.code}}</mat-label>
+            <mat-label class="cellContent subTitle">Color:</mat-label>
+            <mat-label class="cellContent content">{{data.device.color}}</mat-label>
+        </div>
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Encargado:</mat-label>
+            <mat-label class="cellContent content">{{data.repairman.fullName}}</mat-label>
+            <mat-label class="cellContent subTitle">Teléfono:</mat-label>
+            <mat-label class="cellContent content">{{data.repairman.phone}}</mat-label>
+        </div>
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Descripción del servicio:</mat-label>
+            <mat-label class="cellContent content">{{data.service.description}}</mat-label>
+        </div>
+        <div class="rowContent">
+            <mat-label class="cellContent subTitle">Servicio requerido por el cliente:</mat-label>
+            <mat-label class="cellContent content">{{data.description}}</mat-label>
+        </div>
+
+    </div>
+    <div mat-dialog-actions class="rowContent">
+        <button mat-button class ="buttonDeny"(click)="onNoClick()"><mat-icon>close</mat-icon> Cerrar</button>
+        <button mat-button class ="buttonApprove" [mat-dialog-close]="data.id" cdkFocusInitial ><mat-icon>shortcut</mat-icon> Enviar a En Curso</button>
+    </div>
+</div>

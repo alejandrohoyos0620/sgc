@@ -6,11 +6,13 @@ import {MaterialModule} from './../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { DialogServiceComponent } from './components/dialog-service/dialog-service.component';
+import { DialogApproveComponent } from './components/dialog-approve/dialog-approve.component';
 
 @NgModule({
   declarations: [
     PanelComponent,
-    DialogServiceComponent
+    DialogServiceComponent,
+    DialogApproveComponent
   ],
   imports: [
     CommonModule,

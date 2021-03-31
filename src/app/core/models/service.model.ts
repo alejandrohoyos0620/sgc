@@ -7,4 +7,5 @@ export interface Service {
     description: string;
     isEnable: boolean;
     establishment: Establishment;
+    price: number;
 }

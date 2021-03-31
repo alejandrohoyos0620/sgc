@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { hiredService } from '@core/models/hiredService.model';
 import { DialogServiceComponent } from './../dialog-service/dialog-service.component';
+import { DialogApproveComponent } from './../dialog-approve/dialog-approve.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -109,10 +110,12 @@ export class PanelComponent implements OnInit {
         id: 2,
         isDeliverable: false,
         isEnable: true,
-        name: 'Mantenimiento'
+        name: 'Mantenimiento',
+        price: 45000
       },
       status: 'course',
-      createdAt: '07-enero-2021'
+      createdAt: '07-enero-2021',
+      description: 'Arreglar mi computador portatil dado que está muy sucio por el gato que tengo, ya suena raro por dentro'
     },
     {
       id: 2,
@@ -161,10 +164,12 @@ export class PanelComponent implements OnInit {
         id: 1,
         isDeliverable: false,
         isEnable: true,
-        name: 'Cambio de pantalla'
+        name: 'Cambio de pantalla',
+        price: 100000
       },
       status: 'course',
-      createdAt: '07-enero-2021'
+      createdAt: '07-enero-2021',
+      description:'Mi computador está fallando, la pantalla titila a ratos y se pone la mitad negra, porfavor revisar y si es necesario cambiar'
     },
     {
       id: 3,
@@ -214,10 +219,12 @@ export class PanelComponent implements OnInit {
         id: 1,
         isDeliverable: false,
         isEnable: true,
-        name: 'Cambio de pantalla'
+        name: 'Cambio de pantalla',
+        price: 100000
       },
       status: 'course',
-      createdAt: '07-enero-2021'
+      createdAt: '07-enero-2021',
+      description:'Quiero una pantalla nueva, esta ya no brilla bien y creo que se dañó'
     }
   ];
   constructor(
@@ -232,10 +239,25 @@ export class PanelComponent implements OnInit {
     this.tableEnable = table;
   }
 
-  openDialog(index: number): void {
+  openDialogService(index: number): void {
     const dialogRef = this.dialog.open(DialogServiceComponent, {
       width: '1000px',
       height:'600px',
+      disableClose:true,
+      autoFocus:false,
+      data: this.hiredServices[index]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      //this.animal = result;
+    });
+  }
+  openDialogApproved(index: number): void {
+    const dialogRef = this.dialog.open(DialogApproveComponent, {
+      width: '830px',
+      height:'950px',
       disableClose:true,
       autoFocus:false,
       data: this.hiredServices[index]
