@@ -19,7 +19,7 @@
           <div class="col-xs input-div-colum ">
             <input class="input-litle-form" placeholder="Apellido" formControlName="lastName" matInput type="text">
             <mat-error *ngIf="form.get('lastName').dirty && form.get('lastName').hasError('pattern')">
-              {{errors.fullName}}</mat-error>
+              {{errors.sub}}</mat-error>
             <mat-error *ngIf="form.get('lastName').dirty && form.get('lastName').hasError('required')">
               {{errors.required}}</mat-error>
           </div>

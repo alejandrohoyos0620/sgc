@@ -16,7 +16,7 @@
     width: 98%;
     margin: 1% 1%;
 }
-.divBannerService, .divBannerApproved, .divBannerCourse, .divBannerFinished{
+.divBannerService, .divBannerApproved, .divBannerCourse, .divBannerFinished, .divBannerCustomer{
     justify-content: center;
     width: 98%;
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -30,6 +30,9 @@
     p{
         margin: 0;
     }
+}
+.divBannerCustomer{
+    background: rgb(35, 42, 171);
 }
 .divBannerService{
     background: rgb(35, 42, 171);
@@ -51,23 +54,23 @@
     flex-direction: column;
     align-items: center;
 }
-.tablePanelService, .tablePanelCourse, .tablePanelApproved, .tablePanelFinished{
-    height: 89%;
+.tablePanelService, .tablePanelCourse, .tablePanelApproved, .tablePanelFinished, .tablePanelCustomer{
+    height: auto;
     width: 98%;
     border: rgb(204, 204, 204) solid 1px ;
     border-radius: 10px;
     text-align: center;
 }
-.tablePanelCourse{
-   tr:nth-child(even) {
-        background-color: rgb(218, 189, 102);   
+.tablePanelCustomer{
+    tr:nth-child(even) {
+        background-color: rgb(108, 115, 250);   
     }
     
     tr:nth-child(odd) {
-        background-color: rgb(223, 203, 143);
+        background-color: rgb(170, 175, 253);
     }
      tr:nth-child(1){
-        background-color: rgb(209, 157, 0);
+        background-color: rgb(35, 42, 171);
         color: white;
     }
 }
@@ -85,6 +88,20 @@
         color: white;
     }
 }
+.tablePanelCourse{
+   tr:nth-child(even) {
+        background-color: rgb(218, 189, 102);   
+    }
+    
+    tr:nth-child(odd) {
+        background-color: rgb(223, 203, 143);
+    }
+     tr:nth-child(1){
+        background-color: rgb(209, 157, 0);
+        color: white;
+    }
+}
+
 .tablePanelApproved{
     
     tr:nth-child(even) {
@@ -99,6 +116,7 @@
         color: white;
     }
 }
+
 .tablePanelFinished{
     
     tr:nth-child(even) {
@@ -126,6 +144,12 @@ height: 1%;
 .imgHeaderPalen {
     width: 100%;
     height: 80%;
+}
+.buttonNewService{
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    background-color: rgb(49, 132, 36);
 }
 .buttonServiceList,.buttonApprovedList,.buttonCourseList,.buttonFinishedList{
     color: white;

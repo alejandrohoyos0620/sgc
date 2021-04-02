@@ -1,0 +1,66 @@
+<form [formGroup]="form" class ="formDiv" (ngSubmit)="saveService($event)">
+<div class="divContainerDialog">
+    
+        <div mat-dialog-title class="divTitle">
+            <h1>Nuevo servicio</h1>
+        </div>
+        <div class="spaceBetween"></div>
+        <div mat-dialog-content class="divContentDialog">
+            <div class="rowContent">
+                <section class="example-section">
+                    <label class="example-margin">Tipo de servicio:</label>
+                    <mat-radio-group formControlName="type">
+                        <mat-radio-button class="example-margin" value="delivery">
+                            Domicilio
+                        </mat-radio-button>
+                        <mat-radio-button class="example-margin" value="pickup">
+                            Recogida
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </section>
+            </div>
+            <div class="divContentList " >
+                <div class ="divTitleRepairmans">Servicios Disponibles</div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Seleccione un servicio</mat-label>
+                    <mat-select formControlName="service" >
+                      <mat-option *ngFor="let service of services" value="{{service}}"> {{service.name}}: {{service.description}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="rowContent">
+                <mat-form-field class="cellContent subTitle">
+                    <mat-label >Nombre del dispositivo</mat-label>
+                    <input  placeholder="Nombre" formControlName="name" matInput type="text">
+                </mat-form-field>
+            </div>
+            <div class="rowContent">
+                <mat-form-field class="cellContent subTitle">
+                    <mat-label>Marca del dispositivo</mat-label>
+                    <input  placeholder="Marca" formControlName="brand" matInput type="text">
+                </mat-form-field>
+            </div>
+            <div class="rowContent">
+                <mat-form-field class="cellContent subTitle">
+                    <mat-label >Color del dispositivo</mat-label>
+                    <input placeholder="Color" formControlName="color" matInput type="text">
+                </mat-form-field>
+            </div>
+            <div class="rowContent">
+                <mat-form-field class="cellContent subTitle">
+                    <mat-label>MAC del dispositivo</mat-label>
+                    <input  placeholder="Código" formControlName="code" matInput type="text">
+                </mat-form-field>
+            </div>
+            <div mat-dialog-actions class="rowContent">
+                <button mat-button class="buttonDeny" (click)="onNoClick()">
+                    <mat-icon>close</mat-icon> Cancelar
+                </button>
+                <button mat-button class="buttonApprove"  cdkFocusInitial type="submit" >
+                    <mat-icon>shortcut</mat-icon> Solicitar servicio
+                </button>
+            </div>
+        </div>
+ 
+</div> 
+</form>

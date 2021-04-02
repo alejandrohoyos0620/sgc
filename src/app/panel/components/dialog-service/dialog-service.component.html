@@ -2,12 +2,14 @@
     <div mat-dialog-title class="divTitle">{{data.service.name}}</div>
     <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
     <div mat-dialog-content class="divContentDialog" >
-        <mat-label>{{data.service.name}}</mat-label>
-        <mat-label>{{data.service.description}}</mat-label>
+        <mat-label  class="labelDialog"><b>Servicio:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.service.name}}</mat-label>
+        <mat-label  class="labelDialog"><b>Descripción:</b></mat-label>
+        <mat-label class="labelDialog labelContent">{{data.service.description}}</mat-label>
     </div>
     <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
     <div class ="spaceBetweenTitle" *ngIf="isShowRepairmans"></div>
-    <div mat-dialog-content class="divContentList" *ngIf="isShowRepairmans">
+    <div mat-dialog-content class="divContentList" *ngIf="repairmans">
         <div class ="divTitleRepairmans">Técnicos Disponibles</div>
         <mat-form-field appearance="fill">
             <mat-label>Seleccione un técnico</mat-label>
@@ -21,6 +23,6 @@
         <button mat-button class ="buttonApprove" (click)="showRepairmans()" cdkFocusInitial *ngIf="!isShowRepairmans"> <mat-icon>check</mat-icon> Aprobar</button>
     </div>
     <div mat-dialog-actions *ngIf="isShowRepairmans" class="divActionsConfirm">
-        <button mat-button class ="buttonApprove"[mat-dialog-close]="data.id" cdkFocusInitial *ngIf="isShowRepairmans"><mat-icon>check</mat-icon> Confirmar</button>
+        <button mat-button class ="buttonApprove"[mat-dialog-close]="selected" cdkFocusInitial *ngIf="isShowRepairmans"><mat-icon>check</mat-icon> Confirmar</button>
     </div>
 </div>

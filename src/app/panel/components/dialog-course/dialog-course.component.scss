@@ -1,11 +1,18 @@
-.divContentDialog{
-    width: 95%;
+.divContainerDialog{
+    align-items: center;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    background: rgb(169, 169, 169);
+    background: rgb(255, 254, 254);
+}
+.divContentDialog{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
     padding: 0;
-    height: 50%;
-    font-size: 20px;
+    height: 70%;
+    font-size: 17px;
 }
 .divContentList{
     height: auto;
@@ -13,12 +20,16 @@
     display: flex;
     flex-direction: column;
 }
+.content{
+    color: rgb(54, 54, 54);
+}
 .divTitleRepairmans{
     width: auto;
     height: auto;
     background-color: #232aab;
     color: white;
     text-align: center;
+   
 }
 .spaceBetween{
     height: 8%;
@@ -35,20 +46,16 @@
     margin-top: 3%;
     width: 95%;
     height: 11%;
-    background-color: #232aab;
+    background-color: rgb(209, 157, 0);
+    border-radius: 10px;
+    border: rgb(115, 115, 115) solid;
     color: white;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.divContainerDialog{
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: white;
-}
+
 .buttonDeny{
     background-color: rgb(247, 17, 17);
     color: white;
@@ -57,11 +64,16 @@
     background-color: rgb(63, 169, 47);
     color: white;
 }
-.labelDialog{
-    width: 99%;
-    margin-left: 1%;
-    margin-top: 1%;
-} 
-.labelContent{
-    color: white;
+.rowContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.cellContent{
+    width: 50%;
+}
+
+.subTitle{
+    font: 600 20px/32px Roboto, "Helvetica Neue", sans-serif;
 }

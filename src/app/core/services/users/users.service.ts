@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Customer } from '@core/models/customer.model';
 import { Employee } from '@core/models/employee.model';
+import {environment} from '@environments/environment';
+import {map, catchError, retry, tap} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
 import decode from 'jwt-decode';
 @Injectable({
@@ -11,7 +15,9 @@ export class UsersService {
 
   user$ = this.user.asObservable();
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+    ) { }
 
   updateUser(user: Partial<Employee> | Partial<Customer> | any){
     user.fullName=user.sub;
@@ -49,6 +55,14 @@ export class UsersService {
     }
   }
 
+  getAllRepairmans(establishment_id:number){
+    const establishmentId=establishment_id.toString();
+    return this.http.get(`${environment.url_api}/establishments/repairmans`,{params: {establishmentId}})
+    .pipe(
+      map((result: {repairmans: []}) => result.repairmans),
+      catchError(this.handleError),
+    );
+  }
   hasUser(){
    return this.user.getValue().address === undefined? false : true;
   }
@@ -73,6 +87,10 @@ export class UsersService {
       role: tokenPayload.role,
       establishment: tokenPayload.Establishment
     }
+  }
+  private handleError(error: HttpErrorResponse ) {
+    console.log(error);
+    return  throwError('ups algo salió mal');
   }
 
 }

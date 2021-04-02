@@ -1,0 +1,81 @@
+.divTablePanel {
+    width: 100%;
+    height: 84%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.divBannerCourse {
+    justify-content: center;
+    width: 98%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    height: 9%;
+    display: flex;
+    align-items: center;
+    background: rgb(171, 170, 170);
+    p {
+        margin: 0;
+    }
+}
+.buttonEdit {
+    background-color: rgb(255, 192, 0);
+    color: white;
+}
+.buttonDelete {
+    background-color: red;
+    color: white;
+}
+.buttonNewService {
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(62, 171, 46);
+    margin-right: 1%;
+}
+.containerPanel {
+    background-color: white;
+    border: rgb(204, 204, 204) solid;
+    border-radius: 10px !important;
+    box-shadow: 5px 5px 5px 0px rgba(253, 1, 1, 0.2);
+    background: white;
+    /* background-image: linear-gradient(153deg, #a9a9a9 6%, #ffffff  100%); */
+    height: 70%;
+    width: 90%;
+    margin-left: 5%;
+    text-align: right;
+    justify-content: center;
+    margin-top: 20px;
+}
+.tablePanelApproved {
+    height: auto;
+    width: 98%;
+    border: rgb(204, 204, 204) solid 1px;
+    border-radius: 10px;
+    text-align: center;
+    tr:nth-child(even) {
+        background-color: rgb(209, 207, 207);
+    }
+
+    tr:nth-child(odd) {
+        background-color: rgb(240, 240, 240);
+    }
+
+    tr:nth-child(1) {
+        background-color: rgb(171, 170, 170);
+        color: white;
+    }
+}
+.cellButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.spaceNav {
+    height: 5%;
+}
+.spaceTable {
+    height: 1%;
+}

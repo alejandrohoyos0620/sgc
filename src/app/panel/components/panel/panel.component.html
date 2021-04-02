@@ -1,28 +1,61 @@
 <div class="containerPanel">
     <nav class="navTableButtons">
+        <button class="buttonNewService" mat-raised-button matBadgeColor="warn"
+            (click)="newService()" *ngIf="customer">
+            <mat-icon>download</mat-icon>
+            <span>Solicitar un nuevo servicio</span>
+        </button>
         <button class="buttonServiceList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('service')">
+            (click)="changeTable('service') " *ngIf="!customer">
             <mat-icon>download</mat-icon>
             <span>Listado de servicios</span>
         </button>
         <button class="buttonApprovedList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('approved')">
+            (click)="changeTable('approved')" *ngIf="!customer">
             <mat-icon>warning</mat-icon>
             <span>Aprobados</span>
         </button>
         <button class="buttonCourseList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('course')">
+            (click)="changeTable('course')" *ngIf="!customer">
             <mat-icon>error_outline</mat-icon>
             <span>En Curso</span>
         </button>
         <button class="buttonFinishedList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('finished')">
+            (click)="changeTable('finished')" *ngIf="!customer">
             <mat-icon>done_all</mat-icon>
             <span>Terminados</span>
         </button>
     </nav>
     <div class="spaceNav"></div>
-    <div *ngIf="tableEnable === 'service'" class="divTablePanel">
+    <div *ngIf="customer" class="divTablePanel">
+        <div class="divBannerCustomer">
+            <p>Mis servicios en curso</p>
+        </div>
+        <div class="spaceTable"></div>
+        <table class="tablePanelCustomer">
+            <tr>
+                <th>N° Ticket</th>
+                <th>Servicio</th>
+                <th>Técnico</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Ver</th>
+            </tr>
+            <tr *ngFor="let hiredService of hiredServices; index as i">
+                <td >{{ hiredService.id }}</td>
+                <td>{{ hiredService.service.name }}</td>
+                <td>{{ hiredService.repairman.fullName }}</td>
+                <td>{{ hiredService.customer.fullName }}</td>
+                <td>{{ hiredService.createdAt }}</td>
+                <td >
+                    <button mat-icon-button (click)="openDialogCustomer(i)">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="tableEnable === 'service' && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel" >
         <div class="divBannerService">
             <p> Listado de servicios</p>
         </div>
@@ -32,9 +65,9 @@
                 <th>Servicio</th>
                 <th>Detalles</th>
             </tr>
-            <tr *ngFor="let hiredService of hiredServices; index as i">
-                <td>{{ hiredService.service.name }}</td>
-                <td class="rowTableService">
+            <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                <td *ngIf="hiredService.status === 'notApproved'">{{ hiredService.service.name }}</td>
+                <td *ngIf="hiredService.status === 'notApproved'" class="rowTableService">
                     <button mat-icon-button (click)="openDialogService(i)">
                         <mat-icon>list_alt</mat-icon>
                     </button>
@@ -42,7 +75,7 @@
             </tr>
         </table>
     </div>
-    <div *ngIf="tableEnable === 'approved'" class="divTablePanel">
+    <div *ngIf="tableEnable === 'approved'  && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel">
         <div class="divBannerApproved">
             <p> Listado de servicios aprobados</p>
         </div>
@@ -56,13 +89,13 @@
                 <th>Fecha</th>
                 <th>Ver</th>
             </tr>
-            <tr *ngFor="let hiredService of hiredServices; index as i">
-                <td>{{ hiredService.id }}</td>
-                <td>{{ hiredService.service.name }}</td>
-                <td>{{ hiredService.repairman.fullName }}</td>
-                <td>{{ hiredService.customer.fullName }}</td>
-                <td>{{ hiredService.createdAt }}</td>
-                <td >
+            <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.id }}</td>
+                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.service.name }}</td>
+                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.repairman.sub }}</td>
+                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.customer.sub }}</td>
+                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.createdAt }}</td>
+                <td     *ngIf="hiredService.status === 'approved'" >
                     <button mat-icon-button (click)="openDialogApproved(i)">
                         <mat-icon>remove_red_eye</mat-icon>
                     </button>
@@ -70,7 +103,7 @@
             </tr>
         </table>
     </div>
-    <div *ngIf="tableEnable === 'course'" class="divTablePanel">
+    <div *ngIf="tableEnable === 'course'  && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel">
         <div class="divBannerCourse">
             <p> Listado de servicios en curso</p>
         </div>
@@ -84,21 +117,21 @@
                 <th>Fecha</th>
                 <th>Ver</th>
             </tr>
-            <tr *ngFor="let hiredService of hiredServices; index as i">
-                <td>{{ hiredService.id }}</td>
-                <td>{{ hiredService.service.name }}</td>
-                <td>{{ hiredService.repairman.fullName }}</td>
-                <td>{{ hiredService.customer.fullName }}</td>
-                <td>{{ hiredService.createdAt }}</td>
-                <td >
-                    <button mat-icon-button (click)="openDialog(i)">
+            <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.id }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.service.name }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.repairman.sub }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.customer.sub }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.createdAt }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'course'" >
+                    <button mat-icon-button (click)="openDialogCourse(i)">
                         <mat-icon>remove_red_eye</mat-icon>
                     </button>
                 </td>
             </tr>
         </table>
     </div>
-    <div *ngIf="tableEnable === 'finished'" class="divTablePanel">
+    <div *ngIf="tableEnable === 'finished'  && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel">
         <div class="divBannerFinished">
             <p>Listado de servicios terminados</p>
         </div>
@@ -112,14 +145,14 @@
                 <th>Fecha</th>
                 <th>Ver</th>
             </tr>
-            <tr *ngFor="let hiredService of hiredServices; index as i">
-                <td>{{ hiredService.id }}</td>
-                <td>{{ hiredService.service.name }}</td>
-                <td>{{ hiredService.repairman.fullName }}</td>
-                <td>{{ hiredService.customer.fullName }}</td>
-                <td>{{ hiredService.createdAt }}</td>
-                <td >
-                    <button mat-icon-button (click)="openDialog(i)">
+            <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.id }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.service.name }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.repairman.sub }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.customer.sub }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.createdAt }}</td>
+                <td *ngIf="hiredService && hiredService.status === 'finished'">
+                    <button mat-icon-button (click)="openDialogFinished(i)">
                         <mat-icon>remove_red_eye</mat-icon>
                     </button>
                 </td>

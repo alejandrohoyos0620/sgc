@@ -5,19 +5,19 @@ import {FormControl, Validators} from '@angular/forms';
 import { hiredService } from '@core/models/hiredService.model';
 import { Employee } from '@core/models/employee.model';
 @Component({
-  selector: 'app-dialog-approve',
-  templateUrl: './dialog-approve.component.html',
-  styleUrls: ['./dialog-approve.component.scss']
+  selector: 'app-dialog-customer',
+  templateUrl: './dialog-customer.component.html',
+  styleUrls: ['./dialog-customer.component.scss']
 })
-export class DialogApproveComponent{
+export class DialogCustomerComponent  {
 
   selected:any;
   isShowRepairmans:boolean = false;
   repairmans:Partial<Employee>[];
   constructor(
-    public dialogRef: MatDialogRef<DialogApproveComponent>,
+    public dialogRef: MatDialogRef<DialogCustomerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: hiredService) {}
   onNoClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 }

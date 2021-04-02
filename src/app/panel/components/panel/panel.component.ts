@@ -3,16 +3,23 @@ import { hiredService } from '@core/models/hiredService.model';
 import { DialogServiceComponent } from './../dialog-service/dialog-service.component';
 import { DialogApproveComponent } from './../dialog-approve/dialog-approve.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { DialogCourseComponent } from '../dialog-course/dialog-course.component';
+import { DialogFinishedComponent } from '../dialog-finished/dialog-finished.component';
+import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
+import { DialogNewServiceComponent } from '../dialog-new-service/dialog-new-service.component';
+import { Service } from '@core/models/service.model';
+import { HireServicesService } from '@core/services/hiredServices/hire-services.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent implements OnInit {
-  tableEnable = 'service';
-  //hiredServices : hiredService[];
-  establishment:  {
+  tableEnable = '';
+  listServices$: Observable<Partial<hiredService>[]>;
+  customer = false;
+  establishment: {
     address: 'Cuadra superior carrera 23A',
     city: 'Manizales, Caldas',
     email: 'puntodelpcquemado@mail.com',
@@ -20,48 +27,8 @@ export class PanelComponent implements OnInit {
     nit: '987382-4',
     phone: '(03)8785622'
   };
-  // customer1: Partial<Customer> = {
-  //   fullName: 'Alejandro Hoyos Quemado',
-  //   address: 'Calle 21 A',
-  //   city: 'Manizales Caldas',
-  //   email: 'alejoquemado@mail.com',
-  //   phone: '+5731456765'
-  // }
-  // device1: Device = {
-  //   id: '1',
-  //   brand: 'Asus x555gq',
-  //   code: 'C5H34HSMC-DM',
-  //   color: 'Negro',
-  //   name: 'Computador portatil',
-  // }
-  // repairman1: Partial<Employee> = {
-  //   address: 'Calle 78B 21',
-  //   email: 'tecnicoquemado@mail.com',
-  //   establishment: this.establishment,
-  //   fullName: 'Pedro el técnico',
-  //   id: '1',
-  //   phone: '+57312657673',
-  //   role: 'tecnico'
-  // }
-  // service1: Service ={
-  //   description: 'Mantenimiento completo de computador, con formateada',
-  //   establishment: this.establishment,
-  //   id: '2',
-  //   isDeliverable: false,
-  //   isEnable: true,
-  //   name: 'Mantenimiento'
-  // }
-  // servicio1 = {
-  //   id: '2',
-  //   customer: this.customer1,
-  //   device: this.device1,
-  //   repairman: this.repairman1,
-  //   service: this.service1,
-  //   status: 'service'
-  // };
- // servicios: hiredService = this.servicio1;
+
   hiredServices: hiredService[] = [
-   // this.servicios
     {
       id: 1,
       customer: {
@@ -82,14 +49,14 @@ export class PanelComponent implements OnInit {
       repairman: {
         address: 'Calle 78B 21',
         email: 'tecnicoquemado@mail.com',
-        establishment:  {
+        establishment: {
           address: 'Cuadra superior carrera 23A',
           city: 'Manizales, Caldas',
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
           phone: '(03)8785622',
-          id:1
+          id: 1
         },
         fullName: 'Pedro el técnico',
         id: 1,
@@ -98,14 +65,14 @@ export class PanelComponent implements OnInit {
       },
       service: {
         description: 'Mantenimiento completo de computador, con formateada',
-        establishment:  {
+        establishment: {
           address: 'Cuadra superior carrera 23A',
           city: 'Manizales, Caldas',
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
           phone: '(03)8785622',
-          id:1
+          id: 1
         },
         id: 2,
         isDeliverable: false,
@@ -136,14 +103,14 @@ export class PanelComponent implements OnInit {
       repairman: {
         address: 'Calle 78B 21',
         email: 'tecnicoquemado@mail.com',
-        establishment:  {
+        establishment: {
           address: 'Cuadra superior carrera 23A',
           city: 'Manizales, Caldas',
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
           phone: '(03)8785622',
-          id:1
+          id: 1
         },
         fullName: 'Pedro el técnico',
         id: 1,
@@ -152,14 +119,14 @@ export class PanelComponent implements OnInit {
       },
       service: {
         description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
+        establishment: {
           address: 'Cuadra superior carrera 23A',
           city: 'Manizales, Caldas',
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
           phone: '(03)8785622',
-          id:1
+          id: 1
         },
         id: 1,
         isDeliverable: false,
@@ -169,7 +136,7 @@ export class PanelComponent implements OnInit {
       },
       status: 'course',
       createdAt: '07-enero-2021',
-      description:'Mi computador está fallando, la pantalla titila a ratos y se pone la mitad negra, porfavor revisar y si es necesario cambiar'
+      description: 'Mi computador está fallando, la pantalla titila a ratos y se pone la mitad negra, porfavor revisar y si es necesario cambiar'
     },
     {
       id: 3,
@@ -191,14 +158,14 @@ export class PanelComponent implements OnInit {
       repairman: {
         address: 'Calle 78B 21',
         email: 'tecnicoquemado@mail.com',
-        establishment:  {
+        establishment: {
           address: 'Cuadra superior carrera 23A',
           city: 'Manizales, Caldas',
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
           phone: '(03)8785622',
-          id:1
+          id: 1
         },
         fullName: 'Pedro el técnico',
         id: 1,
@@ -207,14 +174,14 @@ export class PanelComponent implements OnInit {
       },
       service: {
         description: 'Servicio de reparación de pantalla de computador',
-        establishment:  {
+        establishment: {
           address: 'Cuadra superior carrera 23A',
           city: 'Manizales, Caldas',
           email: 'puntodelpcquemado@mail.com',
           name: 'Punto del PC quemado',
           nit: '987382-4',
           phone: '(03)8785622',
-          id:1
+          id: 1
         },
         id: 1,
         isDeliverable: false,
@@ -224,27 +191,53 @@ export class PanelComponent implements OnInit {
       },
       status: 'course',
       createdAt: '07-enero-2021',
-      description:'Quiero una pantalla nueva, esta ya no brilla bien y creo que se dañó'
+      description: 'Quiero una pantalla nueva, esta ya no brilla bien y creo que se dañó'
     }
   ];
   constructor(
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    public hireServicesService: HireServicesService
+  ) {
+    this.listServices$ = this.hireServicesService.listServices$;
+  }
 
   ngOnInit(): void {
-    console.log(this.hiredServices);
   }
 
   changeTable(table: string) {
+    console.log(table);
+    switch (table) {
+      case 'service':
+        this.hireServicesService.getAllServices(1, 'notApproved').subscribe(hiredServices => {
+          this.hireServicesService.creteListServices(hiredServices.hiredServices);
+        });
+        break;
+      case 'approved':
+        this.hireServicesService.getAllServices(1, 'approved').subscribe(hiredServices => {
+          this.hireServicesService.creteListServices(hiredServices.hiredServices);
+        });
+        break;
+      case 'course':
+        this.hireServicesService.getAllServices(1, 'course').subscribe(hiredServices => {
+          this.hireServicesService.creteListServices(hiredServices.hiredServices);
+        });
+        break;
+      case 'finished':
+        this.hireServicesService.getAllServices(1, 'finished').subscribe(hiredServices => {
+          this.hireServicesService.creteListServices(hiredServices.hiredServices);
+        });
+        break;
+      default:
+        break;
+    }
     this.tableEnable = table;
   }
-
-  openDialogService(index: number): void {
-    const dialogRef = this.dialog.open(DialogServiceComponent, {
-      width: '1000px',
-      height:'600px',
-      disableClose:true,
-      autoFocus:false,
+  openDialogCustomer(index: number): void {
+    const dialogRef = this.dialog.open(DialogCustomerComponent, {
+      width: '830px',
+      height: '950px',
+      disableClose: true,
+      autoFocus: false,
       data: this.hiredServices[index]
     });
 
@@ -254,17 +247,98 @@ export class PanelComponent implements OnInit {
       //this.animal = result;
     });
   }
+
+  openDialogService(index: number): void {
+    let behavior: BehaviorSubject<hiredService[]>;
+    behavior = (this.listServices$.source) as BehaviorSubject<hiredService[]>;
+    const dialogRef = this.dialog.open(DialogServiceComponent, {
+      width: '1000px',
+      height: '600px',
+      disableClose: true,
+      autoFocus: false,
+      data: behavior.getValue()[index],
+    });
+
+    dialogRef.afterClosed().subscribe(repairmanId => {
+      if (repairmanId) {
+        this.hireServicesService.approveService(behavior.getValue()[index].id, repairmanId).subscribe(result => {
+          console.log(result);
+        });
+      }
+    });
+  }
   openDialogApproved(index: number): void {
+    let behavior: BehaviorSubject<hiredService[]>;
+    behavior = (this.listServices$.source) as BehaviorSubject<hiredService[]>;
     const dialogRef = this.dialog.open(DialogApproveComponent, {
       width: '830px',
-      height:'950px',
-      disableClose:true,
-      autoFocus:false,
-      data: this.hiredServices[index]
+      height: '950px',
+      disableClose: true,
+      autoFocus: false,
+      data: behavior.getValue()[index]
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      console.log(result);
+      if(result){
+         this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'course').subscribe(result => {
+          console.log(result);
+        });
+      }
+      //this.animal = result;
+    });
+  }
+  openDialogCourse(index: number): void {
+    let behavior: BehaviorSubject<hiredService[]>;
+    behavior = (this.listServices$.source) as BehaviorSubject<hiredService[]>;
+    const dialogRef = this.dialog.open(DialogCourseComponent, {
+      width: '830px',
+      height: '950px',
+      disableClose: true,
+      autoFocus: false,
+      data: behavior.getValue()[index]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if(result){
+        this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'finished').subscribe(result => {
+         console.log(result);
+       });
+     }
+      //this.animal = result;
+    });
+  }
+  openDialogFinished(index: number): void {
+    let behavior: BehaviorSubject<hiredService[]>;
+    behavior = (this.listServices$.source) as BehaviorSubject<hiredService[]>;
+    const dialogRef = this.dialog.open(DialogFinishedComponent, {
+      width: '830px',
+      height: '950px',
+      disableClose: true,
+      autoFocus: false,
+      data: behavior.getValue()[index]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      //this.animal = result;
+    });
+  }
+  newService() {
+    const dialogRef = this.dialog.open(DialogNewServiceComponent, {
+      width: '830px',
+      height: '950px',
+      disableClose: true,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result.service.name as Partial<Service>);
       console.log(result);
       //this.animal = result;
     });

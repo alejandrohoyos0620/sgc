@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HideServicesService } from './services/hiredServices/hide-services.service';
+import { HireServicesService } from './services/hiredServices/hire-services.service';
 import { UsersService } from './services/users/users.service';
 
 
@@ -11,7 +11,7 @@ import { UsersService } from './services/users/users.service';
     CommonModule
   ],
   providers: [
-    HideServicesService,
+    HireServicesService,
     UsersService
   ]
 })

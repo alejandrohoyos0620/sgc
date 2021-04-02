@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HideServicesService } from './hide-services.service';
+import { HireServicesService } from './hire-services.service';
 
-describe('HideServicesService', () => {
-  let service: HideServicesService;
+describe('HireServicesService', () => {
+  let service: HireServicesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HideServicesService);
+    service = TestBed.inject(HireServicesService);
   });
 
   it('should be created', () => {
