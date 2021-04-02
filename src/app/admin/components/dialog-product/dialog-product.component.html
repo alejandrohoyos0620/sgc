@@ -1,1 +1,17 @@
-<p>dialog-product works!</p>
+<div class="divContainerDialog">
+    <div mat-dialog-title class="divTitle">{{data.name}}</div>
+    <div class ="spaceBetween"></div>
+    <div mat-dialog-content class="divContentDialog" >
+        <mat-label  class="labelDialog"><b>ID:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.id}}</mat-label>
+        <mat-label  class="labelDialog"><b>Servicio:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.name}}</mat-label>
+        <mat-label  class="labelDialog"><b>Descripción:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.description}}</mat-label>
+    </div>
+    <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
+    <div class ="spaceBetweenTitle" *ngIf="isShowRepairmans"></div>
+    <div mat-dialog-actions  class="divActionsConfirm">
+        <button mat-button class ="buttonApprove"(click)="onNoClick()" cdkFocusInitial ><mat-icon>check</mat-icon> Cerrar</button>
+    </div>
+</div>

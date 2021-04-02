@@ -14,7 +14,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Seleccione un técnico</mat-label>
             <mat-select [(value)]="selected" >
-              <mat-option *ngFor="let repairman of repairmans" value="{{repairman.id}}" >ID: {{repairman.id}} Nombre: {{repairman.fullName}}</mat-option>
+              <mat-option *ngFor="let repairman of repairmans" value="{{repairman.id}}" >ID: {{repairman.id}} Nombre: {{repairman.sub}}</mat-option>
             </mat-select>
           </mat-form-field>
     </div>

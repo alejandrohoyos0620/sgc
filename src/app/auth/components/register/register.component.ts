@@ -31,9 +31,9 @@ export class RegisterComponent implements OnInit {
     event.preventDefault();
     if (this.form.valid) {
       const value = this.form.value;
-      const fullName = `${value.firstName} ${value.lastName}`;
+      const sub = `${value.firstName} ${value.lastName}`;
       this.customer = {
-        fullName: fullName,
+        sub: sub,
         address: value.address,
         city: value.city,
         phone: value.phone,

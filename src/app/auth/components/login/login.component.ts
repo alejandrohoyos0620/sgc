@@ -5,6 +5,7 @@ import {errorMessages} from '@utils/validators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {throwError} from 'rxjs';
+import { UsersService } from '@core/services/users/users.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private usersService: UsersService
     ) {
     this.buildForm();
     this.buttonValid = false;
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
         this.toastr.success("Correcto inicio de sesión");
+        this.usersService.getUser();
         this.router.navigate(['']);
       }, error=>{
         this.toastr.error(error.error.message);

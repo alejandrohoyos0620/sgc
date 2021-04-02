@@ -32,7 +32,7 @@ export class PanelComponent implements OnInit {
     {
       id: 1,
       customer: {
-        fullName: 'Alejandro Hoyos Quemado',
+        sub: 'Alejandro Hoyos Quemado',
         address: 'Calle 21 A',
         city: 'Manizales Caldas',
         email: 'alejoquemado@mail.com',
@@ -58,7 +58,7 @@ export class PanelComponent implements OnInit {
           phone: '(03)8785622',
           id: 1
         },
-        fullName: 'Pedro el técnico',
+        sub: 'Pedro el técnico',
         id: 1,
         phone: '+57312657673',
         role: 'tecnico'
@@ -87,7 +87,7 @@ export class PanelComponent implements OnInit {
     {
       id: 2,
       customer: {
-        fullName: 'Manuel Narvaez Quemado',
+        sub: 'Manuel Narvaez Quemado',
         address: 'Carrera 87 F',
         city: 'Manizales Caldas',
         email: 'manuelquemado@mail.com',
@@ -112,7 +112,7 @@ export class PanelComponent implements OnInit {
           phone: '(03)8785622',
           id: 1
         },
-        fullName: 'Pedro el técnico',
+        sub: 'Pedro el técnico',
         id: 1,
         phone: '+57312657673',
         role: 'tecnico'
@@ -141,7 +141,7 @@ export class PanelComponent implements OnInit {
     {
       id: 3,
       customer: {
-        fullName: 'Alejandro Hoyos Quemado',
+        sub: 'Alejandro Hoyos Quemado',
         address: 'Calle 21 A',
         city: 'Manizales Caldas',
         email: 'alejoquemado@mail.com',
@@ -167,7 +167,7 @@ export class PanelComponent implements OnInit {
           phone: '(03)8785622',
           id: 1
         },
-        fullName: 'Pedro el técnico',
+        sub: 'Pedro el técnico',
         id: 1,
         phone: '+57312657673',
         role: 'tecnico'

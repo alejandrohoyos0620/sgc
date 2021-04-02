@@ -44,8 +44,8 @@
             <tr *ngFor="let hiredService of hiredServices; index as i">
                 <td >{{ hiredService.id }}</td>
                 <td>{{ hiredService.service.name }}</td>
-                <td>{{ hiredService.repairman.fullName }}</td>
-                <td>{{ hiredService.customer.fullName }}</td>
+                <td>{{ hiredService.repairman.sub }}</td>
+                <td>{{ hiredService.customer.sub }}</td>
                 <td>{{ hiredService.createdAt }}</td>
                 <td >
                     <button mat-icon-button (click)="openDialogCustomer(i)">

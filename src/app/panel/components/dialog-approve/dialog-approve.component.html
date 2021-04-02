@@ -1,29 +1,3 @@
-<!-- <div class="divContainerDialog">
-    <div mat-dialog-title class="divTitle">Servicio: {{data.service.name}} Id: {{data.id}}</div>
-    <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
-    <div mat-dialog-content class="divContentDialog" >
-        <mat-label>{{data.service.name}}</mat-label>
-        <mat-label>{{data.service.description}}</mat-label>
-    </div>
-    <div class ="spaceBetween" *ngIf="!isShowRepairmans"></div>
-    <div class ="spaceBetweenTitle" *ngIf="isShowRepairmans"></div>
-    <div mat-dialog-content class="divContentList" *ngIf="isShowRepairmans">
-        <div class ="divTitleRepairmans">Técnicos Disponibles</div>
-        <mat-form-field appearance="fill">
-            <mat-label>Seleccione un técnico</mat-label>
-            <mat-select [(value)]="selected" >
-              <mat-option *ngFor="let repairman of repairmans" value="{{repairman.id}}" >ID: {{repairman.id}} Nombre: {{repairman.fullName}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-    </div>
-    <div mat-dialog-actions *ngIf="!isShowRepairmans" class="divActionsDialog">
-        <button mat-button class ="buttonDeny" *ngIf="!isShowRepairmans" (click)="onNoClick()">Denegar</button>
-        <button mat-button class ="buttonApprove" (click)="showRepairmans()" cdkFocusInitial *ngIf="!isShowRepairmans">Aprobar</button>
-    </div>
-    <div mat-dialog-actions *ngIf="isShowRepairmans" class="divActionsConfirm">
-        <button mat-button class ="buttonApprove"[mat-dialog-close]="data.id" cdkFocusInitial *ngIf="isShowRepairmans">Confirmar</button>
-    </div>
-</div> -->
 <div class="divContainerDialog">
     <div mat-dialog-title class="divTitle">
         <h1>Nombre del servicio: {{data.service.name}}</h1>
@@ -45,7 +19,7 @@
         </div>
         <div class="rowContent">
             <mat-label class="cellContent subTitle">Nombre del cliente:</mat-label>
-            <mat-label class="cellContent content">{{data.customer.fullName}}</mat-label>
+            <mat-label class="cellContent content">{{data.customer.sub}}</mat-label>
             <mat-label class="cellContent subTitle">Teléfono:</mat-label>
             <mat-label class="cellContent content">{{data.customer.phone}}</mat-label>
         </div>
@@ -63,7 +37,7 @@
         </div>
         <div class="rowContent">
             <mat-label class="cellContent subTitle">Encargado:</mat-label>
-            <mat-label class="cellContent content">{{data.repairman.fullName}}</mat-label>
+            <mat-label class="cellContent content">{{data.repairman.sub}}</mat-label>
             <mat-label class="cellContent subTitle">Teléfono:</mat-label>
             <mat-label class="cellContent content">{{data.repairman.phone}}</mat-label>
         </div>

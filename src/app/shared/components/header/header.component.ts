@@ -68,6 +68,7 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if(result){
       this.authService.updateUser(result.source)
         .subscribe((data) => {
           console.log("Usuario del update");
@@ -75,7 +76,7 @@ export class HeaderComponent implements OnInit {
           this.usersService.updateUser(data);
           this.toastr.success("Tu actualziación ha sido exitosa");
         });
-        
+      }
     })
   }
 }

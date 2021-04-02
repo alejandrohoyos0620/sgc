@@ -58,7 +58,7 @@
                             <img class="imgUserIcon" src="../../../../assets/images/userIcon.png">
                         </div>
                         <ul *ngIf="(user$ | async) as userAsync" >
-                            <li><span class="spanNameMenu"><b>{{userAsync.fullName}}</b></span></li>
+                            <li><span class="spanNameMenu"><b>{{userAsync.sub}}</b></span></li>
                             <li><span class="spanEmailenu">{{userAsync.email}}</span></li>
                         </ul>
                         <hr class="linesMenu">

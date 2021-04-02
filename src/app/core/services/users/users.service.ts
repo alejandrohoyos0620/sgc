@@ -20,8 +20,8 @@ export class UsersService {
     ) { }
 
   updateUser(user: Partial<Employee> | Partial<Customer> | any){
-    user.fullName=user.sub;
-    delete user['sub'];
+    // user.fullName=user.sub;
+    // delete user['sub'];
     console.log(typeof(user));
     this.user.next(user);
     this.saveUpdatedUser(user);
@@ -69,7 +69,7 @@ export class UsersService {
   createCustomer(tokenPayload: any): Partial<Customer> {
     return {
       id: tokenPayload.id,
-      fullName: tokenPayload.sub,
+      sub: tokenPayload.sub,
       address: tokenPayload.address,
       city: tokenPayload.city,
       email: tokenPayload.email,
@@ -80,7 +80,7 @@ export class UsersService {
   createEmployee(tokenPayload: any): Partial<Employee>{
     return {
       id:  tokenPayload.id,
-      fullName: tokenPayload.sub,
+      sub: tokenPayload.sub,
       address: tokenPayload.address,
       email: tokenPayload.email,
       phone: tokenPayload.phone,

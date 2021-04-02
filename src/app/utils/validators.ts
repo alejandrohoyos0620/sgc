@@ -24,7 +24,7 @@ export const validateIfMatch: ValidatorFn = (control: FormGroup): ValidationErro
 export const errorMessages: { [key: string]: string } = {
     patternFName:'El campo no puede tener números',
     patternLName:'El campo no puede tener números',
-    fullName: 'El campo no puede tener números',
+    sub: 'El campo no puede tener números',
     email: 'En este campo debe haber un correo(usuario@dominio)',
     confirmEmail: 'Email addresses must match',
     lengthPassword: 'La contraseña debe ser entre 8 y 15 caracteres',
