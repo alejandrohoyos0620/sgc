@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog,
     private toastr: ToastrService,
     private usersService: UsersService
-  ) { 
+  ) {
     this.user$ = usersService.user$;
   }
 
@@ -35,9 +35,29 @@ export class HeaderComponent implements OnInit {
 
   hasUser() {
     if (this.authService.hasUser()) {
-      if(!this.usersService.hasUser()){
-      this.usersService.getUser();
+      if (!this.usersService.hasUser()) {
+        this.usersService.getUser();
+      }
+      return true;
     }
+    else {
+      return false;
+    }
+  }
+  isUserCustomer(){
+    if(this.authService.hasUserRole('administrator') || this.authService.hasUserRole('repairman'))
+    {
+      return false;
+    }
+    else if(this.authService.hasUser){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  hasUserRole(role: string) {
+    if (this.authService.hasUserRole(role)) {
       return true;
     }
     else {
@@ -68,14 +88,14 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-      this.authService.updateUser(result.source)
-        .subscribe((data) => {
-          console.log("Usuario del update");
-          console.log(data);
-          this.usersService.updateUser(data);
-          this.toastr.success("Tu actualziación ha sido exitosa");
-        });
+      if (result) {
+        this.authService.updateUser(result.source)
+          .subscribe((data) => {
+            console.log("Usuario del update");
+            console.log(data);
+            this.usersService.updateUser(data);
+            this.toastr.success("Tu actualziación ha sido exitosa");
+          });
       }
     })
   }

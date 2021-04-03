@@ -12,15 +12,20 @@ import { ServiceFormComponent } from './components/service-form/service-form.com
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { DialogServiceComponent } from './components/dialog-service/dialog-service.component';
 import { DialogProductComponent } from './components/dialog-product/dialog-product.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
-  declarations: [NavComponent, ServiceListComponent, ProductEditComponent, ServiceEditComponent, ServiceFormComponent, ProductFormComponent, DialogServiceComponent, DialogProductComponent],
+  declarations: [NavComponent, ServiceListComponent, ProductEditComponent, ServiceEditComponent, ServiceFormComponent, ProductFormComponent, DialogServiceComponent, DialogProductComponent, CategoryListComponent, CategoryEditComponent, CategoryFormComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
     LayoutModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

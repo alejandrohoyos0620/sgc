@@ -1,33 +1,33 @@
 <div class="containerPanel">
     <nav class="navTableButtons">
         <button class="buttonNewService" mat-raised-button matBadgeColor="warn"
-            (click)="newService()" *ngIf="customer">
+            (click)="newService()" *ngIf="hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator'))">
             <mat-icon>download</mat-icon>
             <span>Solicitar un nuevo servicio</span>
         </button>
         <button class="buttonServiceList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('service') " *ngIf="!customer">
+            (click)="changeTable('service')" *ngIf="hasUserRole('administrator')">
             <mat-icon>download</mat-icon>
             <span>Listado de servicios</span>
         </button>
         <button class="buttonApprovedList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('approved')" *ngIf="!customer">
+            (click)="changeTable('approved')" *ngIf="(hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>warning</mat-icon>
             <span>Aprobados</span>
         </button>
         <button class="buttonCourseList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('course')" *ngIf="!customer">
+            (click)="changeTable('course')" *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>error_outline</mat-icon>
             <span>En Curso</span>
         </button>
         <button class="buttonFinishedList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('finished')" *ngIf="!customer">
+            (click)="changeTable('finished')" *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>done_all</mat-icon>
             <span>Terminados</span>
         </button>
     </nav>
     <div class="spaceNav"></div>
-    <div *ngIf="customer" class="divTablePanel">
+    <div *ngIf="hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator'))" class="divTablePanel">
         <div class="divBannerCustomer">
             <p>Mis servicios en curso</p>
         </div>
@@ -55,7 +55,7 @@
             </tr>
         </table>
     </div>
-    <div *ngIf="tableEnable === 'service' && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel" >
+    <div *ngIf="tableEnable === 'service' &&  hasUserRole('administrator') && (listServices$ | async) as listServicesAsync" class="divTablePanel" >
         <div class="divBannerService">
             <p> Listado de servicios</p>
         </div>
@@ -75,7 +75,7 @@
             </tr>
         </table>
     </div>
-    <div *ngIf="tableEnable === 'approved'  && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel">
+    <div *ngIf="tableEnable === 'approved'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
         <div class="divBannerApproved">
             <p> Listado de servicios aprobados</p>
         </div>
@@ -103,7 +103,7 @@
             </tr>
         </table>
     </div>
-    <div *ngIf="tableEnable === 'course'  && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel">
+    <div *ngIf="tableEnable === 'course'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
         <div class="divBannerCourse">
             <p> Listado de servicios en curso</p>
         </div>
@@ -131,7 +131,7 @@
             </tr>
         </table>
     </div>
-    <div *ngIf="tableEnable === 'finished'  && !customer && (listServices$ | async) as listServicesAsync" class="divTablePanel">
+    <div *ngIf="tableEnable === 'finished'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
         <div class="divBannerFinished">
             <p>Listado de servicios terminados</p>
         </div>

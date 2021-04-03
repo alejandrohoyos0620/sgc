@@ -15,12 +15,12 @@
                         <mat-icon class="iconAccount">shopping_cart </mat-icon>
                     </a>
                 </div>
-                <div class="hoverDivNav" matTooltip="Panel" matTooltipClass="example-tooltip-red">
+                <div class="hoverDivNav" matTooltip="Panel" *ngIf="hasUserRole('administrator') || hasUserRole('repairman') || hasUser()" matTooltipClass="example-tooltip-red">
                     <a routerLink="/panel" routerLinkActive="active">
                         <mat-icon class="iconAccount">space_dashboard </mat-icon>
                     </a>
                 </div>
-                <div class="hoverDivNav" *ngIf="hasUser()">
+                <div class="hoverDivNav" *ngIf="hasUserRole('administrator')">
                     <a class="adminIcon" routerLink="/admin" routerLinkActive="active" matTooltip="Administrar"
                         matTooltipClass="example-tooltip-red">
                         <mat-icon class="iconAccount">admin_panel_settings</mat-icon>
@@ -64,7 +64,7 @@
                         <hr class="linesMenu">
                         <ul *ngIf="(user$ | async) as userAsync">
                             <li><span class="spanDatesMenu"><b>Teléfono:&nbsp;&nbsp;{{userAsync.phone}}</b></span></li>
-                            <li><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{userAsync.city}}</b></span></li>
+                            <li *ngIf="isUserCustomer()"><span class="spanDatesMenu"><b>Ciudad:&nbsp;&nbsp;{{userAsync.city}}</b></span></li>
                             <li><span class="spanDatesMenu"><b>Dirección:&nbsp;&nbsp;{{userAsync.address}}</b></span>
                             </li>
                             <li><button mat-fab (click)="openDialog()">

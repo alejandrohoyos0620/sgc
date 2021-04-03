@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Customer } from '@core/models/customer.model';
 import { Employee } from '@core/models/employee.model';
-import {environment} from '@environments/environment';
-import {map, catchError, retry, tap} from 'rxjs/operators';
-import {Observable, throwError} from 'rxjs';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
+import { environment } from '@environments/environment';
+import { map, catchError, retry, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
@@ -17,29 +17,27 @@ export class UsersService {
 
   constructor(
     private http: HttpClient
-    ) { }
+  ) { }
 
-  updateUser(user: Partial<Employee> | Partial<Customer> | any){
-    // user.fullName=user.sub;
-    // delete user['sub'];
-    console.log(typeof(user));
+  updateUser(user: Partial<Employee> | Partial<Customer> | any) {
+    console.log(typeof (user));
     this.user.next(user);
     this.saveUpdatedUser(user);
   }
-  
+
 
   saveUser(tokenPayload: any) {
-      if (tokenPayload.role == undefined || tokenPayload.role == null) {
-        const customer: Partial<Customer> = this.createCustomer(tokenPayload);
-        localStorage.setItem('user', JSON.stringify(customer));
-      }
-      else{
-        const employee: Partial<Employee> = this.createEmployee(tokenPayload);
-        localStorage.setItem('user', JSON.stringify(employee));
-      }
+    if (tokenPayload.role == undefined || tokenPayload.role == null) {
+      const customer: Partial<Customer> = this.createCustomer(tokenPayload);
+      localStorage.setItem('user', JSON.stringify(customer));
     }
+    else {
+      const employee: Partial<Employee> = this.createEmployee(tokenPayload);
+      localStorage.setItem('user', JSON.stringify(employee));
+    }
+  }
 
-  saveUpdatedUser(user: Partial<Employee> | Partial<Customer> ){
+  saveUpdatedUser(user: Partial<Employee> | Partial<Customer>) {
     localStorage.setItem('user', JSON.stringify(user));
   }
   getUser(): void {
@@ -49,22 +47,29 @@ export class UsersService {
       let customer: Partial<Customer> = userDecode;
       this.user.next(customer);
     }
-    else{
+    else {
       let employee: Partial<Employee> = userDecode;
       this.user.next(employee);
     }
   }
 
-  getAllRepairmans(establishment_id:number){
-    const establishmentId=establishment_id.toString();
-    return this.http.get(`${environment.url_api}/establishments/repairmans`,{params: {establishmentId}})
-    .pipe(
-      map((result: {repairmans: []}) => result.repairmans),
-      catchError(this.handleError),
-    );
+  getAllRepairmans(establishment_id: number) {
+    const establishmentId = establishment_id.toString();
+    return this.http.get(`${environment.url_api}/establishments/repairmans`, { params: { establishmentId } })
+      .pipe(
+        map((result: { repairmans: [] }) => result.repairmans),
+        catchError(this.handleError),
+      );
   }
-  hasUser(){
-   return this.user.getValue().address === undefined? false : true;
+  hasUser() {
+    return this.user.getValue().address === undefined ? false : true;
+  }
+
+  getUserId() {
+    let user = localStorage.getItem('user');
+    let userDecode = JSON.parse(user);
+    if (userDecode.role !== '' && userDecode.role !== undefined && userDecode.role !== null)
+      return userDecode.id;
   }
   createCustomer(tokenPayload: any): Partial<Customer> {
     return {
@@ -77,9 +82,9 @@ export class UsersService {
     }
   }
 
-  createEmployee(tokenPayload: any): Partial<Employee>{
+  createEmployee(tokenPayload: any): Partial<Employee> {
     return {
-      id:  tokenPayload.id,
+      id: tokenPayload.id,
       sub: tokenPayload.sub,
       address: tokenPayload.address,
       email: tokenPayload.email,
@@ -88,9 +93,9 @@ export class UsersService {
       establishment: tokenPayload.Establishment
     }
   }
-  private handleError(error: HttpErrorResponse ) {
+  private handleError(error: HttpErrorResponse) {
     console.log(error);
-    return  throwError('ups algo salió mal');
+    return throwError('ups algo salió mal');
   }
 
 }

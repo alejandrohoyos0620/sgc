@@ -24,9 +24,9 @@ export class ServiceEditComponent implements OnInit {
   ngOnInit(): void {
   this.activatedRoute.params.subscribe((params: Params) => {
     this.id = params.id;
-    this.serviceService.getService(parseInt(this.id)).subscribe((product) =>
+    this.serviceService.getService(parseInt(this.id)).subscribe((service) =>
     {
-      this.form.patchValue(product);
+      this.form.patchValue(service);
     });
   });
   }
@@ -44,13 +44,13 @@ export class ServiceEditComponent implements OnInit {
   }
   private buildForm(): void{
     this.form = this.formBuilder.group({
-      title: ['', [Validators.required]],
+      name:['', [Validators.required]],
+      description: ['', [Validators.required]],
+      isDeliverable: [true, [Validators.required]],
+      isEnable: [true, [Validators.required]],
       price: [0, [Validators.required, MyValidators.isPriceValid]],
-      image: '',
-      description: ['', [Validators.required]]
     });
   }
-
   get priceField(): any{
     return this.form.get('price');
   }

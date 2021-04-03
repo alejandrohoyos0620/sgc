@@ -1,20 +1,20 @@
 <form [formGroup]="form" (ngSubmit)="saveService($event)">
-    <mat-card>
+    <mat-card class ="cardEdit">
         <mat-card-header>
-            <mat-card-title>Producto</mat-card-title>
+            <mat-card-title>Editando Servicio</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div class="row">
                 <div class="col-xs">
-                    <mat-form-field>
-                        <input  placeholder="Title" formControlName="title" matInput type="text">
+                    <mat-form-field class="cellForm">
+                        <input  placeholder="Nombre" formControlName="name" matInput type="text">
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs">
-                    <mat-form-field>
-                        <input  placeholder="Price" formControlName="price" matInput type="number">
+                    <mat-form-field class="cellForm">
+                        <input  placeholder="Precio" formControlName="price" matInput type="number">
                     </mat-form-field>
                     <div *ngIf="form.get('price').errors && form.get('price').dirty">
                         <p *ngIf="priceField.hasError('price_invalid')">No debes pasar de 10000</p>
@@ -24,21 +24,23 @@
             </div>
             <div class="row">
                 <div class="col-xs">
-                    <mat-form-field>
-                        <input placeholder="Image" formControlName="image" matInput type="text">
-                    </mat-form-field>
+                    <section class="actionForm">
+                        <mat-checkbox formControlName="isEnable" color ="primary" class="example-ripple-checkbox">Está habilitado</mat-checkbox>
+                        <mat-checkbox formControlName="isDeliverable" color ="primary" class="example-ripple-checkbox">Tiene domicilio</mat-checkbox>
+                      </section>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs">
-                    <mat-form-field>
-                        <textarea placeholder="Description" formControlName="description" matInput></textarea>
+                    <mat-form-field class="cellForm">
+                        <textarea placeholder="Descripción" formControlName="description" matInput></textarea>
                     </mat-form-field>
                 </div>
             </div>
         </mat-card-content>
-        <mat-card-actions>
-            <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
+        <mat-card-actions class="actionForm">
+            <button  mat-raised-button class="buttonCancel" type="button">Cancelar</button>
+            <button  mat-raised-button class="buttonUpdate" type="submit">Actualizar</button>
         </mat-card-actions>
     </mat-card>
 </form>

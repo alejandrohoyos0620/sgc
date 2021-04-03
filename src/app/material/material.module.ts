@@ -21,6 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -44,7 +45,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatFormFieldModule,
     MatStepperModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   exports: [
     MatButtonModule,
@@ -65,7 +67,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatFormFieldModule,
     MatStepperModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }

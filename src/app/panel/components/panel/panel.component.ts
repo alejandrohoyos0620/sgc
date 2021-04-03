@@ -10,6 +10,8 @@ import { DialogNewServiceComponent } from '../dialog-new-service/dialog-new-serv
 import { Service } from '@core/models/service.model';
 import { HireServicesService } from '@core/services/hiredServices/hire-services.service';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AuthService } from '@core/services/auth.service';
+import { EstablishmentService } from '@core/services/establishments/establishment.service';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -19,6 +21,7 @@ export class PanelComponent implements OnInit {
   tableEnable = '';
   listServices$: Observable<Partial<hiredService>[]>;
   customer = false;
+  establishmentId: number;
   establishment: {
     address: 'Cuadra superior carrera 23A',
     city: 'Manizales, Caldas',
@@ -196,9 +199,12 @@ export class PanelComponent implements OnInit {
   ];
   constructor(
     public dialog: MatDialog,
-    public hireServicesService: HireServicesService
+    public hireServicesService: HireServicesService,
+    private authService: AuthService,
+   private establishmentService: EstablishmentService,
   ) {
     this.listServices$ = this.hireServicesService.listServices$;
+    this.establishmentId = this.establishmentService.getEstablishmentId();
   }
 
   ngOnInit(): void {
@@ -208,22 +214,22 @@ export class PanelComponent implements OnInit {
     console.log(table);
     switch (table) {
       case 'service':
-        this.hireServicesService.getAllServices(1, 'notApproved').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId , 'notApproved').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
       case 'approved':
-        this.hireServicesService.getAllServices(1, 'approved').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId , 'approved').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
       case 'course':
-        this.hireServicesService.getAllServices(1, 'course').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId , 'course').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
       case 'finished':
-        this.hireServicesService.getAllServices(1, 'finished').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId , 'finished').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
@@ -231,6 +237,22 @@ export class PanelComponent implements OnInit {
         break;
     }
     this.tableEnable = table;
+  }
+  hasUser() {
+    if (this.authService.hasUser()) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  hasUserRole(role: string) {
+    if (this.authService.hasUserRole(role)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
   openDialogCustomer(index: number): void {
     const dialogRef = this.dialog.open(DialogCustomerComponent, {

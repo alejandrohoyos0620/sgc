@@ -9,7 +9,7 @@
       <mat-label>Teléfono</mat-label>
       <input matInput [(ngModel)]="user.phone">
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field *ngIf="isUserCustomer()">
       <mat-label>Ciudad</mat-label>
       <input matInput [(ngModel)]="user.city">
     </mat-form-field>
