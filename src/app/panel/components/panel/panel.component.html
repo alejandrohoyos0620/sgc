@@ -5,22 +5,22 @@
             <mat-icon>download</mat-icon>
             <span>Solicitar un nuevo servicio</span>
         </button>
-        <button class="buttonServiceList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
+        <button class="buttonServiceList" mat-raised-button  [matBadge]="totalPrimero$ | async" matBadgePosition="above" matBadgeColor="warn"
             (click)="changeTable('service')" *ngIf="hasUserRole('administrator')">
             <mat-icon>download</mat-icon>
             <span>Listado de servicios</span>
         </button>
-        <button class="buttonApprovedList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
+        <button class="buttonApprovedList" mat-raised-button  [matBadge]="totalSegundo$ | async" matBadgePosition="above" matBadgeColor="warn"
             (click)="changeTable('approved')" *ngIf="(hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>warning</mat-icon>
             <span>Aprobados</span>
         </button>
-        <button class="buttonCourseList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
+        <button class="buttonCourseList" mat-raised-button [matBadge]="totalTercero$ | async" matBadgePosition="above" matBadgeColor="warn"
             (click)="changeTable('course')" *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>error_outline</mat-icon>
             <span>En Curso</span>
         </button>
-        <button class="buttonFinishedList" mat-raised-button matBadge="32" matBadgePosition="above" matBadgeColor="warn"
+        <button class="buttonFinishedList" mat-raised-button [matBadge]="totalCuarto$ | async" matBadgePosition="above" matBadgeColor="warn"
             (click)="changeTable('finished')" *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>done_all</mat-icon>
             <span>Terminados</span>
@@ -95,7 +95,7 @@
                 <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.repairman.sub }}</td>
                 <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.customer.sub }}</td>
                 <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.createdAt }}</td>
-                <td     *ngIf="hiredService.status === 'approved'" >
+                <td  *ngIf="hiredService && hiredService.status === 'approved'" >
                     <button mat-icon-button (click)="openDialogApproved(i)">
                         <mat-icon>remove_red_eye</mat-icon>
                     </button>

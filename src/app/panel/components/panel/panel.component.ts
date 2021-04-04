@@ -12,6 +12,7 @@ import { HireServicesService } from '@core/services/hiredServices/hire-services.
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -19,6 +20,10 @@ import { EstablishmentService } from '@core/services/establishments/establishmen
 })
 export class PanelComponent implements OnInit {
   tableEnable = '';
+  totalPrimero$: Observable<number>;
+  totalSegundo$: Observable<number>;
+  totalTercero$: Observable<number>;
+  totalCuarto$: Observable<number>;
   listServices$: Observable<Partial<hiredService>[]>;
   customer = false;
   establishmentId: number;
@@ -30,173 +35,7 @@ export class PanelComponent implements OnInit {
     nit: '987382-4',
     phone: '(03)8785622'
   };
-
-  hiredServices: hiredService[] = [
-    {
-      id: 1,
-      customer: {
-        sub: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: 1,
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment: {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622',
-          id: 1
-        },
-        sub: 'Pedro el técnico',
-        id: 1,
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Mantenimiento completo de computador, con formateada',
-        establishment: {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622',
-          id: 1
-        },
-        id: 2,
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Mantenimiento',
-        price: 45000
-      },
-      status: 'course',
-      createdAt: '07-enero-2021',
-      description: 'Arreglar mi computador portatil dado que está muy sucio por el gato que tengo, ya suena raro por dentro'
-    },
-    {
-      id: 2,
-      customer: {
-        sub: 'Manuel Narvaez Quemado',
-        address: 'Carrera 87 F',
-        city: 'Manizales Caldas',
-        email: 'manuelquemado@mail.com',
-        phone: '+57319898965'
-      },
-      device: {
-        id: 2,
-        brand: 'Lennovo ff45643',
-        code: 'KLOSBM-83927',
-        color: 'Gros',
-        name: 'Computador portatil',
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment: {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622',
-          id: 1
-        },
-        sub: 'Pedro el técnico',
-        id: 1,
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment: {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622',
-          id: 1
-        },
-        id: 1,
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla',
-        price: 100000
-      },
-      status: 'course',
-      createdAt: '07-enero-2021',
-      description: 'Mi computador está fallando, la pantalla titila a ratos y se pone la mitad negra, porfavor revisar y si es necesario cambiar'
-    },
-    {
-      id: 3,
-      customer: {
-        sub: 'Alejandro Hoyos Quemado',
-        address: 'Calle 21 A',
-        city: 'Manizales Caldas',
-        email: 'alejoquemado@mail.com',
-        phone: '+5731456765'
-      },
-      device: {
-        id: 1,
-        brand: 'Asus x555gq',
-        code: 'C5H34HSMC-DM',
-        color: 'Negro',
-        name: 'Computador portatil',
-
-      },
-      repairman: {
-        address: 'Calle 78B 21',
-        email: 'tecnicoquemado@mail.com',
-        establishment: {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622',
-          id: 1
-        },
-        sub: 'Pedro el técnico',
-        id: 1,
-        phone: '+57312657673',
-        role: 'tecnico'
-      },
-      service: {
-        description: 'Servicio de reparación de pantalla de computador',
-        establishment: {
-          address: 'Cuadra superior carrera 23A',
-          city: 'Manizales, Caldas',
-          email: 'puntodelpcquemado@mail.com',
-          name: 'Punto del PC quemado',
-          nit: '987382-4',
-          phone: '(03)8785622',
-          id: 1
-        },
-        id: 1,
-        isDeliverable: false,
-        isEnable: true,
-        name: 'Cambio de pantalla',
-        price: 100000
-      },
-      status: 'course',
-      createdAt: '07-enero-2021',
-      description: 'Quiero una pantalla nueva, esta ya no brilla bien y creo que se dañó'
-    }
-  ];
+  hiredServices: hiredService[];
   constructor(
     public dialog: MatDialog,
     public hireServicesService: HireServicesService,
@@ -204,8 +43,13 @@ export class PanelComponent implements OnInit {
     private establishmentService: EstablishmentService,
   ) {
     this.listServices$ = this.hireServicesService.listServices$;
+    this.totalPrimero$ = this.hireServicesService.totalPrimero$;
+    this.totalSegundo$ = this.hireServicesService.totalSegundo$;
+    this.totalTercero$ = this.hireServicesService.totalTercero$;
+    this.totalCuarto$ = this.hireServicesService.totalCuarto$;
     if (this.hasUserRole('repairman') || this.hasUserRole('administrator')) {
       this.establishmentId = this.establishmentService.getEstablishmentId();
+      this.getAllBadges();
     }
   }
 
@@ -240,6 +84,23 @@ export class PanelComponent implements OnInit {
     }
     this.tableEnable = table;
   }
+  getAllBadges() {
+    if (this.hasUserRole('administrator')) {
+      this.hireServicesService.getAllServices(this.establishmentId, 'notApproved').subscribe(hiredServices => {
+        this.hireServicesService.getAllBadges(hiredServices.hiredServices, 1);
+      });
+    }
+    this.hireServicesService.getAllServices(this.establishmentId, 'approved').subscribe(hiredServices => {
+      this.hireServicesService.getAllBadges(hiredServices.hiredServices, 2);
+    });
+    this.hireServicesService.getAllServices(this.establishmentId, 'course').subscribe(hiredServices => {
+      this.hireServicesService.getAllBadges(hiredServices.hiredServices, 3);
+    });
+    this.hireServicesService.getAllServices(this.establishmentId, 'finished').subscribe(hiredServices => {
+      this.hireServicesService.getAllBadges(hiredServices.hiredServices, 4);
+    });
+  }
+
   hasUser() {
     if (this.authService.hasUser()) {
       return true;
@@ -286,6 +147,7 @@ export class PanelComponent implements OnInit {
     dialogRef.afterClosed().subscribe(repairmanId => {
       if (repairmanId) {
         this.hireServicesService.approveService(behavior.getValue()[index].id, repairmanId).subscribe(result => {
+          this.getAllBadges();
           console.log(result);
         });
       }
@@ -307,6 +169,7 @@ export class PanelComponent implements OnInit {
       console.log(result);
       if (result) {
         this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'course').subscribe(result => {
+          this.getAllBadges();
           console.log(result);
         });
       }
@@ -329,6 +192,7 @@ export class PanelComponent implements OnInit {
       console.log(result);
       if (result) {
         this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'finished').subscribe(result => {
+          this.getAllBadges();
           console.log(result);
         });
       }

@@ -12,8 +12,16 @@ import { UsersService } from '../users/users.service';
 })
 export class HireServicesService {
   private listServices = new BehaviorSubject<Partial<hiredService>[]>([]);
-
+  private totalPrimero = new BehaviorSubject<number>(0);
+  private totalSegundo = new BehaviorSubject<number>(0);
+  private totalTercero = new BehaviorSubject<number>(0);
+  private totalCuarto = new BehaviorSubject<number>(0);
+  totalPrimero$ = this.totalPrimero.asObservable();
+  totalSegundo$ = this.totalSegundo.asObservable();
+  totalTercero$ = this.totalTercero.asObservable();
+  totalCuarto$ = this.totalCuarto.asObservable();
   listServices$ = this.listServices.asObservable();
+
   constructor(
     private http: HttpClient,
     private auth: AuthService,
@@ -30,13 +38,32 @@ export class HireServicesService {
           catchError(this.handleError),
         );
     }
-    else if(this.auth.hasUserRole('repairman')){
+    else if (this.auth.hasUserRole('repairman')) {
       const repairmanId = this.user.getUserId();
       return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/repairmanServices`, { params: { repairmanId, status } })
         .pipe(
           catchError(this.handleError),
         );
     }
+  }
+  getAllBadges(hiredservices: hiredService[], index: number) {
+    switch (index) {
+      case 1:
+        this.totalPrimero.next(hiredservices.length);
+        break;
+      case 2:
+        this.totalSegundo.next(hiredservices.length);
+        break;
+      case 3:
+        this.totalTercero.next(hiredservices.length);
+        break;
+      case 4:
+        this.totalCuarto.next(hiredservices.length);
+        break;
+      default:
+        break;
+    }
+
   }
   approveService(hiredservicesId: number, repairmanId: number) {
     const data = {
