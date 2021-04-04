@@ -20,11 +20,12 @@ export class ServiceListComponent implements OnInit {
     public dialog: MatDialog,
     private establishmentService: EstablishmentService,
   ) {
-    this.establishmentId= establishmentService.getEstablishmentId();
-    this.fetchServices();
+  
    }
 
   ngOnInit(): void {
+    this.establishmentId= this.establishmentService.getEstablishmentId();
+    this.fetchServices();
   }
   fetchServices(): void {
     this.serviceService.getAllServices(this.establishmentId).subscribe(services =>

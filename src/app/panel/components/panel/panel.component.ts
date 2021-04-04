@@ -201,10 +201,12 @@ export class PanelComponent implements OnInit {
     public dialog: MatDialog,
     public hireServicesService: HireServicesService,
     private authService: AuthService,
-   private establishmentService: EstablishmentService,
+    private establishmentService: EstablishmentService,
   ) {
     this.listServices$ = this.hireServicesService.listServices$;
-    this.establishmentId = this.establishmentService.getEstablishmentId();
+    if (this.hasUserRole('repairman') || this.hasUserRole('administrator')) {
+      this.establishmentId = this.establishmentService.getEstablishmentId();
+    }
   }
 
   ngOnInit(): void {
@@ -214,22 +216,22 @@ export class PanelComponent implements OnInit {
     console.log(table);
     switch (table) {
       case 'service':
-        this.hireServicesService.getAllServices(this.establishmentId , 'notApproved').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId, 'notApproved').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
       case 'approved':
-        this.hireServicesService.getAllServices(this.establishmentId , 'approved').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId, 'approved').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
       case 'course':
-        this.hireServicesService.getAllServices(this.establishmentId , 'course').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId, 'course').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
       case 'finished':
-        this.hireServicesService.getAllServices(this.establishmentId , 'finished').subscribe(hiredServices => {
+        this.hireServicesService.getAllServices(this.establishmentId, 'finished').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
@@ -303,8 +305,8 @@ export class PanelComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      if(result){
-         this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'course').subscribe(result => {
+      if (result) {
+        this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'course').subscribe(result => {
           console.log(result);
         });
       }
@@ -325,11 +327,11 @@ export class PanelComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      if(result){
+      if (result) {
         this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'finished').subscribe(result => {
-         console.log(result);
-       });
-     }
+          console.log(result);
+        });
+      }
       //this.animal = result;
     });
   }
