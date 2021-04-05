@@ -13,59 +13,7 @@ import { DialogServiceComponent } from '../dialog-service/dialog-service.compone
 })
 export class CategoryListComponent implements OnInit {
   
-  services: Service[] = [
-    {
-      description: 'Mantenimiento completo de computador, con formateada',
-      establishment: {
-        address: 'Cuadra superior carrera 23A',
-        city: 'Manizales, Caldas',
-        email: 'puntodelpcquemado@mail.com',
-        name: 'Punto del PC quemado',
-        nit: '987382-4',
-        phone: '(03)8785622',
-        id: 1
-      },
-      id: 1,
-      isDeliverable: false,
-      isEnable: true,
-      name: 'Mantenimiento',
-      price: 45000
-    },
-    {
-      description: 'reparación de pantalla de computador',
-      establishment: {
-        address: 'Cuadra superior carrera 23A',
-        city: 'Manizales, Caldas',
-        email: 'puntodelpcquemado@mail.com',
-        name: 'Punto del PC quemado',
-        nit: '987382-4',
-        phone: '(03)8785622',
-        id: 1
-      },
-      id: 2,
-      isDeliverable: false,
-      isEnable: true,
-      name: 'Reparacion de pantalla',
-      price: 100000
-    },
-    {
-      description: 'Servicio de reparación de pantalla de computador',
-      establishment: {
-        address: 'Cuadra superior carrera 23A',
-        city: 'Manizales, Caldas',
-        email: 'puntodelpcquemado@mail.com',
-        name: 'Punto del PC quemado',
-        nit: '987382-4',
-        phone: '(03)8785622',
-        id: 1
-      },
-      id: 3,
-      isDeliverable: false,
-      isEnable: true,
-      name: 'Cambio de pantalla',
-      price: 100000
-    }
-  ];
+  services: Service[];
   constructor(
     private serviceService: ServiceService,
     public dialog: MatDialog,

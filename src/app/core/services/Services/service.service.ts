@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {map, catchError, retry} from 'rxjs/operators';
 import { Service } from '@core/models/service.model';
+import { Establishment } from '@core/models/establishment.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,29 +23,38 @@ export class ServiceService {
     )
     ;
   }
-  getService(id: number): Observable<Service>{
-    return this.http.get<Service>(`${environment.url_api}/service/${id}`)
+  getService(id: string): Observable<Service>{
+    return this.http.get(`${environment.url_api}/services` , {params: {id}})
     .pipe(
+      map((data:{service: Service})=> data.service),
       catchError(this.handleError),
     );
   }
 
-  createService(product: Service): any{
-    return this.http.post(`${environment.url_api}/service`, product)
+  createService(service: Partial<Service>, establishment_id: number): any{
+    const establishmentId = establishment_id.toString();
+    let services: any = service;
+    services.establishmentId=establishment_id;
+    return this.http.post(`${environment.url_api}/services`, service)
     .pipe(
       catchError(this.handleError),
     );
   }
-
-  updateService(id: number, changes: Partial<Service> ): any{
-    return this.http.put(`${environment.url_api}/service/${id}`, changes)
+  updateService(id: string, service: Partial<Service>, establishment_id: number): any{
+    const establishmentId = establishment_id.toString();
+    let services: any = service;
+    services.establishmentId=establishment_id;
+    services.id = id;
+    return this.http.put(`${environment.url_api}/services`, services)
     .pipe(
       catchError(this.handleError),
     );
   }
+ 
 
-  deleteService(id: number): any{
-    return this.http.delete(`${environment.url_api}/service/${id}`)
+  deleteService(id_number: number): any{
+    const id = id_number.toString();
+    return this.http.delete(`${environment.url_api}/services`, {params: {id}})
     .pipe(
       catchError(this.handleError),
     );

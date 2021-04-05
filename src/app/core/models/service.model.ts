@@ -3,9 +3,9 @@ import { Establishment } from "./establishment.model"
 export interface Service {
     id: number;
     name: string;
-    isDeliverable: boolean;
+    isDeliverable: number;
     description: string;
-    isEnable: boolean;
+    isEnable: number;
     establishment: Establishment;
     price: number;
 }

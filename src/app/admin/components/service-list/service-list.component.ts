@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogServiceComponent } from '../dialog-service/dialog-service.component';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
+import { DialogDeleteServiceComponent } from '../dialog-delete-service/dialog-delete-service.component';
 
 @Component({
   selector: 'app-service-list',
@@ -33,6 +34,7 @@ export class ServiceListComponent implements OnInit {
     );
   }
 
+  
   deleteService(id: number): void {
     this.serviceService.deleteService(id).subscribe(rta => {
       if (rta) {
@@ -43,6 +45,20 @@ export class ServiceListComponent implements OnInit {
     });
   }
 
+  openDialogDeleteService(id: number): void {
+    const dialogRef = this.dialog.open(DialogDeleteServiceComponent, {
+      width: '800px',
+      height: '300px',
+      disableClose: true,
+      autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe(status => {
+      if(status){
+        this.deleteService(id);
+      }
+    });
+  }
   openDialogService(index: number): void {
     const dialogRef = this.dialog.open(DialogServiceComponent, {
       width: '1000px',

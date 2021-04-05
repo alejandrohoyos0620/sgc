@@ -6,6 +6,9 @@ import { MyValidators } from '@utils/validators';
 
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Service } from '@core/models/service.model';
+import { AuthService } from '@core/services/auth.service';
+import { EstablishmentService } from '@core/services/establishments/establishment.service';
 @Component({
   selector: 'app-service-form',
   templateUrl: './service-form.component.html',
@@ -13,42 +16,71 @@ import { Observable } from 'rxjs';
 })
 export class ServiceFormComponent implements OnInit {
   form: FormGroup;
+  establishmentId: number;
   constructor(
     private formBuilder: FormBuilder,
     private serviceService: ServiceService,
     private router: Router,
+    private authService: AuthService,
+    private establishmentService: EstablishmentService,
   ) {
     this.buildForm();
+    if (this.hasUserRole('repairman') || this.hasUserRole('administrator')) {
+      this.establishmentId = this.establishmentService.getEstablishmentId();
+    }
   }
 
   ngOnInit(): void {
   }
 
-  saveProduct(event: Event): void {
+  saveService(event: Event): void {
     event.preventDefault();
     if (this.form.valid) {
-      const product = this.form.value;
-      this.serviceService.createService(product).subscribe((newservice) => {
+      const service: Partial<Service> = {
+        name: this.form.value.name,
+        description: this.form.value.description,
+        price: this.form.value.price,
+        isDeliverable: this.form.value.isDeliverable ? 1:0,
+        isEnable: this.form.value.isEnable ? 1:0,
+      };
+      this.serviceService.createService(service, this.establishmentId).subscribe((newservice) => {
         console.log(newservice);
-        this.router.navigate(['./admin/products']);
+        this.router.navigate(['./admin/services']);
       });
+      console.log(service);
     }
-    console.log(this.form.value);
+    
   }
 
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      id: ['', [Validators.required]],
-      title: ['', [Validators.required]],
-      price: [0, [Validators.required, MyValidators.isPriceValid]],
-      image: '',
-      description: ['', [Validators.required]]
+      name:['', [Validators.required]],
+      description: ['', [Validators.required]],
+      isDeliverable: [false, [Validators.required]],
+      isEnable: [false, [Validators.required]],
+      price: [0, [Validators.required]],
     });
   }
 
   get priceField(): any {
     return this.form.get('price');
+  }
+  hasUser() {
+    if (this.authService.hasUser()) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  hasUserRole(role: string) {
+    if (this.authService.hasUserRole(role)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }
