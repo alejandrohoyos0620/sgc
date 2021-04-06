@@ -12,7 +12,6 @@ import { HireServicesService } from '@core/services/hiredServices/hire-services.
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
-import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -57,7 +56,6 @@ export class PanelComponent implements OnInit {
   }
 
   changeTable(table: string) {
-    console.log(table);
     switch (table) {
       case 'service':
         this.hireServicesService.getAllServices(this.establishmentId, 'notApproved').subscribe(hiredServices => {
@@ -127,9 +125,6 @@ export class PanelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      //this.animal = result;
     });
   }
 
@@ -148,7 +143,6 @@ export class PanelComponent implements OnInit {
       if (repairmanId) {
         this.hireServicesService.approveService(behavior.getValue()[index].id, repairmanId).subscribe(result => {
           this.getAllBadges();
-          console.log(result);
         });
       }
     });
@@ -165,15 +159,11 @@ export class PanelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
       if (result) {
         this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'course').subscribe(result => {
           this.getAllBadges();
-          console.log(result);
         });
       }
-      //this.animal = result;
     });
   }
   openDialogCourse(index: number): void {
@@ -188,15 +178,11 @@ export class PanelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
       if (result) {
         this.hireServicesService.changeStatus(behavior.getValue()[index].id, 'finished').subscribe(result => {
           this.getAllBadges();
-          console.log(result);
         });
       }
-      //this.animal = result;
     });
   }
   openDialogFinished(index: number): void {
@@ -211,9 +197,6 @@ export class PanelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      //this.animal = result;
     });
   }
   newService() {
@@ -225,10 +208,6 @@ export class PanelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result.service.name as Partial<Service>);
-      console.log(result);
-      //this.animal = result;
     });
   }
 }

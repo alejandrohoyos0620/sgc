@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Customer } from '@core/models/customer.model';
 import { Employee } from '@core/models/employee.model';
 import { environment } from '@environments/environment';
-import { map, catchError, retry, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +19,6 @@ export class UsersService {
   ) { }
 
   updateUser(user: Partial<Employee> | Partial<Customer> | any) {
-    console.log(typeof (user));
     this.user.next(user);
     this.saveUpdatedUser(user);
   }

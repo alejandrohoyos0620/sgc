@@ -1,10 +1,9 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component} from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Device } from '@core/models/device.model';
 import { Service } from '@core/models/service.model';
 import { ServiceService } from '@core/services/Services/service.service';
-import { EstablishmentService } from '@core/services/establishments/establishment.service';
 @Component({
   selector: 'app-dialog-new-service',
   templateUrl: './dialog-new-service.component.html',
@@ -26,12 +25,9 @@ export class DialogNewServiceComponent {
     public dialogRef: MatDialogRef<DialogNewServiceComponent>,
     private formBuilder: FormBuilder,
     private serviceService: ServiceService,
-   // private establishmentService: EstablishmentService,
   ) {
     this.buildForm();
     this.fetchServices();
-    //this.establishmentId= establishmentService.getEstablishmentId()
-    //console.log(this.establishmentId);
   }
   onNoClick(): void {
     this.dialogRef.close();

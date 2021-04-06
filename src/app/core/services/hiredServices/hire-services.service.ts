@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, retry, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { hiredService } from '@core/models/hiredService.model';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth.service';
@@ -30,7 +30,6 @@ export class HireServicesService {
 
   getAllServices(establishment_id: number, status: string): any {
     const establishmentId = establishment_id.toString();
-    console.log('aquí igual');
 
     if (this.auth.hasUserRole('administrator')) {
       return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/establishmentServices`, { params: { establishmentId, status } })
@@ -77,8 +76,6 @@ export class HireServicesService {
           this.listServices.getValue().splice(index, 1);
           this.listServices.getValue().push(data.approvedHiredService);
           this.listServices.next([...this.listServices.getValue()]);
-
-          console.log(this.listServices.getValue());
         }),
         catchError(this.handleError),
       );
@@ -95,7 +92,6 @@ export class HireServicesService {
           this.listServices.getValue().splice(index, 1);
           this.listServices.getValue().push(data.approvedHiredService);
           this.listServices.next([...this.listServices.getValue()]);
-          console.log(this.listServices.getValue());
         }),
         catchError(this.handleError),
       );
@@ -104,7 +100,6 @@ export class HireServicesService {
     this.listServices.next(hiredservices);
   }
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
     return throwError('ups algo salió mal');
   }
 }
