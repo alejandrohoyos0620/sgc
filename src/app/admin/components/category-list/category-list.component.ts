@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { hiredService } from '@core/models/hiredService.model';
-import { Service } from '@core/models/service.model';
-import { ServiceService } from '@core/services/Services/service.service';
-import { BehaviorSubject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogServiceComponent } from '../dialog-service/dialog-service.component';
-
+import { EstablishmentService } from '@core/services/establishments/establishment.service';
+import { Category } from '@core/models/category.model';
+import { CategoryService } from '@core/services/categories/category.service';
+import { DialogDeleteCategoryComponent } from '../dialog-delete-category/dialog-delete-category.component';
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
@@ -13,41 +11,50 @@ import { DialogServiceComponent } from '../dialog-service/dialog-service.compone
 })
 export class CategoryListComponent implements OnInit {
   
-  services: Service[];
+  establishmentId: number;
+  categories: Category[];
   constructor(
-    private serviceService: ServiceService,
+    private categoryService: CategoryService,
     public dialog: MatDialog,
-  ) { }
+    private establishmentService: EstablishmentService,
+  ) {
+  
+   }
 
   ngOnInit(): void {
+    this.establishmentId= this.establishmentService.getEstablishmentId();
+    this.fetchCategories();
   }
-  fetchServices(): void {
-    this.serviceService.getAllServices(1).subscribe(services =>
-      this.services = services
+  fetchCategories(): void {
+    this.categoryService.getAllCategories(this.establishmentId).subscribe(categories =>{
+      this.categories = categories
+    }
     );
   }
 
-  deleteService(id: number): void {
-    this.serviceService.deleteService(id).subscribe(rta => {
+  
+  deleteCategory(id: number): void {
+    this.categoryService.deleteCategory(id).subscribe(rta => {
       if (rta) {
-        const index = this.services.findIndex((service) => service.id === id);
-        this.services.splice(index, 1);
-        this.services = [...this.services];
+        const index = this.categories.findIndex((category) => category.id === id);
+        this.categories.splice(index, 1);
+        this.categories = [...this.categories];
       }
     });
   }
 
-  openDialogService(index: number): void {
-    const dialogRef = this.dialog.open(DialogServiceComponent, {
-      width: '1000px',
-      height: '600px',
+  openDialogDeleteCategory(id: number): void {
+    const dialogRef = this.dialog.open(DialogDeleteCategoryComponent, {
+      width: '800px',
+      height: '300px',
       disableClose: true,
       autoFocus: false,
-      data: this.services[index],
     });
 
-    dialogRef.afterClosed().subscribe(repairmanId => {
-      console.log("salió");
+    dialogRef.afterClosed().subscribe(status => {
+      if(status){
+        this.deleteCategory(id);
+      }
     });
   }
 }

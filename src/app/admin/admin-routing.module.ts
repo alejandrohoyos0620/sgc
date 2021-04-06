@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 
 import { NavComponent } from './components/nav/nav.component';
 import { ServiceEditComponent } from './components/service-edit/service-edit.component';
@@ -17,6 +20,10 @@ const routes: Routes = [
         component: ServiceListComponent
       },
       {
+        path: 'categories',
+        component: CategoryListComponent
+      },
+      {
         path: 'products',
         //component: ProductListComponent
       },
@@ -27,6 +34,14 @@ const routes: Routes = [
       {
         path: 'services/edit/:id',
         component: ServiceEditComponent
+      },
+      {
+        path: 'categories/create',
+        component: CategoryFormComponent
+      },
+      {
+        path: 'categories/edit/:id',
+        component: CategoryEditComponent
       },
     ]
   }

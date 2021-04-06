@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { hiredService } from '@core/models/hiredService.model';
 import { Service } from '@core/models/service.model';
 import { ServiceService } from '@core/services/Services/service.service';
-import { BehaviorSubject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogServiceComponent } from '../dialog-service/dialog-service.component';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
@@ -69,7 +67,6 @@ export class ServiceListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(repairmanId => {
-      console.log("salió");
     });
   }
 }

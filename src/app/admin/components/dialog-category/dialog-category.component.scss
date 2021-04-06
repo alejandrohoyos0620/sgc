@@ -1,0 +1,67 @@
+.divContentDialog{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    background: rgb(169, 169, 169);
+    padding: 0;
+    height: 50%;
+}
+.divContentList{
+    height: auto;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+.divTitleRepairmans{
+    width: auto;
+    height: auto;
+    background-color: #232aab;
+    color: white;
+    text-align: center;
+}
+.spaceBetween{
+    height: 8%;
+}
+.spaceBetweenTitle{
+    height: 2%;
+}
+.divActionsDialog{
+    height: 10%;
+    width: 40%;
+    justify-content: space-between;
+}
+.divTitle{
+    margin-top: 3%;
+    width: 95%;
+    height: 11%;
+    background-color: #232aab;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.divContainerDialog{
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+.buttonDeny{
+    background-color: rgb(247, 17, 17);
+    color: white;
+}
+.buttonApprove{
+    background-color: rgb(63, 169, 47);
+    color: white;
+}
+.labelDialog{
+    width: 99%;
+    margin-left: 1%;
+    margin-top: 1%;
+} 
+.labelContent{
+    color: white;
+}

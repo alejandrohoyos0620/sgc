@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {errorMessages} from '@utils/validators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import {throwError} from 'rxjs';
 import { UsersService } from '@core/services/users/users.service';
 @Component({
   selector: 'app-login',
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
       const value = this.form.value;
       this.authService.login(value.email, value.password)
       .subscribe((data) => {
-        console.log(data);
         this.toastr.success("Correcto inicio de sesión");
         this.usersService.getUser();
         this.router.navigate(['']);
@@ -55,12 +53,6 @@ export class LoginComponent implements OnInit {
   register() {
     this.router.navigate(['/auth/register']);
   }
-  // loginApi(){
-  //   this.authService.loginRestApi('alejandro@alejo.com', '123456')
-  //   .subscribe(data => {
-  //     console.log(data);
-  //   });
-  // }
 
   seeIfEmail(): boolean{
     return this.form.get('email').invalid && this.form.get('email').dirty  ;

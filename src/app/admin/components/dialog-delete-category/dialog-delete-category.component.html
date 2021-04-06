@@ -1,0 +1,11 @@
+<div class="divContainerDialog">
+    <div mat-dialog-title class="divTitle"><mat-icon class ="iconWarning">warning</mat-icon></div>
+    <div class ="spaceBetween"></div>
+    <div mat-dialog-content class="divContentDialog" >
+        <p>¿Está seguro que desea eliminar la categoría?</p>
+    </div>
+    <div mat-dialog-actions  class="divActionsConfirm">
+        <button mat-button class ="buttonDeny"(click)="onNoClick(false)" cdkFocusInitial ><mat-icon>cancel</mat-icon> Calcelar</button>
+        <button mat-button class ="buttonApprove" [mat-dialog-close]="true" cdkFocusInitial ><mat-icon>delete</mat-icon> Confirmar</button>
+    </div>
+</div>

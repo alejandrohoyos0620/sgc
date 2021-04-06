@@ -36,7 +36,6 @@ export class ServiceEditComponent implements OnInit {
     this.serviceService.getService(this.id).subscribe((service) =>
     {
       this.form.patchValue(service);
-      console.log(service);
     });
   });
   }
@@ -52,11 +51,9 @@ export class ServiceEditComponent implements OnInit {
       isEnable: this.form.value.isEnable ? 1:0,
     };
     this.serviceService.updateService(this.id, service, this.establishmentId).subscribe((newservice) => {
-      console.log(newservice);
       this.router.navigate(['./admin/services']);
     });
   }
-  console.log(this.form.value);
   }
   private buildForm(): void{
     this.form = this.formBuilder.group({

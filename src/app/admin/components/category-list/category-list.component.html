@@ -3,38 +3,32 @@
     <nav class="navTableButtons">
         <button class="buttonNewService" mat-raised-button routerLink="create">
             <mat-icon>upgrade</mat-icon>
-            <span>Crear nuevo servicio</span>
+            <span>Crear una nueva categoría</span>
         </button>
     </nav>
     <div class="spaceNav"></div>
     <div class="divTablePanel">
         <div class="divBannerCourse">
-            <p>Listado de servicios de SGC</p>
+            <p>Listado de categorías de SGC</p>
         </div>
 
         <div class="spaceTable"></div>
         <table class="tablePanelApproved">
             <tr>
                 <th>Id</th>
-                <th>Servicio</th>
-                <th>Detalles</th>
+                <th>Categoría</th>
                 <th>Acciones</th>
             </tr>
-            <tr *ngFor="let service of services; index as i">
+            <tr *ngFor="let category of categories; index as i">
 
-                <td>{{ service.id }}</td>
-                <td>{{ service.name }}</td>
-                <td>
-                    <button mat-icon-button (click)="openDialogService(i)">
-                        <mat-icon>article</mat-icon>
-                    </button>
-                </td>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
                 <td class ="cellButtons">
-                    <button class="buttonEdit" mat-raised-button [routerLink]="['edit',service.id]" >
+                    <button class="buttonEdit" mat-raised-button [routerLink]="['edit',category.id]" >
                         <mat-icon>mode_edit</mat-icon>
                         <span>Editar</span>
                     </button>
-                    <button class="buttonDelete" mat-raised-button (click)="deleteProduct(service.id)">
+                    <button class="buttonDelete" mat-raised-button (click)="openDialogDeleteCategory(category.id)">
                         <mat-icon>delete</mat-icon>
                         <span>Eliminar</span>
                     </button>

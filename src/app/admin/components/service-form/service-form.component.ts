@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiceService } from '@core/services/Services/service.service';
-import { MyValidators } from '@utils/validators';
-
-import { finalize } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Service } from '@core/models/service.model';
 import { AuthService } from '@core/services/auth.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
@@ -44,10 +40,8 @@ export class ServiceFormComponent implements OnInit {
         isEnable: this.form.value.isEnable ? 1:0,
       };
       this.serviceService.createService(service, this.establishmentId).subscribe((newservice) => {
-        console.log(newservice);
         this.router.navigate(['./admin/services']);
       });
-      console.log(service);
     }
     
   }

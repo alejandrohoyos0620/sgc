@@ -17,9 +17,11 @@ import { CategoryEditComponent } from './components/category-edit/category-edit.
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { SharedModule } from '@shared/shared.module';
 import { DialogDeleteServiceComponent } from './components/dialog-delete-service/dialog-delete-service.component';
+import { DialogDeleteCategoryComponent } from './components/dialog-delete-category/dialog-delete-category.component';
+import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
 
 @NgModule({
-  declarations: [NavComponent, ServiceListComponent, ProductEditComponent, ServiceEditComponent, ServiceFormComponent, ProductFormComponent, DialogServiceComponent, DialogProductComponent, CategoryListComponent, CategoryEditComponent, CategoryFormComponent, DialogDeleteServiceComponent],
+  declarations: [NavComponent, ServiceListComponent, ProductEditComponent, ServiceEditComponent, ServiceFormComponent, ProductFormComponent, DialogServiceComponent, DialogProductComponent, CategoryListComponent, CategoryEditComponent, CategoryFormComponent, DialogDeleteServiceComponent, DialogDeleteCategoryComponent, DialogCategoryComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

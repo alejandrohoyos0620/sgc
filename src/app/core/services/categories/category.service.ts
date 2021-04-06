@@ -3,7 +3,6 @@ import {environment} from '@environments/environment';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {map, catchError, retry} from 'rxjs/operators';
-import { Service } from '@core/models/service.model';
 import { Category } from '@core/models/category.model';
 @Injectable({
   providedIn: 'root'
@@ -11,43 +10,55 @@ import { Category } from '@core/models/category.model';
 export class CategoryService {
   constructor(private http: HttpClient) { }
 
-  getAllCategories(): any{
-    return this.http.get<Category[]>(`${environment.url_api}/category`)
+  getAllCategories(establishment_id: number): any{
+    const establishmentId = establishment_id.toString();
+    return this.http.get(`${environment.url_api}/categories/establishmentCategories`,{params: {establishmentId}})
+    .pipe(
+      map(
+        (result: {categories: Category[]}) => result.categories
+      ),
+      catchError(this.handleError),
+    )
+    ;
+  }
+
+  getCategory(id: string): Observable<Category>{
+    return this.http.get(`${environment.url_api}/categories` , {params: {id}})
+    .pipe(
+      map((data:{category: Category})=> data.category),
+      catchError(this.handleError),
+    );
+  }
+  createCategory(category: Partial<Category>, establishment_id: number): any{
+    const establishmentId = establishment_id.toString();
+    let categories: any = category;
+    categories.establishmentId=establishment_id;
+    return this.http.post(`${environment.url_api}/categories`, categories)
     .pipe(
       catchError(this.handleError),
     );
   }
-
-  getCategory(id: number): Observable<Category>{
-    return this.http.get<Category>(`${environment.url_api}/category/${id}`)
+  updateCategory(id: string, category: Partial<Category>, establishment_id: number): any{
+    const establishmentId = establishment_id.toString();
+    let categories: any = category;
+    categories.establishmentId=establishment_id;
+    categories.id = id;
+    return this.http.put(`${environment.url_api}/categories`, categories)
     .pipe(
       catchError(this.handleError),
     );
   }
+ 
 
-  createCategory(product: Category): any{
-    return this.http.post(`${environment.url_api}/category`, product)
-    .pipe(
-      catchError(this.handleError),
-    );
-  }
-
-  updateCategory(id: number, changes: Partial<Category> ): any{
-    return this.http.put(`${environment.url_api}/category/${id}`, changes)
-    .pipe(
-      catchError(this.handleError),
-    );
-  }
-
-  deleteCategory(id: number): any{
-    return this.http.delete(`${environment.url_api}/category/${id}`)
+  deleteCategory(id_number: number): any{
+    const id = id_number.toString();
+    return this.http.delete(`${environment.url_api}/categories`, {params: {id}})
     .pipe(
       catchError(this.handleError),
     );
   }
 
   private handleError(error: HttpErrorResponse ) {
-    console.log(error);
     return  throwError('ups algo salió mal');
   }
 }
