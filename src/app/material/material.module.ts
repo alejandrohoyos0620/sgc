@@ -22,6 +22,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [],
@@ -38,6 +41,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatDatepickerModule,
     MatMenuModule,
     MatGridListModule,
     MatListModule,
@@ -46,7 +50,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatStepperModule,
     MatTooltipModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule,
@@ -68,7 +73,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatStepperModule,
     MatTooltipModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

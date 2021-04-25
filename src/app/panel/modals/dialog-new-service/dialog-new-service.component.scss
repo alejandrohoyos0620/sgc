@@ -12,11 +12,11 @@
     flex-direction: column;
     padding: 0;
     height: 70%;
-    font-size: 17px;
+    font-size: 16px;
 }
 .divContentList{
     height: auto;
-    width: 95%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -24,12 +24,15 @@
     color: rgb(54, 54, 54);
 }
 .divTitleRepairmans{
-    width: auto;
+    width: 100%;
     height: auto;
     background-color: #232aab;
     color: white;
     text-align: center;
    
+}
+.list{
+    width: 100%;
 }
 .spaceBetween{
     height: 8%;
@@ -60,15 +63,38 @@
     background-color: rgb(247, 17, 17);
     color: white;
 }
+.buttonNewDevice{
+    background-color: #232aab;
+    color: white;
+}
 .buttonApprove{
     background-color: rgb(63, 169, 47);
     color: white;
 }
+.buttonSelected{
+    background-color: #232aab;
+    color: white;
+    width: 90%;
+    font-size: 30px !important;
+}
 .rowContent{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.mat-icon{
+    width: auto  !important;
+    height: auto !important;
+    font-size: 40px !important;
+}
+.rowSelected{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     margin-bottom: 25px;
+    width: 90%;
+    height: 10%;
 }
 .cellContent{
     width: 98%;
@@ -108,3 +134,12 @@
   .example-margin {
     margin: 10px;
   }
+
+
+mat-form-field {
+  margin-right: 12px;
+}
+input,
+label {
+    margin: .4rem 0;
+}

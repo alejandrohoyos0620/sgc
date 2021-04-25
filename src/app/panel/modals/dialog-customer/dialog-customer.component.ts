@@ -18,6 +18,6 @@ export class DialogCustomerComponent  {
     public dialogRef: MatDialogRef<DialogCustomerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: hiredService) {}
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close('true');
   }
 }

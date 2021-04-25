@@ -4,4 +4,5 @@ export interface Device {
     brand: string;
     code: string;
     color: string;
+    ownerId: number;
 }

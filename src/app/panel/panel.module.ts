@@ -5,12 +5,14 @@ import { PanelRoutingModule } from './panel-routing.module';
 import {MaterialModule} from './../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { DialogServiceComponent } from './components/dialog-service/dialog-service.component';
-import { DialogApproveComponent } from './components/dialog-approve/dialog-approve.component';
-import { DialogFinishedComponent } from './components/dialog-finished/dialog-finished.component';
-import { DialogCourseComponent } from './components/dialog-course/dialog-course.component';
-import { DialogCustomerComponent } from './components/dialog-customer/dialog-customer.component';
-import { DialogNewServiceComponent } from './components/dialog-new-service/dialog-new-service.component';
+import { DialogServiceComponent } from './modals/dialog-service/dialog-service.component';
+import { DialogApproveComponent } from './modals/dialog-approve/dialog-approve.component';
+import { DialogFinishedComponent } from './modals/dialog-finished/dialog-finished.component';
+import { DialogCourseComponent } from './modals/dialog-course/dialog-course.component';
+import { DialogCustomerComponent } from './modals/dialog-customer/dialog-customer.component';
+import { DialogNewServiceComponent } from './modals/dialog-new-service/dialog-new-service.component';
+import { DialogNewServiceTypeComponent } from './modals/dialog-new-service-type/dialog-new-service-type.component';
+import { DialogNewDeviceComponent } from './modals/dialog-new-device/dialog-new-device.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { DialogNewServiceComponent } from './components/dialog-new-service/dialo
     DialogFinishedComponent,
     DialogCourseComponent,
     DialogCustomerComponent,
-    DialogNewServiceComponent
+    DialogNewServiceComponent,
+    DialogNewServiceTypeComponent,
+    DialogNewDeviceComponent
   ],
   imports: [
     CommonModule,

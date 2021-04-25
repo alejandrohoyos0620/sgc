@@ -1,0 +1,68 @@
+<form [formGroup]="form" class="formDiv" (ngSubmit)="saveService($event)">
+    <div class="divContainerDialog">
+
+        <div mat-dialog-title class="divTitle">
+            <h1>Nuevo servicio</h1>
+        </div>
+        <div class="spaceBetween"></div>
+        <div mat-dialog-content class="divContentDialog">
+            <div class="divContentList ">
+                <div class="divTitleRepairmans">Servicios Disponibles</div>
+                <mat-form-field appearance="fill" class="list">
+                    <mat-label>Seleccione un servicio</mat-label>
+                    <mat-select formControlName="service">
+                        <mat-option *ngFor="let service of services" value="{{service.id}}"> {{service.name}}:
+                            {{service.description}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="divContentList ">
+                <div class="divTitleRepairmans">Selecciona un Dispositivo</div>
+                <mat-form-field appearance="fill" class="list">
+                    <mat-label>Seleccione un dispositivo</mat-label>
+                    <mat-select formControlName="device">
+                        <mat-option *ngFor="let device of devices" value="{{device.id}}"> {{device.name}}:
+                            {{device.brand}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="rowContent">
+                <button mat-button class="buttonNewDevice" (click)="createDevice()">
+                    <mat-icon>add_circle_outline</mat-icon> Crear Dispositivo
+                </button>
+            </div>
+
+            <div class="divContentList">
+                <div class="divTitleRepairmans">Selecciona una fecha para recoger su dispositivo</div>
+                <mat-form-field class="example-full-width list" appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [min]="minDate" formControlName="date" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="divContentList">
+                <div class="divTitleRepairmans">Selecciona una hora para recoger su dispositivo</div>
+            <input type="time" formControlName="hour" min="08:00" max="18:00" step="2">
+            </div>
+
+            
+
+            <div class="rowContent">
+                <mat-form-field class="cellContent subTitle list">
+                    <mat-label>Añade un comentario para el técnico</mat-label>
+                    <textarea matInput placeholder="Descripción" formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+            <div mat-dialog-actions class="rowContent">
+                <button mat-button class="buttonDeny" (click)="onNoClick()">
+                    <mat-icon>close</mat-icon> Cancelar
+                </button>
+                <button mat-button class="buttonApprove" cdkFocusInitial type="submit">
+                    <mat-icon>shortcut</mat-icon> Solicitar servicio
+                </button>
+            </div>
+        </div>
+
+    </div>
+</form>

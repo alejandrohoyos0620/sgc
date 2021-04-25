@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { hiredService } from '@core/models/hiredService.model';
-import { DialogServiceComponent } from './../dialog-service/dialog-service.component';
-import { DialogApproveComponent } from './../dialog-approve/dialog-approve.component';
+import { DialogServiceComponent } from '../../modals/dialog-service/dialog-service.component';
+import { DialogApproveComponent } from '../../modals/dialog-approve/dialog-approve.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogCourseComponent } from '../dialog-course/dialog-course.component';
-import { DialogFinishedComponent } from '../dialog-finished/dialog-finished.component';
-import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
-import { DialogNewServiceComponent } from '../dialog-new-service/dialog-new-service.component';
+import { DialogCourseComponent } from '../../modals/dialog-course/dialog-course.component';
+import { DialogFinishedComponent } from '../../modals/dialog-finished/dialog-finished.component';
+import { DialogCustomerComponent } from '../../modals/dialog-customer/dialog-customer.component';
+import { DialogNewServiceComponent } from '../../modals/dialog-new-service/dialog-new-service.component';
 import { Service } from '@core/models/service.model';
 import { HireServicesService } from '@core/services/hiredServices/hire-services.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
+import { UsersService } from '@core/services/users/users.service';
+import { DialogNewServiceTypeComponent } from '../../modals/dialog-new-service-type/dialog-new-service-type.component';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -40,19 +42,24 @@ export class PanelComponent implements OnInit {
     public hireServicesService: HireServicesService,
     private authService: AuthService,
     private establishmentService: EstablishmentService,
+    private user: UsersService
   ) {
     this.listServices$ = this.hireServicesService.listServices$;
     this.totalPrimero$ = this.hireServicesService.totalPrimero$;
     this.totalSegundo$ = this.hireServicesService.totalSegundo$;
     this.totalTercero$ = this.hireServicesService.totalTercero$;
     this.totalCuarto$ = this.hireServicesService.totalCuarto$;
+    
+  }
+
+  ngOnInit(): void {
     if (this.hasUserRole('repairman') || this.hasUserRole('administrator')) {
       this.establishmentId = this.establishmentService.getEstablishmentId();
       this.getAllBadges();
     }
-  }
-
-  ngOnInit(): void {
+    else{
+      this.changeTable('customer');
+    }
   }
 
   changeTable(table: string) {
@@ -74,6 +81,11 @@ export class PanelComponent implements OnInit {
         break;
       case 'finished':
         this.hireServicesService.getAllServices(this.establishmentId, 'finished').subscribe(hiredServices => {
+          this.hireServicesService.creteListServices(hiredServices.hiredServices);
+        });
+        break;
+      case 'customer':
+        this.hireServicesService.getAllServices(0, 'notApproved').subscribe(hiredServices => {
           this.hireServicesService.creteListServices(hiredServices.hiredServices);
         });
         break;
@@ -116,12 +128,14 @@ export class PanelComponent implements OnInit {
     }
   }
   openDialogCustomer(index: number): void {
+    let behavior: BehaviorSubject<hiredService[]>;
+    behavior = (this.listServices$.source) as BehaviorSubject<hiredService[]>;
     const dialogRef = this.dialog.open(DialogCustomerComponent, {
       width: '830px',
-      height: '950px',
+      height: '750px',
       disableClose: true,
       autoFocus: false,
-      data: this.hiredServices[index]
+      data: behavior.getValue()[index]
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -200,14 +214,17 @@ export class PanelComponent implements OnInit {
     });
   }
   newService() {
-    const dialogRef = this.dialog.open(DialogNewServiceComponent, {
+    const customerId = this.user.getUserId();
+    const dialogRef = this.dialog.open(DialogNewServiceTypeComponent, {
       width: '830px',
-      height: '950px',
+      height: '300px',
       disableClose: true,
-      autoFocus: false
+      autoFocus: false,
+      data: customerId
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.changeTable('customer');
     });
   }
 }

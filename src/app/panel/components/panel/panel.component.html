@@ -27,7 +27,7 @@
         </button>
     </nav>
     <div class="spaceNav"></div>
-    <div *ngIf="hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator'))" class="divTablePanel">
+    <div *ngIf="tableEnable === 'customer' && hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
         <div class="divBannerCustomer">
             <p>Mis servicios en curso</p>
         </div>
@@ -37,17 +37,16 @@
                 <th>N° Ticket</th>
                 <th>Servicio</th>
                 <th>Técnico</th>
-                <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Ver</th>
             </tr>
-            <tr *ngFor="let hiredService of hiredServices; index as i">
-                <td >{{ hiredService.id }}</td>
-                <td>{{ hiredService.service.name }}</td>
-                <td>{{ hiredService.repairman.sub }}</td>
-                <td>{{ hiredService.customer.sub }}</td>
-                <td>{{ hiredService.createdAt }}</td>
-                <td >
+            <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                <td *ngIf="hiredService " >{{ hiredService.id }}</td>
+                <td *ngIf="hiredService ">{{ hiredService.service.name }}</td>
+                <td *ngIf="hiredService && hiredService.repairman !== undefined">{{ hiredService.repairman.sub }}</td>
+                <td *ngIf="hiredService && hiredService.repairman == undefined">No asignado</td>
+                <td *ngIf="hiredService ">{{ hiredService.createdAt }}</td>
+                <td  *ngIf="hiredService">
                     <button mat-icon-button (click)="openDialogCustomer(i)">
                         <mat-icon>remove_red_eye</mat-icon>
                     </button>

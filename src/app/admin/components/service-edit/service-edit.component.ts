@@ -61,7 +61,7 @@ export class ServiceEditComponent implements OnInit {
       description: ['', [Validators.required]],
       isDeliverable: [true, [Validators.required]],
       isEnable: [true, [Validators.required]],
-      price: [0, [Validators.required, MyValidators.isPriceValid]],
+      price: [0, [Validators.required]],
     });
   }
   get priceField(): any{

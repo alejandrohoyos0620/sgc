@@ -66,7 +66,7 @@ export class UsersService {
   getUserId() {
     let user = localStorage.getItem('user');
     let userDecode = JSON.parse(user);
-    if (userDecode.role !== '' && userDecode.role !== undefined && userDecode.role !== null)
+    if (userDecode !== '' && userDecode !== undefined && userDecode !== null)
       return userDecode.id;
   }
   createCustomer(tokenPayload: any): Partial<Customer> {

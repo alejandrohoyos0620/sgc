@@ -44,7 +44,15 @@ export class HireServicesService {
           catchError(this.handleError),
         );
     }
+    else {
+      const customerId = this.user.getUserId();
+      return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/customerServices`, { params: { customerId } })
+        .pipe(
+          catchError(this.handleError),
+        );
+    }
   }
+  
   getAllBadges(hiredservices: hiredService[], index: number) {
     switch (index) {
       case 1:
@@ -99,6 +107,21 @@ export class HireServicesService {
   creteListServices(hiredservices: hiredService[]) {
     this.listServices.next(hiredservices);
   }
+  createHiredService(customerId, serviceId, deviceId, dateSend, hourSend, description): any{
+    const hired = {
+      customerId: customerId,
+      serviceId: serviceId,
+      deviceId: deviceId,
+      description: description,
+      hour: hourSend,
+      date: dateSend
+    }
+    return this.http.post(`${environment.url_api}/hiredServices`, hired)
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     return throwError('ups algo salió mal');
   }
