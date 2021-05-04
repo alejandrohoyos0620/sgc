@@ -1,0 +1,112 @@
+.divContainerDialog{
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgb(255, 254, 254);
+}
+.divContentDialog{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    height: 70%;
+    font-size: 17px;
+}
+.divContentList{
+    height: auto;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+.content{
+    color: rgb(54, 54, 54);
+}
+.divTitleRepairmans{
+    width: auto;
+    height: auto;
+    background-color: #232aab;
+    color: white;
+    text-align: center;
+   
+}
+.spaceBetween{
+    height: 8%;
+}
+.spaceBetweenTitle{
+    height: 2%;
+}
+.divActionsDialog{
+    height: 10%;
+    width: 40%;
+    justify-content: space-between;
+}
+.divTitle{
+    margin-top: 3%;
+    width: 95%;
+    height: 41%;
+    background-color: rgb(49, 132, 36);
+    border-radius: 10px;
+    border: rgb(115, 115, 115) solid;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonDeny{
+    background-color: rgb(247, 17, 17);
+    color: white;
+}
+.buttonApprove{
+    background-color: rgb(63, 169, 47);
+    color: white;
+}
+.buttonSelected{
+    background-color: #232aab;
+    color: white;
+    width: 48%;
+    font-size: 30px !important;
+}
+.rowContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+.mat-icon{
+    width: auto  !important;
+    height: auto !important;
+    font-size: 40px !important;
+}
+.rowSelected{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 25px;
+    width: 95%;
+    height: 40%;
+}
+.cellContent{
+    width: 98%;
+}
+
+.subTitle{
+    font: 600 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.formDiv{
+    width: 100%;
+    height: 100%;
+}
+.divTitleRepairmans{
+    width: auto;
+    height: auto;
+    background-color: #232aab;
+    color: white;
+    text-align: center;
+}
+
+

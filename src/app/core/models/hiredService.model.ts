@@ -10,6 +10,7 @@ export interface hiredService {
     customer: Partial<Customer>;
     repairman: Partial<Employee>;
     status: string;
+    type: string;
     createdAt: string;
     description: string;
 }

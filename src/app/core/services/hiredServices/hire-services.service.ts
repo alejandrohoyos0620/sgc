@@ -107,13 +107,14 @@ export class HireServicesService {
   creteListServices(hiredservices: hiredService[]) {
     this.listServices.next(hiredservices);
   }
-  createHiredService(customerId, serviceId, deviceId, dateSend, hourSend, description): any{
+  createHiredService(customerId, serviceId, deviceId, typeSend, dateSend, hourSend, description): any{
     const hired = {
       customerId: customerId,
       serviceId: serviceId,
       deviceId: deviceId,
       description: description,
       hour: hourSend,
+      type: typeSend,
       date: dateSend
     }
     return this.http.post(`${environment.url_api}/hiredServices`, hired)

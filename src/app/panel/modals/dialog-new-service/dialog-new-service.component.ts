@@ -11,6 +11,7 @@ import { DialogFinishedComponent } from '../../modals/dialog-finished/dialog-fin
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
 import { DialogNewDeviceComponent } from '../dialog-new-device/dialog-new-device.component';
 import { HireServicesService } from '@core/services/hiredServices/hire-services.service';
+import { DialogSuccesHiredServiceComponent } from '../dialog-succes-hired-service/dialog-succes-hired-service.component';
 @Component({
   selector: 'app-dialog-new-service',
   templateUrl: './dialog-new-service.component.html',
@@ -84,8 +85,12 @@ export class DialogNewServiceComponent implements OnInit {
       const month = dateFor.getMonth()+1 < 10 ? ('0' + (dateFor.getMonth()+1)) : dateFor.getMonth()+1;
       const date = month + '-'+ dateFor.getDate() +  '-' + dateFor.getFullYear() ;
       console.log(this.form.value.hour);
-      this.hiredService.createHiredService(this.data[0], service, device, date, hour, description).subscribe( result =>
-        console.log(result)
+      this.hiredService.createHiredService(this.data[0], service, device,this.data[1], date, hour, description).subscribe( result => {
+        console.log(result);
+        if(result.status ==='success'){
+          this.modalSuccess(result);
+        }
+      }
       );
       this.dialogRef.close(this.device);
     }
@@ -104,5 +109,19 @@ export class DialogNewServiceComponent implements OnInit {
         this.fetchDevices();
       }
     });
+  }
+  modalSuccess(result: any){
+    const dialogRef = this.dialog.open(DialogSuccesHiredServiceComponent, {
+      width: '830px',
+      height: '650px',
+      disableClose: true,
+      autoFocus: false,
+      data: result
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+
   }
 }

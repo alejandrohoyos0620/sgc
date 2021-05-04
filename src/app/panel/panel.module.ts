@@ -13,6 +13,7 @@ import { DialogCustomerComponent } from './modals/dialog-customer/dialog-custome
 import { DialogNewServiceComponent } from './modals/dialog-new-service/dialog-new-service.component';
 import { DialogNewServiceTypeComponent } from './modals/dialog-new-service-type/dialog-new-service-type.component';
 import { DialogNewDeviceComponent } from './modals/dialog-new-device/dialog-new-device.component';
+import { DialogSuccesHiredServiceComponent } from './modals/dialog-succes-hired-service/dialog-succes-hired-service.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DialogNewDeviceComponent } from './modals/dialog-new-device/dialog-new-
     DialogCustomerComponent,
     DialogNewServiceComponent,
     DialogNewServiceTypeComponent,
-    DialogNewDeviceComponent
+    DialogNewDeviceComponent,
+    DialogSuccesHiredServiceComponent
   ],
   imports: [
     CommonModule,

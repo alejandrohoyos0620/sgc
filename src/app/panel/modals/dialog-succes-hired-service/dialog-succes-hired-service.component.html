@@ -1,0 +1,16 @@
+<div class="divContainerDialog">
+    
+    <div mat-dialog-title class="divTitle">
+        <h1>Solicitud exitosa, su número de pedido es:</h1>
+        <h2>{{data.createdHiredServiceId}}</h2>
+    </div>
+    <div class="spaceBetween"></div>
+    <div class="rowSelected">
+        <img src="../../../../assets/images/giphy.gif">
+    </div>
+    <div mat-dialog-actions class="rowContent">
+        <button mat-button class="buttonDeny" (click)="onNoClick()">
+            <mat-icon>close</mat-icon> Cerrar
+        </button>
+    </div>
+</div>
