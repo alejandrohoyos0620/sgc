@@ -19,12 +19,12 @@ export class DialogOverviewExampleDialog{
   onNoClick(): void {
     this.dialogRef.close();
   }
-  isUserCustomer(){
-    if(this.authService.hasUserRole('administrator') || this.authService.hasUserRole('repairman'))
+  isUserCustomer(): any{
+    if (this.authService.hasUserRole('administrator') || this.authService.hasUserRole('repairman'))
     {
       return false;
     }
-    else if(this.authService.hasUser){
+    else if (this.authService.hasUser){
       return true;
     }
     else {

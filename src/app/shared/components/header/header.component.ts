@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  hasUser() {
+  hasUser(): any {
     if (this.authService.hasUser()) {
       if (!this.usersService.hasUser()) {
         this.usersService.getUser();
@@ -42,19 +42,20 @@ export class HeaderComponent implements OnInit {
       return false;
     }
   }
-  isUserCustomer(){
-    if(this.authService.hasUserRole('administrator') || this.authService.hasUserRole('repairman'))
+
+  isUserCustomer(): any{
+    if (this.authService.hasUserRole('administrator') || this.authService.hasUserRole('repairman'))
     {
       return false;
     }
-    else if(this.authService.hasUser){
+    else if (this.authService.hasUser){
       return true;
     }
     else {
       return false;
     }
   }
-  hasUserRole(role: string) {
+  hasUserRole(role: string): any {
     if (this.authService.hasUserRole(role)) {
       return true;
     }
@@ -63,11 +64,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  logout() {
+  logout(): any {
     this.authService.logout();
   }
 
-  changeEditable() {
+  changeEditable(): any {
     if (this.isEditable) {
       this.isEditable = false;
     }
@@ -89,9 +90,9 @@ export class HeaderComponent implements OnInit {
         this.authService.updateUser(result.source)
           .subscribe((data) => {
             this.usersService.updateUser(data);
-            this.toastr.success("Tu actualziación ha sido exitosa");
+            this.toastr.success('Tu actualziación ha sido exitosa');
           });
       }
-    })
+    });
   }
 }

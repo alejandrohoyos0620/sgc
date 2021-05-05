@@ -18,14 +18,14 @@ export class UsersService {
     private http: HttpClient
   ) { }
 
-  updateUser(user: Partial<Employee> | Partial<Customer> | any) {
+  updateUser(user: Partial<Employee> | Partial<Customer> | any): any {
     this.user.next(user);
     this.saveUpdatedUser(user);
   }
 
 
-  saveUser(tokenPayload: any) {
-    if (tokenPayload.role == undefined || tokenPayload.role == null) {
+  saveUser(tokenPayload: any): any {
+    if (tokenPayload.role === undefined || tokenPayload.role === null) {
       const customer: Partial<Customer> = this.createCustomer(tokenPayload);
       localStorage.setItem('user', JSON.stringify(customer));
     }
@@ -35,39 +35,40 @@ export class UsersService {
     }
   }
 
-  saveUpdatedUser(user: Partial<Employee> | Partial<Customer>) {
+  saveUpdatedUser(user: Partial<Employee> | Partial<Customer>): any {
     localStorage.setItem('user', JSON.stringify(user));
   }
   getUser(): void {
-    let user = localStorage.getItem('user');
-    let userDecode = JSON.parse(user);
+    const user = localStorage.getItem('user');
+    const userDecode = JSON.parse(user);
     if (userDecode.role !== '' && userDecode.role !== undefined && userDecode.role !== null) {
-      let customer: Partial<Customer> = userDecode;
+      const customer: Partial<Customer> = userDecode;
       this.user.next(customer);
     }
     else {
-      let employee: Partial<Employee> = userDecode;
+      const employee: Partial<Employee> = userDecode;
       this.user.next(employee);
     }
   }
 
-  getAllRepairmans(establishment_id: number) {
-    const establishmentId = establishment_id.toString();
+  getAllRepairmans(establishmentIdSend: number): any {
+    const establishmentId = establishmentIdSend.toString();
     return this.http.get(`${environment.url_api}/establishments/repairmans`, { params: { establishmentId } })
       .pipe(
         map((result: { repairmans: [] }) => result.repairmans),
         catchError(this.handleError),
       );
   }
-  hasUser() {
+  hasUser(): any{
     return this.user.getValue().address === undefined ? false : true;
   }
 
-  getUserId() {
-    let user = localStorage.getItem('user');
-    let userDecode = JSON.parse(user);
-    if (userDecode !== '' && userDecode !== undefined && userDecode !== null)
+  getUserId(): any {
+    const user = localStorage.getItem('user');
+    const userDecode = JSON.parse(user);
+    if (userDecode !== '' && userDecode !== undefined && userDecode !== null){
       return userDecode.id;
+    }
   }
   createCustomer(tokenPayload: any): Partial<Customer> {
     return {
@@ -77,7 +78,7 @@ export class UsersService {
       city: tokenPayload.city,
       email: tokenPayload.email,
       phone: tokenPayload.phone
-    }
+    };
   }
 
   createEmployee(tokenPayload: any): Partial<Employee> {
@@ -89,9 +90,9 @@ export class UsersService {
       phone: tokenPayload.phone,
       role: tokenPayload.role,
       establishment: tokenPayload.Establishment
-    }
+    };
   }
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): any{
     console.log(error);
     return throwError('ups algo salió mal');
   }

@@ -9,8 +9,7 @@ import {map, catchError, retry} from 'rxjs/operators';
 })
 export class ProductService {
 
- 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllProducts(): any{
     return this.http.get<Product[]>(`${environment.url_api}/products`)
@@ -46,8 +45,8 @@ export class ProductService {
       catchError(this.handleError),
     );
   }
-  
-  private handleError(error: HttpErrorResponse ) {
+
+  private handleError(error: HttpErrorResponse) {
     console.log(error);
     return  throwError('ups algo salió mal');
   }

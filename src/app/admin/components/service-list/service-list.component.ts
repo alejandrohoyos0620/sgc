@@ -18,12 +18,10 @@ export class ServiceListComponent implements OnInit {
     private serviceService: ServiceService,
     public dialog: MatDialog,
     private establishmentService: EstablishmentService,
-  ) {
-  
-   }
+  ) { }
 
   ngOnInit(): void {
-    this.establishmentId= this.establishmentService.getEstablishmentId();
+    this.establishmentId = this.establishmentService.getEstablishmentId();
     this.fetchServices();
   }
   fetchServices(): void {
@@ -32,7 +30,6 @@ export class ServiceListComponent implements OnInit {
     );
   }
 
-  
   deleteService(id: number): void {
     this.serviceService.deleteService(id).subscribe(rta => {
       if (rta) {
@@ -52,7 +49,7 @@ export class ServiceListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(status => {
-      if(status){
+      if (status) {
         this.deleteService(id);
       }
     });

@@ -10,29 +10,25 @@ import { DialogDeleteCategoryComponent } from '../dialog-delete-category/dialog-
   styleUrls: ['./category-list.component.scss']
 })
 export class CategoryListComponent implements OnInit {
-  
   establishmentId: number;
   categories: Category[];
   constructor(
     private categoryService: CategoryService,
     public dialog: MatDialog,
     private establishmentService: EstablishmentService,
-  ) {
-  
-   }
+  ) { }
 
   ngOnInit(): void {
-    this.establishmentId= this.establishmentService.getEstablishmentId();
+    this.establishmentId = this.establishmentService.getEstablishmentId();
     this.fetchCategories();
   }
   fetchCategories(): void {
-    this.categoryService.getAllCategories(this.establishmentId).subscribe(categories =>{
-      this.categories = categories
+    this.categoryService.getAllCategories(this.establishmentId).subscribe(categories => {
+      this.categories = categories;
     }
     );
   }
 
-  
   deleteCategory(id: number): void {
     this.categoryService.deleteCategory(id).subscribe(rta => {
       if (rta) {
@@ -52,7 +48,7 @@ export class CategoryListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(status => {
-      if(status){
+      if (status) {
         this.deleteCategory(id);
       }
     });

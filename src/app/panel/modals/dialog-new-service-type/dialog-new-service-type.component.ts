@@ -10,30 +10,30 @@ import { DialogNewServiceComponent } from '../dialog-new-service/dialog-new-serv
 export class DialogNewServiceTypeComponent {
   deliver = 0;
   pickup = 0;
-  datos =[];
+  datos = [];
   constructor(
     public dialogRef: MatDialogRef<DialogNewServiceTypeComponent>,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: string
-  ) { 
+  ){
     this.datos[0] = data;
     console.log(data);
   }
-  
-  changeSelected(value: string){
-    if(value ==='delivery'){
-      this.deliver =1;
-      this.pickup=0;
+
+  changeSelected(value: string): any{
+    if (value === 'delivery'){
+      this.deliver = 1;
+      this.pickup = 0;
       this.datos[1] = 'delivery';
       this.newService();
-    }else if(value ==='pickup'){
-      this.deliver =0;
-      this.pickup=1;
+    }else if (value === 'pickup'){
+      this.deliver = 0;
+      this.pickup = 1;
       this.datos[1] = 'pickup';
       this.newService();
     }
   }
-  newService() {
+  newService(): any{
     const dialogRef = this.dialog.open(DialogNewServiceComponent, {
       width: '830px',
       height: '900px',

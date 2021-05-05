@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {PanelComponent} from './components/panel/panel.component';
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: PanelComponent
   }
 ];

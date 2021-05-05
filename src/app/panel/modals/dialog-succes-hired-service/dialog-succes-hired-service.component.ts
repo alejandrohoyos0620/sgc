@@ -10,15 +10,15 @@ import { DialogNewServiceComponent } from '../dialog-new-service/dialog-new-serv
 export class DialogSuccesHiredServiceComponent {
   deliver = 0;
   pickup = 0;
-  datos =[];
+  datos = [];
   constructor(
     public dialogRef: MatDialogRef<DialogSuccesHiredServiceComponent>,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { 
+  ) {
     console.log(data);
   }
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -21,7 +21,22 @@ import { DialogDeleteCategoryComponent } from './components/dialog-delete-catego
 import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
 
 @NgModule({
-  declarations: [NavComponent, ServiceListComponent, ProductEditComponent, ServiceEditComponent, ServiceFormComponent, ProductFormComponent, DialogServiceComponent, DialogProductComponent, CategoryListComponent, CategoryEditComponent, CategoryFormComponent, DialogDeleteServiceComponent, DialogDeleteCategoryComponent, DialogCategoryComponent],
+  declarations: [
+    NavComponent,
+    ServiceListComponent,
+    ProductEditComponent,
+    ServiceEditComponent,
+    ServiceFormComponent,
+    ProductFormComponent,
+    DialogServiceComponent,
+    DialogProductComponent,
+    CategoryListComponent,
+    CategoryEditComponent,
+    CategoryFormComponent,
+    DialogDeleteServiceComponent,
+    DialogDeleteCategoryComponent,
+    DialogCategoryComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,

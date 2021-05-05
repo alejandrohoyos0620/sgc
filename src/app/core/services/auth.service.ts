@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { catchError, tap } from 'rxjs/operators';
-//import { JwtHelperService } from '@auth0/angular-jwt';
+// import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import decode from 'jwt-decode';
@@ -25,14 +25,14 @@ export class AuthService {
 
   createUser(customer: Partial<Customer>): any {
     return this.http.post(`${environment.url_api}/users/register`, customer);
-    //return this.af.createUserWithEmailAndPassword(email, password);
+    // return this.af.createUserWithEmailAndPassword(email, password);
   }
-  
+
   updateUser(user$: BehaviorSubject<Partial<Employee> | Partial<Customer>>): any{
     return this.http.put(`${environment.url_api}/users/update`, user$.getValue()).
     pipe(
     map((data: {updatedUser: {}}) => data.updatedUser)
-    )
+    );
   }
 
   login(email: string, password: string): any {

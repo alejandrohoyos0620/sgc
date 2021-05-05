@@ -10,7 +10,7 @@ import { Category } from '@core/models/category.model';
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.scss']
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent{
   form: FormGroup;
   establishmentId: number;
   constructor(
@@ -26,9 +26,6 @@ export class CategoryFormComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
-
   saveCategory(event: Event): void {
     event.preventDefault();
     if (this.form.valid) {
@@ -39,17 +36,16 @@ export class CategoryFormComponent implements OnInit {
         this.router.navigate(['./admin/categories']);
       });
     }
-    
   }
 
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      name:['', [Validators.required]]
+      name: ['', [Validators.required]]
     });
   }
 
-  hasUser() {
+  hasUser(): any{
     if (this.authService.hasUser()) {
       return true;
     }
@@ -57,7 +53,7 @@ export class CategoryFormComponent implements OnInit {
       return false;
     }
   }
-  hasUserRole(role: string) {
+  hasUserRole(role: string): any{
     if (this.authService.hasUserRole(role)) {
       return true;
     }

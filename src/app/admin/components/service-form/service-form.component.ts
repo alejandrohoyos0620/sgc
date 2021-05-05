@@ -10,7 +10,7 @@ import { EstablishmentService } from '@core/services/establishments/establishmen
   templateUrl: './service-form.component.html',
   styleUrls: ['./service-form.component.scss']
 })
-export class ServiceFormComponent implements OnInit {
+export class ServiceFormComponent {
   form: FormGroup;
   establishmentId: number;
   constructor(
@@ -26,9 +26,6 @@ export class ServiceFormComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
-
   saveService(event: Event): void {
     event.preventDefault();
     if (this.form.valid) {
@@ -36,20 +33,20 @@ export class ServiceFormComponent implements OnInit {
         name: this.form.value.name,
         description: this.form.value.description,
         price: this.form.value.price,
-        isDeliverable: this.form.value.isDeliverable ? 1:0,
-        isEnable: this.form.value.isEnable ? 1:0,
+        isDeliverable: this.form.value.isDeliverable ? 1 : 0,
+        isEnable: this.form.value.isEnable ? 1 : 0,
       };
       this.serviceService.createService(service, this.establishmentId).subscribe((newservice) => {
         this.router.navigate(['./admin/services']);
       });
     }
-    
+
   }
 
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      name:['', [Validators.required]],
+      name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       isDeliverable: [false, [Validators.required]],
       isEnable: [false, [Validators.required]],
@@ -60,7 +57,7 @@ export class ServiceFormComponent implements OnInit {
   get priceField(): any {
     return this.form.get('price');
   }
-  hasUser() {
+  hasUser(): any{
     if (this.authService.hasUser()) {
       return true;
     }
@@ -68,7 +65,7 @@ export class ServiceFormComponent implements OnInit {
       return false;
     }
   }
-  hasUserRole(role: string) {
+  hasUserRole(role: string): any{
     if (this.authService.hasUserRole(role)) {
       return true;
     }
@@ -76,5 +73,4 @@ export class ServiceFormComponent implements OnInit {
       return false;
     }
   }
-
 }

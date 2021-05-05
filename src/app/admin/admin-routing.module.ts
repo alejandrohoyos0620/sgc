@@ -7,14 +7,13 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { NavComponent } from './components/nav/nav.component';
 import { ServiceEditComponent } from './components/service-edit/service-edit.component';
 import { ServiceFormComponent } from './components/service-form/service-form.component';
-import { ServiceListComponent } from './components/service-list/service-list.component'
+import { ServiceListComponent } from './components/service-list/service-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: NavComponent,
     children: [
-
       {
         path: 'services',
         component: ServiceListComponent
@@ -25,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'products',
-        //component: ProductListComponent
+// component: ProductListComponent
       },
       {
         path: 'services/create',

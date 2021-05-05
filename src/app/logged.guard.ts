@@ -7,20 +7,17 @@ import decode from 'jwt-decode';
   providedIn: 'root'
 })
 export class LoggedGuard implements CanActivate {
-    constructor(
-      private authService: AuthService,
-      private router: Router
-    ) {
-  
-    }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!this.authService.hasUserRole(route.data.expectedRole)){
-        this.router.navigate(['/auth/login']);
-        return false;
-      }
+    if (!this.authService.hasUserRole(route.data.expectedRole)) {
+      this.router.navigate(['/auth/login']);
+      return false;
+    }
     return true;
   }
-  
 }

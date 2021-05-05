@@ -30,14 +30,14 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    // datos: { missingRole 
-    //   : 'admin' 
-    // } 
+    // datos: { missingRole
+    //   : 'admin'
+    // }
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'admin',
-    //canLoad: [AdminGuard],
+    // canLoad: [AdminGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
 ];

@@ -28,32 +28,50 @@ export class HireServicesService {
     private user: UsersService
   ) { }
 
-  getAllServices(establishment_id: number, status: string): any {
-    const establishmentId = establishment_id.toString();
+  getAllServices(establishmentIdSend: number, status: string): any {
+    const establishmentId = establishmentIdSend.toString();
 
     if (this.auth.hasUserRole('administrator')) {
-      return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/establishmentServices`, { params: { establishmentId, status } })
-        .pipe(
+      return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/establishmentServices`,
+      {
+        params:
+        {
+          establishmentId,
+          status
+        }
+      }).pipe(
           catchError(this.handleError),
         );
     }
     else if (this.auth.hasUserRole('repairman')) {
       const repairmanId = this.user.getUserId();
-      return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/repairmanServices`, { params: { repairmanId, status } })
-        .pipe(
+      return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/repairmanServices`,
+      {
+        params:
+        {
+          repairmanId,
+          status
+        }
+      }).pipe(
           catchError(this.handleError),
         );
     }
     else {
       const customerId = this.user.getUserId();
-      return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/customerServices`, { params: { customerId } })
+      return this.http.get<hiredService[]>(`${environment.url_api}/hiredServices/customerServices`,
+      {
+        params:
+        {
+          customerId
+        }
+      })
         .pipe(
           catchError(this.handleError),
         );
     }
   }
-  
-  getAllBadges(hiredservices: hiredService[], index: number) {
+
+  getAllBadges(hiredservices: hiredService[], index: number): any{
     switch (index) {
       case 1:
         this.totalPrimero.next(hiredservices.length);
@@ -72,11 +90,11 @@ export class HireServicesService {
     }
 
   }
-  approveService(hiredservicesId: number, repairmanId: number) {
+  approveService(hiredservicesId: number, repairmanIdSend: number): any{
     const data = {
       id: hiredservicesId,
-      repairmanId: repairmanId
-    }
+      repairmanId: repairmanIdSend
+    };
     return this.http.put(`${environment.url_api}/hiredServices/approve`, data)
       .pipe(
         tap((data: { approvedHiredService: {} }) => {
@@ -88,11 +106,11 @@ export class HireServicesService {
         catchError(this.handleError),
       );
   }
-  changeStatus(hiredservicesId: number, status: string) {
+  changeStatus(hiredservicesId: number, statusSend: string): any{
     const data = {
       id: hiredservicesId,
-      status: status
-    }
+      status: statusSend
+    };
     return this.http.put(`${environment.url_api}/hiredServices/change`, data)
       .pipe(
         tap((data: { approvedHiredService: {} }) => {
@@ -104,19 +122,19 @@ export class HireServicesService {
         catchError(this.handleError),
       );
   }
-  creteListServices(hiredservices: hiredService[]) {
+  creteListServices(hiredservices: hiredService[]): void{
     this.listServices.next(hiredservices);
   }
-  createHiredService(customerId, serviceId, deviceId, typeSend, dateSend, hourSend, description): any{
+  createHiredService(customerIdSend, serviceIdSend, deviceIdSend, typeSend, dateSend, hourSend, descriptionSend): any{
     const hired = {
-      customerId: customerId,
-      serviceId: serviceId,
-      deviceId: deviceId,
-      description: description,
+      customerId: customerIdSend,
+      serviceId: serviceIdSend,
+      deviceId: deviceIdSend,
+      description: descriptionSend,
       hour: hourSend,
       type: typeSend,
       date: dateSend
-    }
+    };
     return this.http.post(`${environment.url_api}/hiredServices`, hired)
     .pipe(
       catchError(this.handleError),

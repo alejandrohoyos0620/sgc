@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { Category } from '@core/models/category.model';
-import { Service } from '@core/models/service.model';
 import { AuthService } from '@core/services/auth.service';
 import { CategoryService } from '@core/services/categories/category.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
-import {ServiceService} from '@core/services/Services/service.service';
-import {MyValidators} from '@utils/validators';
 @Component({
   selector: 'app-category-edit',
   templateUrl: './category-edit.component.html',
@@ -54,10 +51,10 @@ export class CategoryEditComponent implements OnInit {
   }
   private buildForm(): void{
     this.form = this.formBuilder.group({
-      name:['', [Validators.required]]
+      name: ['', [Validators.required]]
     });
   }
-  hasUser() {
+  hasUser(): any{
     if (this.authService.hasUser()) {
       return true;
     }
@@ -65,7 +62,7 @@ export class CategoryEditComponent implements OnInit {
       return false;
     }
   }
-  hasUserRole(role: string) {
+  hasUserRole(role: string): any{
     if (this.authService.hasUserRole(role)) {
       return true;
     }

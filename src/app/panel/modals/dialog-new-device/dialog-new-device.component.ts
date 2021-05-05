@@ -10,7 +10,7 @@ import { DevicesService } from '@core/services/devices/devices.service';
   styleUrls: ['./dialog-new-device.component.scss']
 })
 export class DialogNewDeviceComponent implements OnInit {
-  isShowRepairmans: boolean = false;
+  isShowRepairmans = false;
   type;
   form: FormGroup;
   establishmentId: number;
@@ -26,7 +26,7 @@ export class DialogNewDeviceComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: number
   ) {
   }
-  ngOnInit(){
+  ngOnInit(): void{
     this.buildForm();
   }
   onNoClick(): void {
@@ -46,9 +46,9 @@ export class DialogNewDeviceComponent implements OnInit {
     if (this.form.valid) {
       this.device = this.form.value;
       this.device.ownerId = this.data;
-       this.devideService.createDevice(this.device).subscribe((newService) => {
+      this.devideService.createDevice(this.device).subscribe((newService) => {
          this.dialogRef.close(newService);
-       });
+      });
     }
   }
 }

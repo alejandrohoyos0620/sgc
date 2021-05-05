@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-
 import {AuthService} from '@core/services/auth.service';
 
 @Component({
@@ -26,10 +25,7 @@ export class NavComponent {
     ) {}
 
   logout(): void{
-    // this.auth.logout().then(() => {
-    //   this.route.navigate(['./home']);
-    // });
-    if(this.auth.logout()){
+    if (this.auth.logout()){
       this.route.navigate(['./home']);
     }
   }

@@ -7,18 +7,18 @@ import { Establishment } from '@core/models/establishment.model';
 export class EstablishmentService {
 
   constructor() { }
-  saveEstablishment(tokenPayload: any){
+  saveEstablishment(tokenPayload: any): any{
     const establishment = tokenPayload.establishment;
     localStorage.setItem('establishment', JSON.stringify(establishment));
   }
   getEstablishment(): Establishment {
-    let establishment = localStorage.getItem('establishment');
-    let establishmentDecode:Establishment = JSON.parse(establishment);
+    const establishment = localStorage.getItem('establishment');
+    const establishmentDecode: Establishment = JSON.parse(establishment);
     return establishmentDecode;
   }
   getEstablishmentId(): number {
-    let establishment = localStorage.getItem('establishment');
-    let establishmentDecode:Establishment = JSON.parse(establishment);
+    const establishment = localStorage.getItem('establishment');
+    const establishmentDecode: Establishment = JSON.parse(establishment);
     return Number(establishmentDecode.id);
   }
 }

@@ -49,7 +49,6 @@ export class PanelComponent implements OnInit {
     this.totalSegundo$ = this.hireServicesService.totalSegundo$;
     this.totalTercero$ = this.hireServicesService.totalTercero$;
     this.totalCuarto$ = this.hireServicesService.totalCuarto$;
-    
   }
 
   ngOnInit(): void {
@@ -62,7 +61,7 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  changeTable(table: string) {
+  changeTable(table: string): void{
     switch (table) {
       case 'service':
         this.hireServicesService.getAllServices(this.establishmentId, 'notApproved').subscribe(hiredServices => {
@@ -94,7 +93,7 @@ export class PanelComponent implements OnInit {
     }
     this.tableEnable = table;
   }
-  getAllBadges() {
+  getAllBadges(): void{
     if (this.hasUserRole('administrator')) {
       this.hireServicesService.getAllServices(this.establishmentId, 'notApproved').subscribe(hiredServices => {
         this.hireServicesService.getAllBadges(hiredServices.hiredServices, 1);
@@ -111,7 +110,7 @@ export class PanelComponent implements OnInit {
     });
   }
 
-  hasUser() {
+  hasUser(): any{
     if (this.authService.hasUser()) {
       return true;
     }
@@ -119,7 +118,7 @@ export class PanelComponent implements OnInit {
       return false;
     }
   }
-  hasUserRole(role: string) {
+  hasUserRole(role: string): any{
     if (this.authService.hasUserRole(role)) {
       return true;
     }
@@ -213,7 +212,7 @@ export class PanelComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-  newService() {
+  newService(): void{
     const customerId = this.user.getUserId();
     const dialogRef = this.dialog.open(DialogNewServiceTypeComponent, {
       width: '830px',
