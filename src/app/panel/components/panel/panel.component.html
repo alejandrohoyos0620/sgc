@@ -44,8 +44,8 @@
             </tr>
             <tr *ngFor="let hiredService of listServicesAsync; index as i">
                 <td *ngIf="hiredService " >{{ hiredService.id }}</td>
-                <td *ngIf="hiredService " >{{ hiredService.type}}</td>
-                <td *ngIf="hiredService " >{{ hiredService.status}}</td>
+                <td *ngIf="hiredService " >{{ hiredService.type | toSpanish}}</td>
+                <td *ngIf="hiredService " >{{ hiredService.status | toSpanish}}</td>
                 <td *ngIf="hiredService ">{{ hiredService.service.name }}</td>
                 <td *ngIf="hiredService && hiredService.repairman !== undefined">{{ hiredService.repairman.sub }}</td>
                 <td *ngIf="hiredService && hiredService.repairman == undefined">No asignado</td>
@@ -95,7 +95,7 @@
             </tr>
             <tr *ngFor="let hiredService of listServicesAsync; index as i">
                 <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.id }}</td>
-                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.type }}</td>
+                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.type | toSpanish }}</td>
                 <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.service.name }}</td>
                 <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.repairman.sub }}</td>
                 <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.customer.sub }}</td>

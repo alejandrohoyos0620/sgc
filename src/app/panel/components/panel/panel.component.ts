@@ -14,6 +14,7 @@ import { AuthService } from '@core/services/auth.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
 import { UsersService } from '@core/services/users/users.service';
 import { DialogNewServiceTypeComponent } from '../../modals/dialog-new-service-type/dialog-new-service-type.component';
+
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',

@@ -14,6 +14,7 @@ import { DialogNewServiceComponent } from './modals/dialog-new-service/dialog-ne
 import { DialogNewServiceTypeComponent } from './modals/dialog-new-service-type/dialog-new-service-type.component';
 import { DialogNewDeviceComponent } from './modals/dialog-new-device/dialog-new-device.component';
 import { DialogSuccesHiredServiceComponent } from './modals/dialog-succes-hired-service/dialog-succes-hired-service.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DialogSuccesHiredServiceComponent } from './modals/dialog-succes-hired-
     PanelRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class PanelModule { }

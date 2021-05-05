@@ -10,14 +10,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { DialogOverviewExampleDialog } from './components/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
-
+import { ToSpanishPipe } from './pipes/to-spanish.pipe';
 
 
 
 @NgModule({
   declarations: [ HeaderComponent,
     FooterComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    ToSpanishPipe
+    
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { DialogOverviewExampleDialog } from './components/dialog-overview-exampl
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ToSpanishPipe
   ]
 })
 export class SharedModule { }
