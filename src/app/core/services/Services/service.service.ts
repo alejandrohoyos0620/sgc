@@ -42,7 +42,6 @@ export class ServiceService {
   }
 
   createService(service: Partial<Service>, establishmentIdSend: number): any {
-    const establishmentId = establishmentIdSend.toString();
     const services: any = service;
     services.establishmentId = establishmentIdSend;
     return this.http.post(`${environment.url_api}/services`, service)
@@ -52,7 +51,6 @@ export class ServiceService {
   }
 
   updateService(id: string, service: Partial<Service>, establishmentIdSend: number): any {
-    const establishmentId = establishmentIdSend.toString();
     const services: any = service;
     services.establishmentId = establishmentIdSend;
     services.id = id;
