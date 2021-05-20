@@ -79,7 +79,8 @@ export class DialogNewServiceComponent implements OnInit {
     if (this.form.valid) {
       const service = this.form.value.service;
       const device = this.form.value.device;
-      const hour = this.form.value.hour;
+      let hour = this.form.value.hour;
+      hour = hour+':00';
       const description: string = this.form.value.description;
       const dateFor: Date = new Date(this.form.value.date);
       const month = dateFor.getMonth() + 1 < 10 ? ('0' + (dateFor.getMonth() + 1)) : dateFor.getMonth() + 1;

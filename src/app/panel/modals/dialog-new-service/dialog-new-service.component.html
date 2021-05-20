@@ -43,7 +43,7 @@
             </div>
             <div class="divContentList">
                 <div class="divTitleRepairmans">Selecciona una hora el servicio</div>
-            <input matInput type="time" formControlName="hour" step="2"  required>
+            <input matInput type="time" formControlName="hour"  required>
             <mat-error *ngIf="errorHour && !form.get('hour').dirty">
                 {{errors.required}}</mat-error>
             </div>

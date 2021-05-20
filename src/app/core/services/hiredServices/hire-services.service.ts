@@ -150,6 +150,7 @@ export class HireServicesService {
       type: typeSend,
       date: dateSend
     };
+    console.log(hired);
     return this.http.post(`${environment.url_api}/hiredServices`, hired)
       .pipe(
         catchError(this.handleError),
