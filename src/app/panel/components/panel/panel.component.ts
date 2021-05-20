@@ -154,8 +154,14 @@ export class PanelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(repairmanId => {
+      console.log(repairmanId);
       if (repairmanId) {
         this.hireServicesService.approveService(behavior.getValue()[index].id, repairmanId).subscribe(result => {
+          this.getAllBadges();
+        });
+      }
+      else{
+        this.hireServicesService.changeStatusReject(behavior.getValue()[index].id, 'rejected').subscribe(result => {
           this.getAllBadges();
         });
       }

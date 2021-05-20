@@ -21,11 +21,11 @@ export class DialogServiceComponent {
     private userService: UsersService
   ) { }
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
   showRepairmans(): any {
     this.isShowRepairmans = true;
-    this.userService.getAllRepairmans(1).subscribe(repairmans => {
+    this.userService.getAllRepairmans(1, this.data.hour, this.data.date).subscribe(repairmans => {
       this.repairmans = repairmans;
     }
     );

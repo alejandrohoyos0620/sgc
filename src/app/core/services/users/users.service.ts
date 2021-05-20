@@ -51,9 +51,9 @@ export class UsersService {
     }
   }
 
-  getAllRepairmans(establishmentIdSend: number): any {
+  getAllRepairmans(establishmentIdSend: number, hour: string, date: string): any {
     const establishmentId = establishmentIdSend.toString();
-    return this.http.get(`${environment.url_api}/establishments/repairmans`, { params: { establishmentId } })
+    return this.http.get(`${environment.url_api}/establishments/repairmans`, { params: { establishmentId, hour, date } })
       .pipe(
         map((result: { repairmans: [] }) => result.repairmans),
         catchError(this.handleError),

@@ -12,5 +12,7 @@ export interface hiredService {
     status: string;
     type: string;
     createdAt: string;
+    hour: string;
+    date: string;
     description: string;
 }

@@ -143,3 +143,14 @@ input,
 label {
     margin: .4rem 0;
 }
+input:invalid+span:after {
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+  }
+  
+  input:valid+span:after {
+    position: absolute;
+    content: '✓';
+    padding-left: 5px;
+  }

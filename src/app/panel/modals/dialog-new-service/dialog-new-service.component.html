@@ -43,7 +43,9 @@
             </div>
             <div class="divContentList">
                 <div class="divTitleRepairmans">Selecciona una hora el servicio</div>
-            <input type="time" formControlName="hour" min="08:00" max="18:00" step="2">
+            <input matInput type="time" formControlName="hour" step="2"  required>
+            <mat-error *ngIf="errorHour && !form.get('hour').dirty">
+                {{errors.required}}</mat-error>
             </div>
 
             
@@ -55,7 +57,7 @@
                 </mat-form-field>
             </div>
             <div mat-dialog-actions class="rowContent">
-                <button mat-button class="buttonDeny" (click)="onNoClick()">
+                <button mat-button class="buttonDeny" (click)="onNoClick()" type="button">
                     <mat-icon>close</mat-icon> Cancelar
                 </button>
                 <button mat-button class="buttonApprove" cdkFocusInitial type="submit">

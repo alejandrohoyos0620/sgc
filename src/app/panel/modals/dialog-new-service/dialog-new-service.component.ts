@@ -9,6 +9,7 @@ import { EstablishmentService } from '@core/services/establishments/establishmen
 import { DialogNewDeviceComponent } from '../dialog-new-device/dialog-new-device.component';
 import { HireServicesService } from '@core/services/hiredServices/hire-services.service';
 import { DialogSuccesHiredServiceComponent } from '../dialog-succes-hired-service/dialog-succes-hired-service.component';
+import { errorMessages, validateIfMatch } from '@utils/validators';
 @Component({
   selector: 'app-dialog-new-service',
   templateUrl: './dialog-new-service.component.html',
@@ -25,6 +26,8 @@ export class DialogNewServiceComponent implements OnInit {
   pickup = 0;
   selected = false;
   minDate: Date;
+  errorHour = false;
+  errors = errorMessages;
   device: Partial<Device> = {
     brand: '',
     code: '',
@@ -46,7 +49,8 @@ export class DialogNewServiceComponent implements OnInit {
     this.buildForm();
     this.fetchDevices();
     this.fetchServices();
-    this.minDate = new Date();
+    const today =  new Date();
+    this.minDate = new Date(today.setDate(today.getDate() + 1));;
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -67,7 +71,7 @@ export class DialogNewServiceComponent implements OnInit {
       description: ['', [Validators.required]],
       service: [0, [Validators.required]],
       date: ['', [Validators.required]],
-      hour: ['', [Validators.required]]
+      hour: ['', [Validators.required, Validators.min(8), Validators.max(17)]]
     });
   }
   saveService(event: Event): void {
@@ -79,8 +83,8 @@ export class DialogNewServiceComponent implements OnInit {
       const description: string = this.form.value.description;
       const dateFor: Date = new Date(this.form.value.date);
       const month = dateFor.getMonth() + 1 < 10 ? ('0' + (dateFor.getMonth() + 1)) : dateFor.getMonth() + 1;
-      const date = month + '-' + dateFor.getDate() + '-' + dateFor.getFullYear();
-      console.log(this.form.value.hour);
+      const date = dateFor.getFullYear() + '-' + month + '-' + dateFor.getDate();
+      console.log(typeof(this.form.value.hour));
       this.hiredService.createHiredService(this.data[0], service, device, this.data[1], date, hour, description).subscribe( result => {
         console.log(result);
         if (result.status === 'success'){
@@ -89,6 +93,9 @@ export class DialogNewServiceComponent implements OnInit {
       }
       );
       this.dialogRef.close(this.device);
+    }
+    if (this.form.get('hour').hasError('required')){
+      this.errorHour = true;
     }
   }
   createDevice(): any{
