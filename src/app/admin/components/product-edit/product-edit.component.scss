@@ -32,6 +32,12 @@ form {
     flex-direction: row;
     justify-content: space-evenly;
 }
+.divContentList{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 .divTitleRepairmans{
     width: auto;
     height: auto;

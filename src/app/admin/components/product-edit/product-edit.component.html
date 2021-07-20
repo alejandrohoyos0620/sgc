@@ -59,9 +59,12 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex flex-column justify-content-center">
                 <div class="divTitleRepairmans">Imagen</div>
-                <input class="form-control form-control-sm" id="formFileSm" type="file">
+                <img *ngIf="!loader && imageSrc && !(image$ | async) as image" [src] ="imageSrc" alt="" class="img-fluid">
+                <img *ngIf="loader" src="{{pathLoader}}" class="img-fluid" alt="">
+                <img *ngIf="!loader && (image$ | async) as image" [src] ="image" alt="" class="img-fluid">
+                        <input  placeholder="Image" type="file"  (change)="uploadFile($event)">
             </div>
             <div class="row">
                 <div class="col-xs">
@@ -79,8 +82,8 @@
             </div>
         </mat-card-content>
         <mat-card-actions class="actionForm">
-            <button  mat-raised-button class="buttonCancel" type="button"  routerLink='/admin/services'>Cancelar</button>
-            <button  mat-raised-button class="buttonUpdate" type="submit">Crear</button>
+            <button  mat-raised-button class="buttonCancel" type="button"  routerLink='/admin/products'>Cancelar</button>
+            <button  mat-raised-button class="buttonUpdate" type="submit">Editar</button>
         </mat-card-actions>
     </mat-card>
 </form>

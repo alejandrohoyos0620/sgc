@@ -44,7 +44,6 @@ export class ProductFormComponent {
   }
   saveProduct(event: Event): void {
     event.preventDefault();
-    console.log(this.form.value.image);
     if (this.form.valid) {
       const product: Partial<Product> = {
         name: this.form.value.name,
@@ -109,6 +108,7 @@ export class ProductFormComponent {
       .pipe(
         finalize(() => {
           this.image$ = fileRef.getDownloadURL();
+          console.log(this.image$);
           this.image$.subscribe(url => {
             this.form.get('image').setValue(url);
           });

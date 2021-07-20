@@ -13,7 +13,6 @@ export class ProductService {
 
   getAllProducts(establishmentIdSend: number): any{
     const establishmentId = establishmentIdSend.toString();
-    console.log(establishmentId);
     return this.http.get<Product[]>(`${environment.url_api}/products/filterByEstablishment`, { params: { establishmentId } })
     .pipe(
       catchError(this.handleError),
@@ -46,7 +45,7 @@ export class ProductService {
 
   updateProduct(id: string, changes: Partial<Product>, establishmentIdSend: number): any{
     const product: any = changes;
-    product.establishment = establishmentIdSend;
+    product.establishmentId = establishmentIdSend;
     product.id = id;
     return this.http.put(`${environment.url_api}/products`, product)
     .pipe(

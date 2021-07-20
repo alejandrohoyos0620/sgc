@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Category } from '@core/models/category.model';
@@ -8,6 +9,8 @@ import { AuthService } from '@core/services/auth.service';
 import { CategoryService } from '@core/services/categories/category.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
 import { ProductService } from '@core/services/products/product.service';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-edit',
@@ -20,6 +23,10 @@ export class ProductEditComponent implements OnInit {
   id: string;
   establishmentId: number;
   categories: Category[];
+  image$: Observable<any>;
+  imageSrc: string;
+  loader: boolean = false;
+  pathLoader: string;
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
@@ -28,11 +35,14 @@ export class ProductEditComponent implements OnInit {
     private authService: AuthService,
     private establishmentService: EstablishmentService,
     private categoryService: CategoryService,
+    private Storage: AngularFireStorage,
   ) {
     this.buildForm();
     if (this.hasUserRole('repairman') || this.hasUserRole('administrator')) {
       this.establishmentId = this.establishmentService.getEstablishmentId();
     }
+    this.image$= new Observable<any>();
+    this.pathLoader = '../../assets/images/loading.gif';
   }
 
   ngOnInit(): void {
@@ -50,9 +60,9 @@ export class ProductEditComponent implements OnInit {
     this.categoryService.getAllCategories(this.establishmentId).subscribe(categories => {
       this.categories = categories;
       this.form.patchValue(product);
-      console.log(product.categoryId);
-      this.form.controls['categoryId'].setValue(product.categoryId);
-      console.log(this.form.value.categoryId);
+      this.form.controls['categoryId'].setValue(""+product.categoryId);
+      this.imageSrc = product.image;
+      this.form.controls['image'].setValue(product.image);
     }
     );
   }
@@ -68,6 +78,7 @@ export class ProductEditComponent implements OnInit {
         categoryId: this.form.value.categoryId,
         description: this.form.value.description,
         price: this.form.value.price,
+        image: this.form.value.image,
         isEnable: this.form.value.isEnable ? 1 : 0,
       };
       this.productService.updateProduct(this.id, product, this.establishmentId).subscribe((newproduct) => {
@@ -83,6 +94,7 @@ export class ProductEditComponent implements OnInit {
       categoryId: ['', [Validators.required]],
       code: ['', [Validators.required]],
       color: ['', [Validators.required]],
+      image: ['', [Validators.required]],
       description: ['', [Validators.required]],
       isEnable: [true, [Validators.required]],
     });
@@ -105,6 +117,25 @@ export class ProductEditComponent implements OnInit {
     else {
       return false;
     }
+  }
+  uploadFile(event): void {
+    this.loader = true;
+    const file = event.target.files[0];
+    const name = file.name;
+    const fileRef = this.Storage.ref(name);
+    const task = this.Storage.upload(name, file);
+
+    task.snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.image$ = fileRef.getDownloadURL();
+          this.image$.subscribe(url => {
+            this.loader= false;
+            this.form.get('image').setValue(url);
+          });
+        }
+        )
+      ).subscribe();
   }
 
 }
