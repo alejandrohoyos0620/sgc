@@ -1,1 +1,81 @@
-<p>product-form works!</p>
+<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+    <mat-card class="cardEdit">
+        <mat-card-header class="justify-content-center">
+            <mat-card-title>Crear Producto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field class="cellForm">
+                        <input placeholder="Nombre" formControlName="name" matInput type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field class="cellForm">
+                        <input placeholder="Precio" formControlName="price" matInput type="number">
+                    </mat-form-field>
+                    <div *ngIf="form.get('price').errors && form.get('price').dirty">
+                        <p *ngIf="priceField.hasError('required')">El campo es requerido</p>
+                    </div>
+                </div>
+            </div>
+            <div class="divContentList">
+                <div class="divTitleRepairmans">Categoría</div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Seleccione una categoria</mat-label>
+                    <mat-select formControlName="category" *ngIf="categories">
+                        <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field class="cellForm">
+                        <input placeholder="Marca" formControlName="brand" matInput type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field class="cellForm">
+                        <input placeholder="Código" formControlName="code" matInput type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field class="cellForm">
+                        <input placeholder="Color" formControlName="color" matInput type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="divTitleRepairmans">Imagen</div>
+                <img *ngIf="(image$ | async) as image" [src] ="image" alt="" class="img-fluid">
+                        <input  placeholder="Image" type="file"  (change)="uploadFile($event)">
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field class="cellForm">
+                        <textarea placeholder="Descripción" formControlName="description" matInput></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <section class="actionForm">
+                        <mat-checkbox formControlName="isEnable" color="primary" class="example-ripple-checkbox">Está
+                            habilitado</mat-checkbox>
+                    </section>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="actionForm">
+            <button mat-raised-button class="buttonCancel" type="button" routerLink='/admin/services'>Cancelar</button>
+            <button mat-raised-button class="buttonUpdate" type="submit">Crear</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

@@ -19,6 +19,8 @@ import { SharedModule } from '@shared/shared.module';
 import { DialogDeleteServiceComponent } from './components/dialog-delete-service/dialog-delete-service.component';
 import { DialogDeleteCategoryComponent } from './components/dialog-delete-category/dialog-delete-category.component';
 import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { DialogDeleteProductComponent } from './components/dialog-delete-product/dialog-delete-product.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { DialogCategoryComponent } from './components/dialog-category/dialog-cat
     CategoryFormComponent,
     DialogDeleteServiceComponent,
     DialogDeleteCategoryComponent,
-    DialogCategoryComponent
+    DialogCategoryComponent,
+    ProductListComponent,
+    DialogDeleteProductComponent
   ],
   imports: [
     CommonModule,

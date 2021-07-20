@@ -14,6 +14,9 @@ import { ToastrModule } from 'ngx-toastr';
 import {MaterialModule} from '@material/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AuthInterceptor} from './auth.interceptor';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule} from '@angular/fire/storage';
+import { environment } from './../environments/environment' 
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import {AuthInterceptor} from './auth.interceptor';
     ToastrModule.forRoot(),
     FontAwesomeModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -1,0 +1,58 @@
+<div class="containerPanel">
+    <div class="spaceNav"></div>
+    <nav class="navTableButtons">
+        <button class="buttonNewService" mat-raised-button routerLink="create">
+            <mat-icon>upgrade</mat-icon>
+            <span>Crear nuevo Producto</span>
+        </button>
+    </nav>
+    <div class="spaceNav"></div>
+    <div class="divTablePanel">
+        <div class="divBannerCourse">
+            <p>Listado de productos de SGC</p>
+        </div>
+
+        <div class="spaceTable"></div>
+        <table class="tablePanelApproved">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Marca</th>
+                <th>Color</th>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Detalles</th>
+                <th>Acciones</th>
+            </tr>
+            <tr *ngFor="let product of products; index as i">
+
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <!-- <td *ngFor="let category of categories" *ngIf=""> <span *ngIf="category.id == product.categoryId">{{ category.name }} </span></td> -->
+                <td *ngIf="categories">{{nameCategory(product.categoryId)}}</td>
+                <td>${{ product.price }}</td>
+                <td>{{ product.brand }}</td>
+                <td>{{ product.color }}</td>
+                <td>{{ product.code }}</td>
+                <td>{{ product.description }}</td>
+                <td>
+                    <button mat-icon-button (click)="openDialogProduct(i)">
+                        <mat-icon>article</mat-icon>
+                    </button>
+                </td>
+                <td class ="cellButtons">
+                    <button class="buttonEdit" mat-raised-button [routerLink]="['edit',product.id]" >
+                        <mat-icon>mode_edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                    <button class="buttonDelete" mat-raised-button (click)="openDialogDeleteProduct(product.id)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

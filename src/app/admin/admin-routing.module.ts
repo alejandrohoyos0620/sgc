@@ -5,6 +5,9 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 import { CategoryListComponent } from './components/category-list/category-list.component';
 
 import { NavComponent } from './components/nav/nav.component';
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
 import { ServiceEditComponent } from './components/service-edit/service-edit.component';
 import { ServiceFormComponent } from './components/service-form/service-form.component';
 import { ServiceListComponent } from './components/service-list/service-list.component';
@@ -24,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: 'products',
-// component: ProductListComponent
+       component: ProductListComponent
       },
       {
         path: 'services/create',
@@ -33,6 +36,14 @@ const routes: Routes = [
       {
         path: 'services/edit/:id',
         component: ServiceEditComponent
+      },
+      {
+        path: 'products/create',
+        component: ProductFormComponent
+      },
+      {
+        path: 'products/edit/:id',
+        component: ProductEditComponent
       },
       {
         path: 'categories/create',

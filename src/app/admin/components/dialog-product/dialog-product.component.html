@@ -4,8 +4,18 @@
     <div mat-dialog-content class="divContentDialog" >
         <mat-label  class="labelDialog"><b>ID:</b></mat-label>
         <mat-label  class="labelDialog labelContent">{{data.id}}</mat-label>
-        <mat-label  class="labelDialog"><b>Servicio:</b></mat-label>
+        <mat-label  class="labelDialog"><b>Nombre:</b></mat-label>
         <mat-label  class="labelDialog labelContent">{{data.name}}</mat-label>
+        <mat-label  class="labelDialog"><b>Precio:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.price}}</mat-label>
+        <mat-label  class="labelDialog"><b>Categoría:</b></mat-label>
+        <mat-label  class="labelDialog labelContent" *ngIf="categories">{{nameCategory(data.categoryId)}}</mat-label>
+        <mat-label  class="labelDialog"><b>Marca:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.brand}}</mat-label>
+        <mat-label  class="labelDialog"><b>Código:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.code}}</mat-label>
+        <mat-label  class="labelDialog"><b>Color:</b></mat-label>
+        <mat-label  class="labelDialog labelContent">{{data.color}}</mat-label>
         <mat-label  class="labelDialog"><b>Descripción:</b></mat-label>
         <mat-label  class="labelDialog labelContent">{{data.description}}</mat-label>
     </div>

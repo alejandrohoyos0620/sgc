@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "sgc-front"
+  },
+  "targets": {
+    "sgc-front": {
+      "hosting": {
+        "sgc": [
+          "sgc-front"
+        ]
+      }
+    }
   }
 }
