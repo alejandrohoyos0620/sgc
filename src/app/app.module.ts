@@ -16,7 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AuthInterceptor} from './auth.interceptor';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule} from '@angular/fire/storage';
-import { environment } from './../environments/environment' 
+import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,22 @@
+<div  *ngIf="product" class="container row container-product-detail">
+    <div class="col-6">
+        <img [src]="product.image" alt="product-image" class="row img-fluid">
+        
+    </div>
+    <div class="col-6 d-flex flex-column justify-content-center">
+        <small >{{ product.brand }}</small>
+        <h1 class="row">{{ product.name }}</h1>
+        <h2 class="row">{{ product.price | currency}} UND</h2>
+       
+        <h2><b> Ficha técnica</b></h2>
+        <ul>
+            <li class="mb-1"><b>Código:</b> {{product.code}}</li>
+            <li class="mb-1"><b>Color:</b> {{ product.color }}</li>
+            <li class="mb-1"><b>Marca:</b> {{product.brand}}</li>
+            <li class="mb-1"><b>Descripción:</b> {{product.description}}</li>
+        </ul>
+        <button  class="btn-add-cart" mat-raised-button >Agregar al carrito</button>
+        <!-- <p>{{ product.description}}</p> -->
+    </div>
+    
+</div>

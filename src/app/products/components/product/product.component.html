@@ -4,13 +4,13 @@
         <mat-card-subtitle>{{ product.price | currency}}</mat-card-subtitle>
     </mat-card-header>
     <div class="crop-image">
-        <img [src]="product.image" alt="">
+        <img class="img-fluid" [src]="product.image" alt="">
     </div>
-    <mat-card-content>
+    <!-- <mat-card-content>
         <p> {{product.description | slice:0:10}} </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <a mat-raised-button color [routerLink]="['/products', product.id]">Ver detalle</a>
-        <button (click)="addCart()" mat-raised-button color="primary">Agregar al carrito</button>
+    </mat-card-content> -->
+    <mat-card-actions class="d-flex justify-content-center">
+        <a mat-raised-button color="primary" [routerLink]="['/products', product.id]">Ver detalle</a>
+        <button  class="btn-add-cart" mat-raised-button >Agregar al carrito</button>
     </mat-card-actions>
 </mat-card>

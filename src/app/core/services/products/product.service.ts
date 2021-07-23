@@ -11,12 +11,27 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getAllProducts(establishmentIdSend: number): any{
+  getAllProductsByEstablishment(establishmentIdSend: number): any{
     const establishmentId = establishmentIdSend.toString();
     return this.http.get<Product[]>(`${environment.url_api}/products/filterByEstablishment`, { params: { establishmentId } })
     .pipe(
       catchError(this.handleError),
     );
+  }
+  getAllProductsByCatalog(establishmentIdSend: number, page: string): any{
+    const establishmentId = establishmentIdSend.toString();
+    if(page=='0'){
+      return this.http.get<Product[]>(`${environment.url_api}/products/filterEnabledByEstablishment`, { params: { establishmentId} })
+      .pipe(
+        catchError(this.handleError),
+      );
+    }else{
+      return this.http.get<Product[]>(`${environment.url_api}/products/filterEnabledByEstablishment`, { params: { establishmentId, page } })
+      .pipe(
+        catchError(this.handleError),
+      );
+    }
+    
   }
 
   getAllProductsByCategory(categoryId: number): any{

@@ -32,7 +32,7 @@ export class ProductListComponent implements OnInit {
     this.fetchProducts();
   }
   fetchProducts(): void {
-    this.productService.getAllProducts(this.establishmentId).subscribe(response => {
+    this.productService.getAllProductsByEstablishment(this.establishmentId).subscribe(response => {
       if (response.status == 'success') {
         this.products = response.products;
         this.categoryService.getAllCategories(this.establishmentId).subscribe(categories => {

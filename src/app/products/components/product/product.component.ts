@@ -13,11 +13,13 @@ import { Product } from '@core/models/product.model';
 })
 export class ProductComponent implements OnInit {
   @Input() product: Product;
+  @Input() numberOfPages: number;
   @Output() productClicked: EventEmitter<any> = new EventEmitter();
   today = new Date();
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.numberOfPages);
   }
   addCart(): void {
   }

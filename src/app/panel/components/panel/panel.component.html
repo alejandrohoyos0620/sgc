@@ -1,167 +1,187 @@
 <div class="containerPanel">
     <nav class="navTableButtons">
-        <button class="buttonNewService" mat-raised-button matBadgeColor="warn"
-            (click)="newService()" *ngIf="hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator'))">
+        <button class="buttonNewService" mat-raised-button matBadgeColor="warn" (click)="newService()"
+            *ngIf="hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator'))">
             <mat-icon>download</mat-icon>
             <span>Solicitar un nuevo servicio</span>
         </button>
-        <button class="buttonServiceList" mat-raised-button  [matBadge]="totalPrimero$ | async" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('service')" *ngIf="hasUserRole('administrator')">
+        <button class="buttonServiceList" mat-raised-button [matBadge]="totalPrimero$ | async" matBadgePosition="above"
+            matBadgeColor="warn" (click)="changeTable('service')" *ngIf="hasUserRole('administrator')">
             <mat-icon>download</mat-icon>
             <span>Listado de servicios</span>
         </button>
-        <button class="buttonApprovedList" mat-raised-button  [matBadge]="totalSegundo$ | async" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('approved')" *ngIf="(hasUserRole('repairman') || hasUserRole('administrator'))">
+        <button class="buttonApprovedList" mat-raised-button [matBadge]="totalSegundo$ | async" matBadgePosition="above"
+            matBadgeColor="warn" (click)="changeTable('approved')"
+            *ngIf="(hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>warning</mat-icon>
             <span>Aprobados</span>
         </button>
-        <button class="buttonCourseList" mat-raised-button [matBadge]="totalTercero$ | async" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('course')" *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
+        <button class="buttonCourseList" mat-raised-button [matBadge]="totalTercero$ | async" matBadgePosition="above"
+            matBadgeColor="warn" (click)="changeTable('course')"
+            *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>error_outline</mat-icon>
             <span>En Curso</span>
         </button>
-        <button class="buttonFinishedList" mat-raised-button [matBadge]="totalCuarto$ | async" matBadgePosition="above" matBadgeColor="warn"
-            (click)="changeTable('finished')" *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
+        <button class="buttonFinishedList" mat-raised-button [matBadge]="totalCuarto$ | async" matBadgePosition="above"
+            matBadgeColor="warn" (click)="changeTable('finished')"
+            *ngIf=" (hasUserRole('repairman') || hasUserRole('administrator'))">
             <mat-icon>done_all</mat-icon>
             <span>Terminados</span>
         </button>
     </nav>
     <div class="spaceNav"></div>
-    <div *ngIf="tableEnable === 'customer' && hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
+    <div *ngIf="tableEnable === 'customer' && hasUser() && (!hasUserRole('repairman') && !hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync"
+        class="divTablePanel">
         <div class="divBannerCustomer">
             <p>Mis servicios en curso</p>
         </div>
         <div class="spaceTable"></div>
-        <table class="tablePanelCustomer">
-            <tr>
-                <th>N° Ticket</th>
-                <th>Tipo</th>
-                <th>Estado de la solicitud</th>
-                <th>Servicio</th>
-                <th>Técnico</th>
-                <th>Fecha</th>
-                <th>Ver</th>
-            </tr>
-            <tr *ngFor="let hiredService of listServicesAsync; index as i">
-                <td *ngIf="hiredService " >{{ hiredService.id }}</td>
-                <td *ngIf="hiredService " >{{ hiredService.type | toSpanish}}</td>
-                <td *ngIf="hiredService " >{{ hiredService.status | toSpanish}}</td>
-                <td *ngIf="hiredService ">{{ hiredService.service.name }}</td>
-                <td *ngIf="hiredService && hiredService.repairman !== undefined">{{ hiredService.repairman.sub }}</td>
-                <td *ngIf="hiredService && hiredService.repairman == undefined">No asignado</td>
-                <td *ngIf="hiredService ">{{ hiredService.createdAt }}</td>
-                <td  *ngIf="hiredService">
-                    <button mat-icon-button (click)="openDialogCustomer(i)">
-                        <mat-icon>remove_red_eye</mat-icon>
-                    </button>
-                </td>
-            </tr>
-        </table>
+        <div class="tablePanelService overflow-auto">
+            <table class="w-100">
+                <tr>
+                    <th>N° Ticket</th>
+                    <th>Tipo</th>
+                    <th>Estado de la solicitud</th>
+                    <th>Servicio</th>
+                    <th>Técnico</th>
+                    <th>Fecha</th>
+                    <th>Ver</th>
+                </tr>
+                <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                    <td *ngIf="hiredService ">{{ hiredService.id }}</td>
+                    <td *ngIf="hiredService ">{{ hiredService.type | toSpanish}}</td>
+                    <td *ngIf="hiredService ">{{ hiredService.status | toSpanish}}</td>
+                    <td *ngIf="hiredService ">{{ hiredService.service.name }}</td>
+                    <td *ngIf="hiredService && hiredService.repairman !== undefined">{{ hiredService.repairman.sub }}
+                    </td>
+                    <td *ngIf="hiredService && hiredService.repairman == undefined">No asignado</td>
+                    <td *ngIf="hiredService ">{{ hiredService.createdAt }}</td>
+                    <td *ngIf="hiredService">
+                        <button mat-icon-button (click)="openDialogCustomer(i)">
+                            <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div *ngIf="tableEnable === 'service' &&  hasUserRole('administrator') && (listServices$ | async) as listServicesAsync" class="divTablePanel" >
+    <div *ngIf="tableEnable === 'service' &&  hasUserRole('administrator') && (listServices$ | async) as listServicesAsync"
+        class="divTablePanel">
         <div class="divBannerService">
             <p> Listado de servicios</p>
         </div>
         <div class="spaceTable"></div>
-        <table class="tablePanelService">
-            <tr>
-                <th>Servicio</th>
-                <th>Detalles</th>
-            </tr>
-            <tr *ngFor="let hiredService of listServicesAsync; index as i">
-                <td *ngIf="hiredService.status === 'notApproved'">{{ hiredService.service.name }}</td>
-                <td *ngIf="hiredService.status === 'notApproved'" class="rowTableService">
-                    <button mat-icon-button (click)="openDialogService(i)">
-                        <mat-icon>list_alt</mat-icon>
-                    </button>
-                </td>
-            </tr>
-        </table>
+        <div class="tablePanelService overflow-auto">
+            <table class="w-100">
+                <tr>
+                    <th>Servicio</th>
+                    <th>Detalles</th>
+                </tr>
+                <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                    <td *ngIf="hiredService.status === 'notApproved'">{{ hiredService.service.name }}</td>
+                    <td *ngIf="hiredService.status === 'notApproved'" class="rowTableService">
+                        <button mat-icon-button (click)="openDialogService(i)">
+                            <mat-icon>list_alt</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div *ngIf="tableEnable === 'approved'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
+    <div *ngIf="tableEnable === 'approved'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync"
+        class="divTablePanel">
         <div class="divBannerApproved">
             <p> Listado de servicios aprobados</p>
         </div>
         <div class="spaceTable"></div>
-        <table class="tablePanelApproved">
-            <tr>
-                <th>N° Ticket</th>
-                <th>Tipo</th>
-                <th>Servicio</th>
-                <th>Técnico</th>
-                <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Ver</th>
-            </tr>
-            <tr *ngFor="let hiredService of listServicesAsync; index as i">
-                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.id }}</td>
-                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.type | toSpanish }}</td>
-                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.service.name }}</td>
-                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.repairman.sub }}</td>
-                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.customer.sub }}</td>
-                <td  *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.createdAt }}</td>
-                <td  *ngIf="hiredService && hiredService.status === 'approved'" >
-                    <button mat-icon-button (click)="openDialogApproved(i)">
-                        <mat-icon>remove_red_eye</mat-icon>
-                    </button>
-                </td>
-            </tr>
-        </table>
+        <div class="tablePanelApproved overflow-auto">
+            <table class="w-100">
+                <tr>
+                    <th>N° Ticket</th>
+                    <th>Tipo</th>
+                    <th>Servicio</th>
+                    <th>Técnico</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Ver</th>
+                </tr>
+                <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                    <td *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.id }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.type | toSpanish }}
+                    </td>
+                    <td *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.service.name }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.repairman.sub }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.customer.sub }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'approved'">{{ hiredService.createdAt }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'approved'">
+                        <button mat-icon-button (click)="openDialogApproved(i)">
+                            <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div *ngIf="tableEnable === 'course'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
+    <div *ngIf="tableEnable === 'course'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync"
+        class="divTablePanel">
         <div class="divBannerCourse">
             <p> Listado de servicios en curso</p>
         </div>
         <div class="spaceTable"></div>
-        <table class="tablePanelCourse">
-            <tr>
-                <th>N° Ticket</th>
-                <th>Servicio</th>
-                <th>Técnico</th>
-                <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Ver</th>
-            </tr>
-            <tr *ngFor="let hiredService of listServicesAsync; index as i">
-                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.id }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.service.name }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.repairman.sub }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.customer.sub }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.createdAt }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'course'" >
-                    <button mat-icon-button (click)="openDialogCourse(i)">
-                        <mat-icon>remove_red_eye</mat-icon>
-                    </button>
-                </td>
-            </tr>
-        </table>
+        <div class="tablePanelCourse overflow-auto">
+            <table class="w-100">
+                <tr>
+                    <th>N° Ticket</th>
+                    <th>Servicio</th>
+                    <th>Técnico</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Ver</th>
+                </tr>
+                <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                    <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.id }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.service.name }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.repairman.sub }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.customer.sub }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'course'">{{ hiredService.createdAt }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'course'">
+                        <button mat-icon-button (click)="openDialogCourse(i)">
+                            <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div *ngIf="tableEnable === 'finished'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync" class="divTablePanel">
+    <div *ngIf="tableEnable === 'finished'  && (hasUserRole('repairman') || hasUserRole('administrator')) && (listServices$ | async) as listServicesAsync"
+        class="divTablePanel">
         <div class="divBannerFinished">
             <p>Listado de servicios terminados</p>
         </div>
         <div class="spaceTable"></div>
-        <table class="tablePanelFinished">
-            <tr>
-                <th>N° Ticket</th>
-                <th>Servicio</th>
-                <th>Técnico</th>
-                <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Ver</th>
-            </tr>
-            <tr *ngFor="let hiredService of listServicesAsync; index as i">
-                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.id }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.service.name }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.repairman.sub }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.customer.sub }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.createdAt }}</td>
-                <td *ngIf="hiredService && hiredService.status === 'finished'">
-                    <button mat-icon-button (click)="openDialogFinished(i)">
-                        <mat-icon>remove_red_eye</mat-icon>
-                    </button>
-                </td>
-            </tr>
-        </table>
+        <div class="tablePanelFinished overflow-auto">
+            <table class="w-100">
+                <tr>
+                    <th>N° Ticket</th>
+                    <th>Servicio</th>
+                    <th>Técnico</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Ver</th>
+                </tr>
+                <tr *ngFor="let hiredService of listServicesAsync; index as i">
+                    <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.id }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.service.name }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.repairman.sub }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.customer.sub }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.createdAt }}</td>
+                    <td *ngIf="hiredService && hiredService.status === 'finished'">
+                        <button mat-icon-button (click)="openDialogFinished(i)">
+                            <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
