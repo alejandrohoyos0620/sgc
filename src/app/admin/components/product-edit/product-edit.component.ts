@@ -9,6 +9,7 @@ import { AuthService } from '@core/services/auth.service';
 import { CategoryService } from '@core/services/categories/category.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
 import { ProductService } from '@core/services/products/product.service';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -36,6 +37,7 @@ export class ProductEditComponent implements OnInit {
     private establishmentService: EstablishmentService,
     private categoryService: CategoryService,
     private Storage: AngularFireStorage,
+    private toastr: ToastrService,
   ) {
     this.buildForm();
     if (this.hasUserRole('repairman') || this.hasUserRole('administrator')) {
@@ -82,6 +84,7 @@ export class ProductEditComponent implements OnInit {
         isEnable: this.form.value.isEnable ? 1 : 0,
       };
       this.productService.updateProduct(this.id, product, this.establishmentId).subscribe((newproduct) => {
+        this.toastr.success('Se actualizó el producto correctamente');
         this.router.navigate(['./admin/products']);
       });
     }

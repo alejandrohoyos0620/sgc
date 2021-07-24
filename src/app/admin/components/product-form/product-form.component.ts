@@ -10,6 +10,7 @@ import { CategoryService } from '@core/services/categories/category.service';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -29,6 +30,7 @@ export class ProductFormComponent {
     private establishmentService: EstablishmentService,
     private categoryService: CategoryService,
     private Storage: AngularFireStorage,
+    private toastr: ToastrService,
   ) {
     this.buildForm();
     if (this.hasUserRole('repairman') || this.hasUserRole('administrator')) {
@@ -57,8 +59,11 @@ export class ProductFormComponent {
         isEnable: this.form.value.isEnable ? 1 : 0,
       };
       this.productService.createProduct(product, this.establishmentId).subscribe((newproduct) => {
+        this.toastr.success('Se creó el producto correctamente');
         this.router.navigate(['./admin/products']);
       });
+    }else{
+      this.toastr.error('Recuerda llenar todos los campos para la creación de un producto nuevo');
     }
 
   }

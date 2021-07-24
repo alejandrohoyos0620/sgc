@@ -1,22 +1,46 @@
-<div class="container">
-    <div class = "product-grid">
-        <app-product *ngFor="let product of products" 
-        (productClicked)="clickProduct($event)" 
-        [product]="product"
-        [numberOfPages]="numberOfPages">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === true">
+    <mat-toolbar>Filtro por categorías </mat-toolbar>
+    <mat-nav-list>
+      <!-- <a mat-list-item routerLink="/admin/services">Administrar Servicios</a>
+      <a mat-list-item routerLink="/admin/categories">Administrar Categorias</a>
+      <a mat-list-item routerLink="/admin/products">Administrar Productos</a>
+      <a mat-list-item routerLink="/">Volver atras</a> -->
+      <a  mat-list-item (click)="getAllProducts()">Todas la categorías</a>
+      <a *ngFor="let category of categories" mat-list-item (click)="getProductsByCategory(category.id)">{{category.name}}</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Categorías</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="container">
+      <div class="product-grid">
+        <div  *ngIf="products.length == 0"></div>
+        <div  *ngIf="products.length == 0" class="alert alert-warning message-not-products" role="alert">
+          No se encuentran prodcutos habilitados.
+        </div>
+        <app-product *ngFor="let product of products" (productClicked)="clickProduct($event)" [product]="product"
+          [numberOfPages]="numberOfPages">
         </app-product>
-    </div>
-    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+      </div>
+      <nav aria-label="Page navigation example" class="d-flex justify-content-center">
         <ul class="pagination">
           <li class="page-item">
             <button class="page-link" (click)="previos()" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </button>
           </li>
-          <li class="page-item" *ngFor="let num of numbers; let i = index"><a  class="page-link" href="javascript:;" (click)="getPage(num)">{{num}}</a></li>
+          <li class="page-item" *ngFor="let num of numbers; let i = index"><a class="page-link" href="javascript:;"
+              (click)="getPage(num)">{{num}}</a></li>
           <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
           <li class="page-item">
             <button class="page-link" (click)="next()" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
@@ -24,4 +48,6 @@
           </li>
         </ul>
       </nav>
-</div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

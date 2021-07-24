@@ -9,6 +9,7 @@ import { DialogProductComponent } from '../dialog-product/dialog-product.compone
 import { DialogDeleteProductComponent } from '../dialog-delete-product/dialog-delete-product.component';
 import { CategoryService } from '@core/services/categories/category.service';
 import { Category } from '@core/models/category.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-list',
@@ -25,6 +26,7 @@ export class ProductListComponent implements OnInit {
     public dialog: MatDialog,
     private establishmentService: EstablishmentService,
     private categoryService: CategoryService,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class ProductListComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe(rta => {
       if (rta) {
         const index = this.products.findIndex((product) => product.id === id);
+        this.toastr.success('Se eliminó el producto correctamente');
         this.products.splice(index, 1);
         this.products = [...this.products];
       }
