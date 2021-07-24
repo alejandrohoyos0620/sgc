@@ -36,7 +36,7 @@ export class ProductService {
 
   getAllProductsByCategory(category_Id: number): any{
     const categoryId = category_Id.toString();
-    return this.http.get<Product[]>(`${environment.url_api}/products/filterByCategory`, { params: { categoryId } })
+    return this.http.get<Product[]>(`${environment.url_api}/products/filterEnabledByCategory`, { params: { categoryId } })
     .pipe(
       catchError(this.handleError),
     );

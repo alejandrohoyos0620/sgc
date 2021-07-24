@@ -20,6 +20,7 @@ export class ProductsContainer implements OnInit {
   categories: Category[];
   pages = [];
   numbers = [];
+  isFiltred = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -61,18 +62,31 @@ export class ProductsContainer implements OnInit {
     }
     );
   }
-  getAllProducts(){
+  getAllProducts() {
+    this.isFiltred = false;
     this.productsService.getAllProductsByCatalog(this.establishmentId, '0').subscribe(response => {
       if (response.status == "success") {
+        this.numberOfPages = response.products.numberOfPages;
+        this.numbers = [];
+        for (let i = 1; i <= this.numberOfPages; i++) {
+          this.numbers.push(i);
+        }
+        console.log(this.numbers);
         this.products = response.products.products;
       }
     });
   }
   getProductsByCategory(idCategory: number) {
-    let id = idCategory + "";
+    this.isFiltred = true;
     this.productsService.getAllProductsByCategory(idCategory).subscribe(response => {
-      if(response.status == "success"){}
-        this.products = response.products;
+      if (response.status == "success") {
+        this.numberOfPages = response.products.numberOfPages;
+        this.numbers = [];
+        for (let i = 1; i <= this.numberOfPages; i++) {
+          this.numbers.push(i);
+        }
+        this.products = response.products.products;
+      }
     }
     );
   }
@@ -85,6 +99,7 @@ export class ProductsContainer implements OnInit {
   getPage(page) {
     if (page != this.currentPage) {
       //this.getRequests(page);
+
       let pageString = page + "";
       this.productsService.getAllProductsByCatalog(this.establishmentId, pageString).subscribe(response => {
         if (response.status == "success") {
