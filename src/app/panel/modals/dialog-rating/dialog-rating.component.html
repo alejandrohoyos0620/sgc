@@ -1,0 +1,39 @@
+
+<form class="divContainerDialog" [formGroup]="form" (ngSubmit)="saveRating($event)">
+        
+        <div mat-dialog-title class="divTitle" *ngIf="firstAdvertenceSave && !firstAdvertenceCancel" >
+            ¡Aún no ha realizado ninguna calificación! &nbsp; &nbsp;&nbsp;&nbsp;
+            <mat-icon class ="iconWarning">warning</mat-icon>
+        </div>
+        <div mat-dialog-title class="divTitle" *ngIf="firstAdvertenceCancel">
+            ¡Si cierras sin guardar, no se guardaran tus cambios!&nbsp; &nbsp;&nbsp;&nbsp;
+            <mat-icon class ="iconWarning">warning</mat-icon>
+        </div>
+    <div class ="spaceBetween" *ngIf="!firstAdvertenceSave && !firstAdvertenceCancel "></div>
+    <div class ="spaceBetween" *ngIf="!firstAdvertenceSave && !firstAdvertenceCancel "></div>
+    <div class ="spaceBetween" *ngIf="!firstAdvertenceSave && !firstAdvertenceCancel "></div>
+    <div mat-dialog-content class="divContentDialog" >
+
+        
+        <p>¿Qué calificación le das al servicio prestado?</p>
+        
+            <p class="clasificacion">
+              <input id="radio1" type="radio" formControlName="star1" value="5"><!--
+              --><label class ="fs-1" for="radio1">★</label><!--
+              --><input id="radio2" type="radio" formControlName="star1" value="4"><!--
+              --><label class ="fs-1" for="radio2">★</label><!--
+              --><input  id="radio3" type="radio" formControlName="star1" value="3"><!--
+              --><label class ="fs-1" for="radio3">★</label><!--
+              --><input id="radio4" type="radio" formControlName="star1" value="2"><!--
+              --><label class ="fs-1" for="radio4">★</label><!--
+              --><input id="radio5" type="radio" formControlName="star1" value="1"><!--
+              --><label class ="fs-1" for="radio5">★</label>
+            </p>
+
+          
+    </div>
+    <div mat-dialog-actions  class="divActionsConfirm">
+        <button mat-button type="button" class ="buttonDeny"(click)="onNoClick()" cdkFocusInitial ><mat-icon>cancel</mat-icon> Calcelar</button>
+        <button mat-button type="submit" class ="buttonApprove"  cdkFocusInitial ><mat-icon>delete</mat-icon> Confirmar</button>
+    </div>
+</form>

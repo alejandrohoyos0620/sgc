@@ -40,7 +40,7 @@
             [disabled]="form.invalid" mat-raised-button type="submit">Iniciar sesión</button>
         </div>
         <div class="empty"></div>
-        <a>¿Olvidaste tu contraseña?</a>
+        <a (click)="openModalRecovery()">¿Olvidaste tu contraseña?</a>
         <hr>
         <div class="mat-button">
           <button class="button-login " mat-raised-button routerLink="/auth/register">Registrarse</button>

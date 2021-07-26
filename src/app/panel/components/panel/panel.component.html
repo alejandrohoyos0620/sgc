@@ -45,6 +45,7 @@
                     <th>Servicio</th>
                     <th>Técnico</th>
                     <th>Fecha</th>
+                    <th>Calificación</th>
                     <th>Ver</th>
                 </tr>
                 <tr *ngFor="let hiredService of listServicesAsync; index as i">
@@ -56,6 +57,32 @@
                     </td>
                     <td *ngIf="hiredService && hiredService.repairman == undefined">No asignado</td>
                     <td *ngIf="hiredService ">{{ hiredService.createdAt }}</td>
+                    <td *ngIf="hiredService && !hiredService.rating "><button mat-button class="buttonApprove"
+                            [disabled]="hiredService.status != 'finished'"
+                            (click)="openDialogRating(hiredService.id)">Calificar</button></td>
+                    <td *ngIf="hiredService && hiredService.rating ">
+                        <div>
+                            <label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=1, 'starBlack': hiredService.rating.score<1}"
+                                class="fs-1" for="radio1">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=2, 'starBlack': hiredService.rating.score<2}"
+                                class="fs-1" for="radio2">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=3, 'starBlack': hiredService.rating.score<3}"
+                                class="fs-1" for="radio3">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=4, 'starBlack': hiredService.rating.score<4}"
+                                class="fs-1" for="radio4">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=5, 'starBlack': hiredService.rating.score<5}"
+                                class="fs-1" for="radio5">★</label>
+                        </div>
+                    </td>
                     <td *ngIf="hiredService">
                         <button mat-icon-button (click)="openDialogCustomer(i)">
                             <mat-icon>remove_red_eye</mat-icon>
@@ -167,6 +194,7 @@
                     <th>Técnico</th>
                     <th>Cliente</th>
                     <th>Fecha</th>
+                    <th *ngIf="hasUserRole('administrator')">Calificación</th>
                     <th>Ver</th>
                 </tr>
                 <tr *ngFor="let hiredService of listServicesAsync; index as i">
@@ -175,6 +203,30 @@
                     <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.repairman.sub }}</td>
                     <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.customer.sub }}</td>
                     <td *ngIf="hiredService && hiredService.status === 'finished'">{{ hiredService.createdAt }}</td>
+                    <td *ngIf="hiredService && !hiredService.rating && hasUserRole('administrator')">No calificado</td>
+                    <td *ngIf="hiredService && hiredService.rating ">
+                        <div>
+                            <label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=1, 'starBlack': hiredService.rating.score<1}"
+                                class="fs-1" for="radio1">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=2, 'starBlack': hiredService.rating.score<2}"
+                                class="fs-1" for="radio2">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=3, 'starBlack': hiredService.rating.score<3}"
+                                class="fs-1" for="radio3">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=4, 'starBlack': hiredService.rating.score<4}"
+                                class="fs-1" for="radio4">★</label>
+                            <!--
+                        --><label
+                                [ngClass]="{'starOrange' : hiredService.rating.score>=5, 'starBlack': hiredService.rating.score<5}"
+                                class="fs-1" for="radio5">★</label>
+                        </div>
+                    </td>
                     <td *ngIf="hiredService && hiredService.status === 'finished'">
                         <button mat-icon-button (click)="openDialogFinished(i)">
                             <mat-icon>remove_red_eye</mat-icon>

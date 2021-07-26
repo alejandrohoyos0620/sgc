@@ -106,6 +106,17 @@ export class HireServicesService {
         catchError(this.handleError),
       );
   }
+  saveRating(hiredservicesId: number, Score: string): any {
+    const data = {
+      hiredServiceId: hiredservicesId,
+      score : Score
+    };
+    return this.http.post(`${environment.url_api}/ratings`, data)
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
   changeStatus(hiredservicesId: number, statusSend: string): any {
     const data = {
       id: hiredservicesId,
@@ -150,7 +161,6 @@ export class HireServicesService {
       type: typeSend,
       date: dateSend
     };
-    console.log(hired);
     return this.http.post(`${environment.url_api}/hiredServices`, hired)
       .pipe(
         catchError(this.handleError),

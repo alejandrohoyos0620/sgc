@@ -8,9 +8,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { DialogForgotPasswordComponent } from './components/dialog-forgot-password/dialog-forgot-password.component';
+import { DialogRecoveryPasswordComponent } from './components/dialog-recovery-password/dialog-recovery-password.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, DialogForgotPasswordComponent, DialogRecoveryPasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

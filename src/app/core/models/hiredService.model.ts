@@ -15,4 +15,10 @@ export interface hiredService {
     hour: string;
     date: string;
     description: string;
+    rating: {
+        id: number,
+        score: number,
+        commentary: string,
+        hiredServiceId: number
+    }
 }

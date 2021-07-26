@@ -15,6 +15,7 @@ import { DialogNewServiceTypeComponent } from './modals/dialog-new-service-type/
 import { DialogNewDeviceComponent } from './modals/dialog-new-device/dialog-new-device.component';
 import { DialogSuccesHiredServiceComponent } from './modals/dialog-succes-hired-service/dialog-succes-hired-service.component';
 import { SharedModule } from '@shared/shared.module';
+import { DialogRatingComponent } from './modals/dialog-rating/dialog-rating.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SharedModule } from '@shared/shared.module';
     DialogNewServiceComponent,
     DialogNewServiceTypeComponent,
     DialogNewDeviceComponent,
-    DialogSuccesHiredServiceComponent
+    DialogSuccesHiredServiceComponent,
+    DialogRatingComponent
   ],
   imports: [
     CommonModule,

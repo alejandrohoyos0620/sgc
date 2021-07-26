@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { catchError, tap } from 'rxjs/operators';
 // import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import decode from 'jwt-decode';
 import { BehaviorSubject, Observable, throwError, } from 'rxjs';
@@ -75,5 +75,28 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  recoveryPassword(email): any{
+    return this.http.post(`${environment.url_api}/auth/recoverPassword`, {email})
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  forgotPassword(email, code, newPassword): any{
+    let body = {
+      email,
+      code,
+      newPassword
+    }
+    return this.http.post(`${environment.url_api}/auth/updatePassword`, body)
+    .pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError('ups algo salió mal');
   }
 }

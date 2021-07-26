@@ -14,6 +14,7 @@ import { AuthService } from '@core/services/auth.service';
 import { EstablishmentService } from '@core/services/establishments/establishment.service';
 import { UsersService } from '@core/services/users/users.service';
 import { DialogNewServiceTypeComponent } from '../../modals/dialog-new-service-type/dialog-new-service-type.component';
+import { DialogRatingComponent } from '../../modals/dialog-rating/dialog-rating.component';
 
 @Component({
   selector: 'app-panel',
@@ -141,7 +142,27 @@ export class PanelComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+  openDialogRating(hiredId: number): void {
+    const dialogRef = this.dialog.open(DialogRatingComponent, {
+      width: '800px',
+      height: '300px',
+      disableClose: true,
+      autoFocus: false,
+    });
 
+    dialogRef.afterClosed().subscribe(value => {
+      if(value != '0')
+        this.createRating(hiredId, value);
+    });
+  }
+  createRating(hiredId, value){
+    this.hireServicesService.saveRating(hiredId, value).subscribe((response) => {
+      if(response.status == "success"){
+        window.location.reload();
+      }
+    });
+  }
+  
   openDialogService(index: number): void {
     let behavior: BehaviorSubject<hiredService[]>;
     behavior = (this.listServices$.source) as BehaviorSubject<hiredService[]>;

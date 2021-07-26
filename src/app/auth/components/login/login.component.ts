@@ -5,6 +5,9 @@ import { errorMessages } from '@utils/validators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from '@core/services/users/users.service';
+import { DialogRecoveryPasswordComponent } from '../dialog-recovery-password/dialog-recovery-password.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogForgotPasswordComponent } from '../dialog-forgot-password/dialog-forgot-password.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +23,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    public dialog: MatDialog,
   ) {
     this.buildForm();
     this.buttonValid = false;
@@ -65,5 +69,30 @@ export class LoginComponent implements OnInit {
       this.typePassword = 'password';
     }
 
+  }
+  openModalRecovery(){
+    const dialogRef = this.dialog.open(DialogRecoveryPasswordComponent, {
+      width: '750px',
+      height: '400px',
+      disableClose: false,
+      autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.openModalForgot();
+    });
+  }
+
+  openModalForgot(){
+    const dialogRef = this.dialog.open(DialogForgotPasswordComponent, {
+      width: '750px',
+      height: '800px',
+      disableClose: false,
+      autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      
+    });
   }
 }
