@@ -1,4 +1,4 @@
-<div  *ngIf="product" class="container row container-product-detail">
+<div  *ngIf="product" class="container row container-product-detail my-2">
     <div class="col-6">
         <img [src]="product.image" alt="product-image" class="row img-fluid">
         
@@ -16,6 +16,7 @@
             <li class="mb-1"><b>Descripción:</b> {{product.description}}</li>
         </ul>
         <button  class="btn-add-cart" mat-raised-button >Agregar al carrito</button>
+        <a  href="/products" class="text-center mt-3" >Volver atrás</a>
         <!-- <p>{{ product.description}}</p> -->
     </div>
     
