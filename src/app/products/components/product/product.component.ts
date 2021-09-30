@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit {
   today = new Date();
   constructor() { }
 
+  
   ngOnInit(): void {
     console.log(this.numberOfPages);
   }
